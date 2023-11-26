@@ -1,45 +1,26 @@
 package com.animousen4.game.engine.core.services;
 
-import com.animousen4.game.engine.core.underwriting.SolvePositionUnderwriting;
-import com.animousen4.game.engine.core.underwriting.res.SolvePositionResult;
-import com.animousen4.game.engine.core.validations.SolvePositionRequestValidator;
-import com.animousen4.game.engine.dto.ValidationError;
-import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
-import com.animousen4.game.engine.dto.v1.SolvePositionResponseV1;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.andreinc.neatchess.client.UCI;
+import net.andreinc.neatchess.client.UCIResponse;
+import net.andreinc.neatchess.client.model.Analysis;
+import net.andreinc.neatchess.client.model.Move;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class GameEngineServiceImpl implements GameEngineService{
+class GameEngineServiceImpl implements GameEngineService{
+    UCI uci;
 
-    @Autowired
-    SolvePositionUnderwriting solvePositionUnderwriting;
-
-    @Autowired
-    SolvePositionRequestValidator validator;
-    @Override
-    public SolvePositionResponseV1 solvePosition(SolvePositionRequestV1 request) {
-        List<ValidationError> errors = validator.validate(request);
-        return errors.isEmpty() ?
-                buildSuccessResponse(
-                        request,
-                        solvePositionUnderwriting.calculateBestMove(request)
-                ) :
-                buildErrorResponse(
-                        errors
-                );
+    GameEngineServiceImpl() {
+        uci = new UCI();
     }
 
-    SolvePositionResponseV1 buildSuccessResponse(SolvePositionRequestV1 request, SolvePositionResult solveResult) {
-        return SolvePositionResponseV1.builder()
-                .bestMove(solveResult.getBestMove())
-                .bestMovePonder(solveResult.getBestMovePonder())
-                .build();
-    }
-
-    SolvePositionResponseV1 buildErrorResponse(List<ValidationError> errors) {
-        return new SolvePositionResponseV1(errors);
+    public Move getBestSolution(String fen, long moveTime) {
+        uci.startStockfish();
+        uci.positionFen(fen);
+        UCIResponse<Analysis> response = uci.analysis(moveTime);
+        var result = response.getResultOrThrow();
+        uci.close();
+        return result.getBestMove();
     }
 }
