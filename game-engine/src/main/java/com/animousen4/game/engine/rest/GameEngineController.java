@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.rest;
 
-import com.animousen4.game.engine.core.services.GameEngineService;
+import com.animousen4.game.engine.core.services.PositionSolverService;
 import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
 import com.animousen4.game.engine.dto.v1.SolvePositionResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameEngineController {
 
     @Autowired
-    private GameEngineService gameEngineService;
+    private PositionSolverService gameEngineService;
 
     @PostMapping(
             path="/solvePosition",
