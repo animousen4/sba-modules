@@ -14,7 +14,7 @@ class SolvePositionUnderwritingImpl implements SolvePositionUnderwriting{
 
     @Override
     public SolvePositionResult calculateBestMove(SolvePositionRequestV1 requestV1) {
-        var answer = gameEngineService.getBestSolution(requestV1.getFenPosition(), 4000);
+        var answer = gameEngineService.getBestSolution(requestV1.getFenPosition(), 14000);
         return new SolvePositionResult(answer.toString(), "meow");
     }
 }
