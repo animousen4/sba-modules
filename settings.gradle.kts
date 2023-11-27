@@ -17,4 +17,4 @@ plugins {
 }
 
 rootProject.name = "sba-modules"
-include("app", "list", "utilities", "game-engine")
+include("app", "list", "utilities", "game-engine", "abs-app", "auth-server")

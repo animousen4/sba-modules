@@ -19,7 +19,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.projectlombok:lombok:1.18.28")
     implementation("net.andreinc:neatchess:1.0")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    //implementation ("org.springframework.boot:spring-boot-starter-security")
+//  Temporary explicit version to fix Thymeleaf bug
+    //implementation ("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE")
+    //implementation ("org.springframework.security:spring-security-test")
+    //testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     annotationProcessor("org.projectlombok:lombok")
     compileOnly ("org.projectlombok:lombok")

@@ -35,7 +35,7 @@ public class PositionSolverServiceImpl implements PositionSolverService {
     SolvePositionResponseV1 buildSuccessResponse(SolvePositionRequestV1 request, SolvePositionResult solveResult) {
         return SolvePositionResponseV1.builder()
                 .bestMove(solveResult.getBestMove())
-                .bestMovePonder(solveResult.getBestMovePonder())
+                .bestMoveVariant(solveResult.getBestVariant())
                 .build();
     }
 

@@ -20,8 +20,8 @@ class FenPositionValidation extends PositionValidationImpl {
     private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> validate(SolvePositionRequestV1 request) {
-        return (request.getFenPosition() == null) ?
+    public Optional<ValidationError> validate(SolvePositionRequestV1 obj) {
+        return (obj.getFenPosition() == null) ?
                 Optional.of(errorFactory.buildError(MANDATORY_FIELD_MISSING, List.of(
                         new Placeholder(FIELD_NAME, "fenPosition")
                 ))) :

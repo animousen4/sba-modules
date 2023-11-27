@@ -16,19 +16,17 @@ class GameEngineServiceImpl implements GameEngineService{
     UCI uci;
 
     GameEngineServiceImpl() {
-        uci = new UCI();
-    }
-
-    public Move getBestSolution(String fen, long moveTime) {
         URL resource = GameEngineServiceImpl.class.getResource("/engine/stockfish16");
+        uci = new UCI();
         try {
             String path = Paths.get(resource.toURI()).toFile().getAbsolutePath();
             uci.start(path);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
 
-
+    public Move getBestSolution(String fen, long moveTime) {
         uci.positionFen(fen);
         UCIResponse<Analysis> response = uci.analysis(moveTime);
         var result = response.getResultOrThrow();

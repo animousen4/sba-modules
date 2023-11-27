@@ -11,10 +11,10 @@ import java.util.Optional;
 
 abstract class PositionValidationImpl implements PositionValidation {
     @Override
-    public abstract Optional<ValidationError> validate(SolvePositionRequestV1 request);
+    public abstract Optional<ValidationError> validate(SolvePositionRequestV1 obj);
 
     @Override
-    public List<ValidationError> validateList(SolvePositionRequestV1 request) {
+    public List<ValidationError> validateList(SolvePositionRequestV1 obj) {
         return null;
     }
 }

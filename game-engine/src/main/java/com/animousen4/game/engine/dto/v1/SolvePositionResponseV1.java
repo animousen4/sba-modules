@@ -14,7 +14,7 @@ import java.util.List;
 public class SolvePositionResponseV1 extends CoreResponse {
 
     String bestMove;
-    String bestMovePonder;
+    List<String> bestMoveVariant;
     public SolvePositionResponseV1(List<ValidationError> errors) {
         super(errors);
     }
