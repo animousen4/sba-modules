@@ -2,7 +2,7 @@ package com.animousen4.game.engine.core.validations.user;
 
 import com.animousen4.game.engine.core.validations.UserValidation;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
-import com.animousen4.game.engine.core.validations.regex.ValidationRegex;
+import com.animousen4.game.engine.core.services.regex.ValidationRegex;
 import com.animousen4.game.engine.dto.User;
 import com.animousen4.game.engine.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,6 @@ public class LoginInputValidation implements UserValidation {
             res.add(validateUserSymbols(obj));
             res.add(validateUserMail(obj));
         }
-
         return res.stream()
                 .filter(Optional::isPresent)
                 .map(Optional::get)

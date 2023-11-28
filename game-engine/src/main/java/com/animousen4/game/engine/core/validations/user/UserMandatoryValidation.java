@@ -39,8 +39,10 @@ class UserMandatoryValidation implements UserValidation {
     }
 
 
+
     @Override
     public List<ValidationError> validateList(User obj) {
+
         return null;
     }
 }
