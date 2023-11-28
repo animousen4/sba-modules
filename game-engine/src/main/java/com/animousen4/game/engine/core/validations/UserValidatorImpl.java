@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,9 +26,9 @@ class UserValidatorImpl implements UserValidator{
 
     List<ValidationError> collectSingleErrors(User user) {
         return userValidationList.stream()
-                .map(validation -> validation.validateList(user))
-                .filter(Objects::nonNull)
-                .flatMap(Collection::stream)
+                .map(validation -> validation.validate(user))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .collect(Collectors.toList());
     }
 

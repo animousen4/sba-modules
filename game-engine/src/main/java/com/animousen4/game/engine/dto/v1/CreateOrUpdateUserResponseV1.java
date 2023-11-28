@@ -1,20 +1,20 @@
 package com.animousen4.game.engine.dto.v1;
 
+import com.animousen4.game.engine.core.services.dto.UserCreds;
 import com.animousen4.game.engine.dto.CoreResponse;
 import com.animousen4.game.engine.dto.ValidationError;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@AllArgsConstructor
+@SuperBuilder
 public class CreateOrUpdateUserResponseV1 extends CoreResponse {
 
-    String status;
+    UserCreds status;
     public CreateOrUpdateUserResponseV1(List<ValidationError> errors) {
         super(errors);
     }

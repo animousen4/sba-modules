@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 class SolvePositionUnderwritingImpl implements SolvePositionUnderwriting{
@@ -17,6 +18,6 @@ class SolvePositionUnderwritingImpl implements SolvePositionUnderwriting{
     @Override
     public SolvePositionResult calculateBestMove(SolvePositionRequestV1 requestV1) {
         var answer = gameEngineService.getBestSolution(requestV1.getFenPosition(), 14000);
-        return new SolvePositionResult(answer.getLan(), Arrays.toString(answer.getContinuation()));
+        return new SolvePositionResult(answer.getLan(), List.of(answer.getContinuation()));
     }
 }
