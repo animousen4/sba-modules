@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 @Service
 public class ValidationRegex {
-    public final Pattern usernameSizeRegex = Pattern.compile(".{3,18}");
-    public final Pattern usernameSymbolsRegex = Pattern.compile("([A-Z]|[a-z]|[0-9])*");
+    public final String usernameSizeRegex = ".{3,18}";
+    public final String usernameSymbolsRegex = "([A-Z]|[a-z]|[0-9])*";
 
-    public final Pattern mailRegex = Pattern.compile("^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,}$");
+    public final String mailRegex = "([A-Z]|[a-z]|[0-9])+@([A-Z]|[a-z]|[0-9])+\\.([A-Z]|[a-z]|[0-9])+";
 }
