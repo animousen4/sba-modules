@@ -11,7 +11,7 @@ data class UserEntity (
     val id: Long,
     val username: String,
     val email : String,
-
+    val emailVerified: Boolean,
     @Column("phone_number")
     val phoneNumber: String,
     val avatar: String?

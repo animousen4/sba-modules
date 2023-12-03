@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 class AuthHandler(
     val userService: UserService
 ) {
-    suspend fun createOrUpdateUser(serverRequest: ServerRequest) : ServerResponse =
-        userService.createOrUpdateUser(serverRequest)
+    fun createOrUpdateUser(serverRequest: ServerRequest) : Mono<ServerResponse> =
+        userService.createOrUpdateUser(serverRequest);
 
 }

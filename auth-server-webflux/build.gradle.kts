@@ -27,6 +27,8 @@ dependencies {
 
 	implementation("org.postgresql:postgresql")
 	implementation("org.springframework.data:spring-data-relational")
+	implementation("org.springframework.data:spring-data-r2dbc")
+
 
 
 
