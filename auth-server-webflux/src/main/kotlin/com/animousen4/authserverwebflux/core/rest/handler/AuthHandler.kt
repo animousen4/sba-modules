@@ -4,13 +4,15 @@ import com.animousen4.authserverwebflux.core.service.UserService
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.buildAndAwait
 import reactor.core.publisher.Mono
 
 @Service
 class AuthHandler(
     val userService: UserService
 ) {
-    fun createOrUpdateUser(serverRequest: ServerRequest) : Mono<ServerResponse> =
-        userService.createOrUpdateUser(serverRequest);
+    suspend fun createOrUpdateUser(serverRequest: ServerRequest) : ServerResponse {
+        return ServerResponse.ok().buildAndAwait()
+    }
 
 }

@@ -4,6 +4,7 @@ import com.animousen4.authserverwebflux.core.rest.handler.AuthHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.MediaType.TEXT_PLAIN
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerResponse
@@ -16,12 +17,12 @@ class RestConfig(
     private val authHandler: AuthHandler
 ) {
     @Bean
-    fun authRouter() = router {
+    fun authRouter() = coRouter {
 
-        accept(MediaType.APPLICATION_JSON).and(
-            path("/api")
-        ).nest{
-            POST("/createOrUpdate", authHandler::createOrUpdateUser)
+        accept(
+            APPLICATION_JSON
+        ).and(path("/api")).nest {
+            GET("/createOrUpdateUser", authHandler::createOrUpdateUser)
         }
     }
 }
