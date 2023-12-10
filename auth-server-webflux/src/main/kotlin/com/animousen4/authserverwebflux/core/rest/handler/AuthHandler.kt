@@ -15,4 +15,8 @@ class AuthHandler(
         return ServerResponse.ok().buildAndAwait()
     }
 
+    suspend fun getUserInfo(serverRequest: ServerRequest) : ServerResponse {
+        return userService.getUser(serverRequest).;
+    }
+
 }

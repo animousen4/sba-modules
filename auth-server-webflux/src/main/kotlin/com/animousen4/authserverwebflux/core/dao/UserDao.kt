@@ -8,9 +8,7 @@ import reactor.core.publisher.Mono
 
 @Component
 class UserDao(
-
+    val userRepository: UserRepository
 ) {
-    fun createOrUpdateUser(email : String) : Mono<UserEntity> {
-        return Mono.empty()
-    }
+    fun getUserByEmail(email: String) = userRepository.getUserEntityByEmail(email);
 }

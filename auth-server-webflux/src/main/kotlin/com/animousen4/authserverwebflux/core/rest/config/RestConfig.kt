@@ -22,7 +22,7 @@ class RestConfig(
         accept(
             APPLICATION_JSON
         ).and(path("/api")).nest {
-            GET("/createOrUpdateUser", authHandler::createOrUpdateUser)
+            GET("/getUser", authHandler::getUserInfo)
         }
     }
 }
