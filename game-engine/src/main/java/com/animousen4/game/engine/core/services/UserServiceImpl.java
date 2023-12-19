@@ -1,15 +1,21 @@
 package com.animousen4.game.engine.core.services;
 
+import com.animousen4.game.engine.core.repositories.UserRepository;
+import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.services.dto.UserCreds;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
-import com.animousen4.game.engine.core.validations.UserValidation;
+import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
-import com.animousen4.game.engine.dto.User;
+import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
+import com.animousen4.game.engine.dto.UserDto;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import static com.animousen4.game.engine.core.consts.AppConsts.USER_ID;
+import static com.animousen4.game.engine.core.consts.AppConsts.USER_NOT_FOUND;
 
 
 @Service
@@ -17,19 +23,36 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserValidator validator;
+
+    @Autowired
+    ValidationErrorFactory validationErrorFactory;
+    @Autowired
+    UserRepository userRepository;
     // Connect to db
     @Override
-    public UserCredsResult getUserCreds(User user) {
-        var errors = validator.validate(user);
-        if (errors.isEmpty())
+    public UserCredsResult getUserCredentials(long id) {
+
+        UserEntity ent = userRepository.getUserEntityById(id);
+        if (ent != null) {
+            UserCredsResult result =
+                    UserCredsResult.builder()
+                            .userCreds(
+                                    UserCreds.builder()
+                                            .id(ent.getId())
+                                            .statusId(ent.getStatusId())
+                                            .username(ent.getUsername())
+                                            .build()
+
+                            )
+                            .build();
+            return result;
+        } else {
             return UserCredsResult.builder()
-                .userCreds(UserCreds.builder()
-                        .id(user.getId())
-                        .username(user.getLogin())
-                        .build())
-                .build();
-        return UserCredsResult.builder()
-                .errorList(errors)
-                .build();
+                    .errorList(List.of(validationErrorFactory.buildError(
+                            USER_NOT_FOUND,
+                            new Placeholder(USER_ID, id)
+                    )))
+                    .build();
+        }
     }
 }

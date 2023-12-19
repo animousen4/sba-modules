@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.validations;
 
-import com.animousen4.game.engine.dto.User;
+import com.animousen4.game.engine.dto.UserDto;
 import com.animousen4.game.engine.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,13 @@ class UserValidatorImpl implements UserValidator{
     @Autowired
     List<UserValidation> userValidationList;
     @Override
-    public List<ValidationError> validate(User user) {
+    public List<ValidationError> validate(UserDto user) {
         List<ValidationError> singleErrors = collectSingleErrors(user);
         List<ValidationError> listErrors = collectListErrors(user);
         return concatenateLists(singleErrors, listErrors);
     }
 
-    List<ValidationError> collectSingleErrors(User user) {
+    List<ValidationError> collectSingleErrors(UserDto user) {
         return userValidationList.stream()
                 .map(validation -> validation.validate(user))
                 .filter(Optional::isPresent)
@@ -32,7 +32,7 @@ class UserValidatorImpl implements UserValidator{
                 .collect(Collectors.toList());
     }
 
-    List<ValidationError> collectListErrors(User user){
+    List<ValidationError> collectListErrors(UserDto user){
         return userValidationList.stream()
                 .map(validation -> validation.validateList(user))
                 .filter(Objects::nonNull)

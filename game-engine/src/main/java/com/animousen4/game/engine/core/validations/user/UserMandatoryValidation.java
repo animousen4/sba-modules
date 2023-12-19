@@ -4,9 +4,8 @@ import com.animousen4.game.engine.core.consts.AppConsts;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidation;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
-import com.animousen4.game.engine.dto.User;
+import com.animousen4.game.engine.dto.UserDto;
 import com.animousen4.game.engine.dto.ValidationError;
-import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ class UserMandatoryValidation implements UserValidation {
     ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validate(User obj) {
+    public Optional<ValidationError> validate(UserDto obj) {
         return obj != null ?
                 Optional.empty() :
                 Optional.of(
@@ -41,7 +40,7 @@ class UserMandatoryValidation implements UserValidation {
 
 
     @Override
-    public List<ValidationError> validateList(User obj) {
+    public List<ValidationError> validateList(UserDto obj) {
 
         return null;
     }

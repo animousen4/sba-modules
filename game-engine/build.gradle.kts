@@ -17,18 +17,12 @@ dependencies {
     implementation("org.apache.commons:commons-text")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.0")
+
     implementation("org.projectlombok:lombok:1.18.28")
+    implementation("org.postgresql:postgresql:42.3.1")
+
     implementation("net.andreinc:neatchess:1.0")
-    // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-    implementation("io.projectreactor:reactor-core")
-
-    //implementation ("org.springframework.boot:spring-boot-starter-security")
-//  Temporary explicit version to fix Thymeleaf bug
-    //implementation ("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE")
-    //implementation ("org.springframework.security:spring-security-test")
-    //testImplementation("org.springframework.boot:spring-boot-starter-test")
-
     annotationProcessor("org.projectlombok:lombok")
     compileOnly ("org.projectlombok:lombok")
 

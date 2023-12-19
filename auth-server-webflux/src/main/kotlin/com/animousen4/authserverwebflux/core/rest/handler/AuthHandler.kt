@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.buildAndAwait
-import reactor.core.publisher.Mono
 
 @Service
 class AuthHandler(
@@ -16,7 +15,7 @@ class AuthHandler(
     }
 
     suspend fun getUserInfo(serverRequest: ServerRequest) : ServerResponse {
-        return userService.getUser(serverRequest).;
+        return userService.getUserInfo(serverRequest);
     }
 
 }

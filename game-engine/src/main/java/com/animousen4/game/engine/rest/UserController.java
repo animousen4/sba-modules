@@ -1,11 +1,10 @@
 package com.animousen4.game.engine.rest;
 
+import com.animousen4.game.engine.core.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.UserService;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserRequestV1;
 import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserResponseV1;
-import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
-import com.animousen4.game.engine.dto.v1.SolvePositionResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    RequestLogger requestLogger;
     @PostMapping(
-            path="/createOrUpdateUser",
+            path="/getUserInfo",
             consumes = "application/json",
             produces = "application/json"
     )
@@ -30,8 +32,8 @@ public class UserController {
     }
 
     public CreateOrUpdateUserResponseV1 buildResponseCreateOrUpdate(CreateOrUpdateUserRequestV1 request) {
-        UserCredsResult result = userService.getUserCreds(request.getUser());
-
+        UserCredsResult result = userService.getUserCredentials(request.getUserId());
+        requestLogger.logRequest(request);
         return result.hasErrors() ?
                 new CreateOrUpdateUserResponseV1(result.getErrorList()) :
                 CreateOrUpdateUserResponseV1.builder()

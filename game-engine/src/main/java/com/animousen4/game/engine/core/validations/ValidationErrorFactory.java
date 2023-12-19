@@ -22,4 +22,8 @@ public class ValidationErrorFactory {
         String errorDescription = errorCodeUtil.getErrorDescription(errorCode, placeholders);
         return new ValidationError(errorCode, errorDescription);
     }
+
+    public ValidationError buildError(String errorCode, Placeholder placeholder) {
+        return buildError(errorCode, List.of(placeholder));
+    }
 }

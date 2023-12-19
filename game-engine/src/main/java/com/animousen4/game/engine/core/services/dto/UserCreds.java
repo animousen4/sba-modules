@@ -8,4 +8,5 @@ import lombok.Data;
 public class UserCreds {
     long id;
     String username;
+    long statusId;
 }

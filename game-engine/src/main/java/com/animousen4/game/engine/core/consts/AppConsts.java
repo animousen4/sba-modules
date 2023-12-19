@@ -7,6 +7,11 @@ public class AppConsts {
     public static final String USERNAME_SYMBOLS_PROBLEM = "USERNAME_SYMBOLS_PROBLEM";
 
     public static final String WRONG_EMAIL_TYPE = "WRONG_EMAIL_TYPE";
+    public static final String USER_NOT_FOUND = "USER_NOT_FOUND";
+
     // Placeholder
     public static final String FIELD_NAME = "FIELD_NAME";
+
+    public static final String USER_ID = "USER_ID";
+
 }

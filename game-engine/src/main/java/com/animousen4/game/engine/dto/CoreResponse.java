@@ -14,8 +14,4 @@ import java.util.List;
 @SuperBuilder
 public class CoreResponse {
     List<ValidationError> errors;
-    /*//public CoreResponse(List<ValidationError> errors) {
-        this.errors = errors;
-    }*/
-
 }
