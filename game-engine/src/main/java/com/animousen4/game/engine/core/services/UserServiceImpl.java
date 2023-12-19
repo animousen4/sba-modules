@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     ValidationErrorFactory validationErrorFactory;
+
     @Autowired
     UserRepository userRepository;
     // Connect to db
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
     public UserCredsResult getUserCredentials(long id) {
 
         UserEntity ent = userRepository.getUserEntityById(id);
+
         if (ent != null) {
             UserCredsResult result =
                     UserCredsResult.builder()

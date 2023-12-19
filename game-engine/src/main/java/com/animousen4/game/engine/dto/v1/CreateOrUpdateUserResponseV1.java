@@ -14,7 +14,7 @@ import java.util.List;
 @SuperBuilder
 public class CreateOrUpdateUserResponseV1 extends CoreResponse {
 
-    UserCreds status;
+    UserCreds creds;
     public CreateOrUpdateUserResponseV1(List<ValidationError> errors) {
         super(errors);
     }

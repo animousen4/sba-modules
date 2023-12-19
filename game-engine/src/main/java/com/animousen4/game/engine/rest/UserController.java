@@ -5,7 +5,6 @@ import com.animousen4.game.engine.core.services.UserService;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.dto.v1.GetUserCreds;
 import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserResponseV1;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +37,7 @@ public class UserController {
         return result.hasErrors() ?
                 new CreateOrUpdateUserResponseV1(result.getErrorList()) :
                 CreateOrUpdateUserResponseV1.builder()
-                        .status(result.getUserCreds())
+                        .creds(result.getUserCreds())
                         .build();
 
     }
