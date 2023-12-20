@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.dto;
+package com.animousen4.game.engine.core.services.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +8,6 @@ import lombok.Setter;
 public class UserDto {
     String username;
     String email;
-    String password;
+    Long statusId;
+    Long statusReasonId;
 }

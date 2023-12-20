@@ -3,6 +3,7 @@ package com.animousen4.game.engine.core.services;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.services.dto.UserCreds;
+import com.animousen4.game.engine.core.services.dto.UserDto;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     // Connect to db
     @Override
-    public UserCredsResult getUserCredentials(long id) {
+    public UserCredsResult getUserCredentials(Long id) {
 
         UserEntity ent = userRepository.findUserEntityById(id);
 
@@ -54,5 +55,16 @@ public class UserServiceImpl implements UserService {
                     )))
                     .build();
         }
+    }
+
+    @Override
+    public void createOrUpdateUser(UserDto userDto) {
+        UserEntity ent =  userRepository.findUserEntityByUsername(userDto.getUsername());
+
+        userRepository.save(
+                UserEntity.builder()
+                        .username(userDto.getUsername())
+                        .build()
+        );
     }
 }

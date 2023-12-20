@@ -3,7 +3,7 @@ package com.animousen4.game.engine.core.validations.user;
 import com.animousen4.game.engine.core.validations.UserValidation;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
 import com.animousen4.game.engine.core.services.regex.ValidationRegex;
-import com.animousen4.game.engine.dto.UserDto;
+import com.animousen4.game.engine.core.services.dto.UserDto;
 import com.animousen4.game.engine.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
