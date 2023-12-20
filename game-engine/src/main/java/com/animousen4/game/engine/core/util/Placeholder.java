@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Placeholder {
-    public Placeholder(String placeholderName, long i) {
+    public Placeholder(String placeholderName, Long i) {
         this.placeholderName = placeholderName;
         this.placeholderValue = String.valueOf(i);
     }

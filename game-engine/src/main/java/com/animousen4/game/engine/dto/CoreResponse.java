@@ -2,7 +2,6 @@ package com.animousen4.game.engine.dto;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,4 +13,5 @@ import java.util.List;
 @SuperBuilder
 public class CoreResponse {
     List<ValidationError> errors;
+
 }

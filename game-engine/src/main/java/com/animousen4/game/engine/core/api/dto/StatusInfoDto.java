@@ -1,12 +1,12 @@
 package com.animousen4.game.engine.core.api.dto;
 
 import lombok.Builder;
+import lombok.Data;
 
 @Builder
-public class FullStatusInfoDto {
+@Data
+public class StatusInfoDto {
     String statusName;
     String statusDescription;
 
-    String statusNameReason;
-    String statusNameDescription;
 }

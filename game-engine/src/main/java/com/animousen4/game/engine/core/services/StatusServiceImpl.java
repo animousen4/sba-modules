@@ -2,7 +2,7 @@ package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.GetFullStatusInfoResult;
 import com.animousen4.game.engine.core.dao.AttributesDao;
-import com.animousen4.game.engine.core.api.dto.FullStatusInfoDto;
+import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
 import com.animousen4.game.engine.dto.v1.GetFullStatusInfoRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.animousen4.game.engine.core.consts.AppConsts.STATUS_ID;
 import static com.animousen4.game.engine.core.consts.AppConsts.STATUS_NOT_FOUND;
 
 
@@ -21,16 +22,20 @@ public class StatusServiceImpl implements StatusService{
 
     @Autowired
     ValidationErrorFactory validationErrorFactory;
-    public GetFullStatusInfoResult getFullStatusInfo(GetFullStatusInfoRequestV1 request) {
-        FullStatusInfoDto dto = attributesDao.getEntityById(request.getId());
 
-        return dto != null ?
+    public boolean existsStatus(Long id) {
+        return attributesDao.existStatusEntity(id);
+    }
+    public GetFullStatusInfoResult getFullStatusInfo(GetFullStatusInfoRequestV1 request) {
+        return attributesDao.existStatusEntity(request.getId()) ?
                 GetFullStatusInfoResult.builder()
-                        .fullStatusInfo(dto)
+                        .statusInfo(
+                                attributesDao.getEntityById(request.getId())
+                        )
                         .build() :
                 GetFullStatusInfoResult.builder()
                         .validationErrors(
-                                List.of(validationErrorFactory.buildError(STATUS_NOT_FOUND))
+                                List.of(validationErrorFactory.buildError(STATUS_NOT_FOUND, new Placeholder(STATUS_ID, request.getId())))
                         )
                         .build();
     }

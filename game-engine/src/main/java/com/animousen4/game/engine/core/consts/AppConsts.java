@@ -13,6 +13,8 @@ public class AppConsts {
 
     // Placeholder
     public static final String FIELD_NAME = "FIELD_NAME";
+    public static final String STATUS_ID = "STATUS_ID";
+
 
     public static final String USER_ID = "USER_ID";
 
