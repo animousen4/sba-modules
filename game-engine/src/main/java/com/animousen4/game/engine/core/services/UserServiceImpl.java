@@ -7,8 +7,6 @@ import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
-import com.animousen4.game.engine.dto.UserDto;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserCredsResult getUserCredentials(long id) {
 
-        UserEntity ent = userRepository.getUserEntityById(id);
+        UserEntity ent = userRepository.findUserEntityById(id);
 
         if (ent != null) {
             UserCredsResult result =

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class UserCreds {
-    long id;
+    Long id;
     String username;
-    long statusId;
+    Long statusId;
 }

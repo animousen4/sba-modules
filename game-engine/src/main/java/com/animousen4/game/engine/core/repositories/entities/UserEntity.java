@@ -1,6 +1,5 @@
 package com.animousen4.game.engine.core.repositories.entities;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "users", schema = "user_schema")
 public class UserEntity {
     @Id
-    long id;
+    Long id;
 
     String username;
 
@@ -24,10 +23,10 @@ public class UserEntity {
     String email;
 
     @Column(name = "status_id")
-    long statusId;
+    Long statusId;
 
     @Column(name = "status_reason_id")
-    long statusReasonId;
+    Long statusReasonId;
 
     @Column(name = "creator_id")
     long creatorId;
