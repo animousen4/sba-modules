@@ -64,6 +64,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(
                 UserEntity.builder()
                         .username(userDto.getUsername())
+                        .email(userDto.getEmail())
+                        .statusId(userDto.getStatusId())
+                        .statusReasonId(userDto.getStatusReasonId())
                         .build()
         );
     }
