@@ -9,6 +9,8 @@ public class AppConsts {
     public static final String WRONG_EMAIL_TYPE = "WRONG_EMAIL_TYPE";
     public static final String USER_NOT_FOUND = "USER_NOT_FOUND";
 
+    public static final String STATUS_NOT_FOUND = "STATUS_NOT_FOUND";
+
     // Placeholder
     public static final String FIELD_NAME = "FIELD_NAME";
 

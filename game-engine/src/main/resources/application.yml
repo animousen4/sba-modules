@@ -3,3 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/dev_user_sba_modules_db
     username: dev_user_sba_modules_admin
     password: c98bdd96cc2340d7b5300aa15
+
+
+game:
+  engine:
+    stockfish: /engine/stockfish16

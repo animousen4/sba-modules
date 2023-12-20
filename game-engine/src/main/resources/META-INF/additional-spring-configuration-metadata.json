@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "game.engine.stockfish",
+      "type": "java.lang.String",
+      "description": "Description for game.engine.stockfish."
+  }
+] }
