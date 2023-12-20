@@ -12,7 +12,7 @@ import java.util.Properties;
 
 @Component
 public class ErrorCodeUtil {
-    private Properties props;
+    private final Properties props;
 
     ErrorCodeUtil() throws IOException {
         Resource resource = new ClassPathResource("errorCode.properties");

@@ -15,7 +15,7 @@ class AuthHandler(
     }
 
     suspend fun getUserInfo(serverRequest: ServerRequest) : ServerResponse {
-        return userService.getUserInfo(serverRequest);
+        return userService.getUserInfo(serverRequest)
     }
 
 }

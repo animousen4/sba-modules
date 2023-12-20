@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 @Repository
 interface UserRepository : R2dbcRepository<UserEntity, Long> {
-    fun getUserEntityByEmail(email: String) : Mono<UserEntity>;
+    fun getUserEntityByEmail(email: String) : Mono<UserEntity>
 
 }

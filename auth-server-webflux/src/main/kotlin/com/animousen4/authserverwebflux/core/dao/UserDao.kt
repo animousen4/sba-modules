@@ -10,5 +10,5 @@ import reactor.core.publisher.Mono
 class UserDao(
     val userRepository: UserRepository
 ) {
-    fun getUserByEmail(email: String) = userRepository.getUserEntityByEmail(email);
+    fun getUserByEmail(email: String) = userRepository.getUserEntityByEmail(email)
 }

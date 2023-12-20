@@ -3,5 +3,5 @@ package com.animousen4.game.engine.core.underwriting;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 
 public interface UserCredsUnderwriting {
-    public UserCredsResult getUserCreds(String username);
+    UserCredsResult getUserCreds(String username);
 }

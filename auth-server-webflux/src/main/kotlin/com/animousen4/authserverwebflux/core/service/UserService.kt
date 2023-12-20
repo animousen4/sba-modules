@@ -12,9 +12,9 @@ class UserService(
 ) {
 
     suspend fun getUserInfo(serverRequest: ServerRequest) : ServerResponse {
-        val user = userDao.getUserByEmail("bot@animousen4.me");
+        val user = userDao.getUserByEmail("bot@animousen4.me")
 
-        return ServerResponse.ok().buildAndAwait();
+        return ServerResponse.ok().buildAndAwait()
 
     }
 
