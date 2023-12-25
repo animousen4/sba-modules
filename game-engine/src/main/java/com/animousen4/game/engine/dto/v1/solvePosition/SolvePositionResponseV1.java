@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.dto.v1;
+package com.animousen4.game.engine.dto.v1.solvePosition;
 
 import com.animousen4.game.engine.dto.CoreResponse;
 import com.animousen4.game.engine.dto.ValidationError;

@@ -1,12 +1,13 @@
 package com.animousen4.game.engine.rest;
 
-import com.animousen4.game.engine.core.logger.RequestLogger;
+import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserConverterV1;
+import com.animousen4.game.engine.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.UserService;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
-import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserRequestV1;
-import com.animousen4.game.engine.dto.v1.CreateOrUpdateUserResponseV1;
-import com.animousen4.game.engine.dto.v1.GetUserInfoRequestV1;
-import com.animousen4.game.engine.dto.v1.GetUserInfoResponseV1;
+import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserRequestV1;
+import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserResponseV1;
+import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoRequestV1;
+import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,9 @@ public class UserController {
 
     @Autowired
     RequestLogger requestLogger;
+
+    @Autowired
+    CreateOrUpdateUserConverterV1 userConverterV1;
     @PostMapping(path="/getUserInfo")
     public GetUserInfoResponseV1 getUserInfo(
             @RequestBody GetUserInfoRequestV1 request
@@ -42,11 +46,9 @@ public class UserController {
     }
 
     public CreateOrUpdateUserResponseV1 buildResponseCreateOrUpdateUser(CreateOrUpdateUserRequestV1 requestV1) {
-        userService.createOrUpdateUser(requestV1.getUser());
-
-        return CreateOrUpdateUserResponseV1.builder()
-                .ok(Boolean.TRUE)
-                .build();
+        var command = userConverterV1.buildCommand(requestV1);
+        var result = userService.createOrUpdateUser(command);
+        return userConverterV1.buildResponse(result);
     }
     public GetUserInfoResponseV1 buildResponseGetUserInfo(GetUserInfoRequestV1 request) {
         UserCredsResult result = userService.getUserCredentials(request.getUserId());

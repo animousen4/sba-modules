@@ -1,5 +1,9 @@
 package com.animousen4.game.engine.core.services;
 
+import com.animousen4.game.engine.core.api.command.CreateOrUpdateUserCommand;
+import com.animousen4.game.engine.core.api.model.user.UserModel;
+import com.animousen4.game.engine.core.api.result.CreateOrUpdateUserResult;
+import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.services.dto.UserCreds;
@@ -28,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserDao userDao;
     // Connect to db
     @Override
     public UserCredsResult getUserCredentials(Long id) {
@@ -58,6 +65,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public CreateOrUpdateUserResult createOrUpdateUser(CreateOrUpdateUserCommand userCommand) {
+        UserModel requestUserModel = userCommand.getUserModel();
+        UserEntity ent = userDao.getUserById(requestUserModel.getId());
+
+        if (ent == null)
+            return CreateOrUpdateUserResult.builder()
+                    .validationErrors(
+                            List.of(validationErrorFactory.buildError(
+                                    USER_NOT_FOUND,
+                                    new Placeholder(USER_ID, requestUserModel.getId())
+                                    ))
+                    )
+                    .build();
+        else {
+            userDao.updateUserById(
+                    ent
+                            .withEmail(requestUserModel.getEmail())
+
+            );
+            return CreateOrUpdateUserResult.builder()
+
+                    .build();
+        }
+    }
+
+    /*@Override
     public void createOrUpdateUser(UserDto userDto) {
         UserEntity ent =  userRepository.findUserEntityByUsername(userDto.getUsername());
 
@@ -69,5 +102,5 @@ public class UserServiceImpl implements UserService {
                         .statusReasonId(userDto.getStatusReasonId())
                         .build()
         );
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.dto.v1;
+package com.animousen4.game.engine.dto.v1.createOrUpdateUser;
 
 import com.animousen4.game.engine.core.services.dto.UserDto;
 import com.animousen4.game.engine.dto.CoreRequest;
@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateOrUpdateUserRequestV1 extends CoreRequest {
-    UserDto user;
+    private UserDto user;
 }

@@ -1,11 +1,9 @@
-package com.animousen4.game.engine.dto.v1;
+package com.animousen4.game.engine.dto.v1.getUserInfo;
 
 import com.animousen4.game.engine.core.services.dto.UserCreds;
 import com.animousen4.game.engine.dto.CoreResponse;
 import com.animousen4.game.engine.dto.ValidationError;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -14,10 +12,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @SuperBuilder
-public class CreateOrUpdateUserResponseV1 extends CoreResponse {
+public class GetUserInfoResponseV1 extends CoreResponse {
 
-    Boolean ok;
-    public CreateOrUpdateUserResponseV1(List<ValidationError> errors) {
+    UserCreds creds;
+    public GetUserInfoResponseV1(List<ValidationError> errors) {
         super(errors);
     }
 }

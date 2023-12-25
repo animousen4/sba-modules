@@ -1,10 +1,9 @@
 package com.animousen4.game.engine.core.validations.position;
 
 import com.animousen4.game.engine.core.util.Placeholder;
-import com.animousen4.game.engine.core.validations.PositionValidation;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
 import com.animousen4.game.engine.dto.ValidationError;
-import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
+import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

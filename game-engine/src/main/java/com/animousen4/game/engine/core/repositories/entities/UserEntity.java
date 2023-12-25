@@ -1,9 +1,7 @@
 package com.animousen4.game.engine.core.repositories.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
@@ -11,8 +9,9 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
-
+@With
 @Table(name = "users", schema = "user_schema")
 public class UserEntity {
     @Id

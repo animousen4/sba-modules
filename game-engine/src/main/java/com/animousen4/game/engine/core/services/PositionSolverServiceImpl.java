@@ -4,8 +4,8 @@ import com.animousen4.game.engine.core.underwriting.SolvePositionUnderwriting;
 import com.animousen4.game.engine.core.underwriting.res.SolvePositionResult;
 import com.animousen4.game.engine.core.validations.SolvePositionRequestValidator;
 import com.animousen4.game.engine.dto.ValidationError;
-import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
-import com.animousen4.game.engine.dto.v1.SolvePositionResponseV1;
+import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
+import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

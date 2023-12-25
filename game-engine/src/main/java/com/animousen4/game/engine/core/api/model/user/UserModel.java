@@ -1,15 +1,17 @@
-package com.animousen4.game.engine.core.services.dto;
+package com.animousen4.game.engine.core.api.model.user;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
+@Builder
 @Getter
-@Setter
-public class UserDto {
+public class UserModel {
     Long id;
+
     String username;
     String oldUsername;
     String email;
+
     Long statusId;
     Long statusReasonId;
 }

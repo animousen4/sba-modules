@@ -46,7 +46,7 @@
             <AppenderRef ref="CommonFile"/>
         </Root>
 
-        <Logger name="com.animousen4.game.engine.core.logger.RequestLogger">
+        <Logger name="com.animousen4.game.engine.logger.RequestLogger">
             <AppenderRef ref="CommunicationFile"/>
         </Logger>
     </Loggers>

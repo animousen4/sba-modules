@@ -2,11 +2,10 @@ package com.animousen4.game.engine.core.underwriting;
 
 import com.animousen4.game.engine.core.services.GameEngineService;
 import com.animousen4.game.engine.core.underwriting.res.SolvePositionResult;
-import com.animousen4.game.engine.dto.v1.SolvePositionRequestV1;
+import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Component

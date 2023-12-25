@@ -1,9 +1,10 @@
 package com.animousen4.game.engine.rest;
 
-import com.animousen4.game.engine.core.logger.RequestLogger;
+import com.animousen4.game.engine.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.StatusService;
-import com.animousen4.game.engine.dto.v1.GetFullStatusInfoRequestV1;
-import com.animousen4.game.engine.dto.v1.GetFullStatusInfoResponseV1;
+import com.animousen4.game.engine.dto.v1.getFullStatusInfo.GetFullStatusInfoRequestV1;
+import com.animousen4.game.engine.dto.v1.getFullStatusInfo.GetFullStatusInfoResponseV1;
+import com.animousen4.game.engine.logger.ResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,9 @@ public class StatusController {
     @Autowired
     RequestLogger requestLogger;
 
+    @Autowired
+    ResponseLogger responseLogger;
+
     @PostMapping(
             path="/getStatusInfo"
     )
@@ -30,7 +34,10 @@ public class StatusController {
             @RequestBody GetFullStatusInfoRequestV1 request
     ) {
         requestLogger.logRequest(request);
-        return processRequest(request);
+        var response = processRequest(request);
+        responseLogger.logResponse(response);
+
+        return response;
     }
 
     public GetFullStatusInfoResponseV1 processRequest(GetFullStatusInfoRequestV1 requestV1) {

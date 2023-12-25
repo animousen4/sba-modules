@@ -1,9 +1,9 @@
-package com.animousen4.game.engine.core.logger;
+package com.animousen4.game.engine.logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class AbstractLogger {
+public abstract class AbstractLogger {
     protected String logObject(Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(object);
