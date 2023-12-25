@@ -5,8 +5,8 @@ import com.animousen4.game.engine.dto.ValidationError;
 import java.util.List;
 import java.util.Optional;
 
-public interface AbstractValidation<Obj> {
-    Optional<ValidationError> validate(Obj obj);
+public interface AbstractValidation<T> {
+    Optional<ValidationError> validate(T obj);
 
-    List<ValidationError> validateList(Obj obj);
+    List<ValidationError> validateList(T obj);
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_CONSOLE_PATTERN">
+            %d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{${sys:PID}}{magenta} [%15.15t] %style{%-40.40C{1.}}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+        </Property>
+        <Property name="LOG_FILE_PATTERN">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+        <Property name="BASE_PATH">logs</Property>
+
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_CONSOLE_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="CommonFile"
+                     fileName="${BASE_PATH}/common/application-logs.log"
+                     filePattern="${BASE_PATH}/common/archive/application-logs-%d{yyyy-MM-dd}.log" append="True" >
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <OnStartupTriggeringPolicy minSize="0"/>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+
+        </RollingFile>
+
+        <RollingFile name="CommunicationFile"
+                     fileName="${BASE_PATH}/communication/communication-app-logs.log"
+                     filePattern="${BASE_PATH}/communication/archive/communication-app-logs-%d{yyyy-MM-dd}.log" append="True">
+            <PatternLayout pattern="${LOG_FILE_PATTERN}"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <OnStartupTriggeringPolicy minSize="0"/>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="CommonFile"/>
+        </Root>
+
+        <Logger name="com.animousen4.game.engine.core.logger.RequestLogger">
+            <AppenderRef ref="CommunicationFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
+
