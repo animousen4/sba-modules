@@ -24,6 +24,11 @@
             <option value="$PROJECT_DIR$/auth-server" />
             <option value="$PROJECT_DIR$/auth-server-webflux" />
             <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/computer-science" />
+            <option value="$PROJECT_DIR$/computer-science/tasks" />
+            <option value="$PROJECT_DIR$/computer-science/tasks/StringBuilderNotifier" />
+            <option value="$PROJECT_DIR$/computer-science/tasks/StringBuilderUndo" />
+            <option value="$PROJECT_DIR$/computer-science/tasks/TemperatureConverter" />
             <option value="$PROJECT_DIR$/game-engine" />
             <option value="$PROJECT_DIR$/list" />
             <option value="$PROJECT_DIR$/utilities" />

@@ -12,6 +12,15 @@
         <module name="sba-modules.auth-server.main" />
         <module name="sba-modules.game-engine.main" />
       </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.28/a2ff5da8bcd8b1b26f36b806ced63213362c6dcc/lombok-1.18.28.jar" />
+        </processorPath>
+        <module name="sba-modules.computer-science.tasks.StringBuilderNotifier.main" />
+        <module name="sba-modules.computer-science.tasks.StringBuilderUndo.main" />
+        <module name="sba-modules.computer-science.tasks.TemperatureConverter.main" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>

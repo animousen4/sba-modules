@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" />
     </modules>
   </component>
