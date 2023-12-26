@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/StringBuilderNotifier/sba-modules.computer-science.tasks.StringBuilderNotifier.main.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/StringBuilderNotifier/sba-modules.computer-science.tasks.StringBuilderNotifier.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/StringBuilderUndo/sba-modules.computer-science.tasks.StringBuilderUndo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/StringBuilderUndo/sba-modules.computer-science.tasks.StringBuilderUndo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/TemperatureConverter/sba-modules.computer-science.tasks.TemperatureConverter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/TemperatureConverter/sba-modules.computer-science.tasks.TemperatureConverter.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" />
     </modules>
   </component>

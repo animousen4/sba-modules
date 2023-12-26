@@ -5,8 +5,6 @@ import reactor.core.publisher.Mono
 
 class ResponseCreator {
     companion object {
-        fun <V, E> createServerResponse(body: Mono<V>, cl: Class<V>): ServerResponse {
 
-        }
     }
 }
