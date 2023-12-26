@@ -5,6 +5,7 @@ spring:
     password: c98bdd96cc2340d7b5300aa15
 
 
+
 game:
   engine:
     stockfish: /engine/stockfish16
