@@ -5,12 +5,13 @@ import com.animousen4.core.entites.GroupCalcRes;
 import com.animousen4.core.entites.Match;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CommandAnalyzer {
     public Map<String, GroupCalcRes> getCalculatedMaps(List<Match> matches) {
-        HashMap<String, GroupCalcRes> m = new HashMap<>();
+        LinkedHashMap<String, GroupCalcRes> m = new LinkedHashMap<>();
 
         matches.forEach(
                 match -> {

@@ -1,11 +1,13 @@
 package com.animousen4.core.entites;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Builder
 public class Match {
     String commandOne;
