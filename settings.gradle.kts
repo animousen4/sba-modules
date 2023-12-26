@@ -21,5 +21,6 @@ include("app", "list", "utilities", "game-engine", "abs-app", "auth-server", "au
 include (
     universityFolder.plus("StringBuilderNotifier"),
     universityFolder.plus("StringBuilderUndo"),
-    universityFolder.plus("TemperatureConverter")
+    universityFolder.plus("TemperatureConverter"),
+    universityFolder.plus("FinalControlWork")
 )
