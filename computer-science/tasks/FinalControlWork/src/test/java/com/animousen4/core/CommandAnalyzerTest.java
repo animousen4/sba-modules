@@ -9,6 +9,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommandAnalyzerTest {
 
@@ -34,19 +35,19 @@ public class CommandAnalyzerTest {
                 .scored(1)
                 .missed(1)
                 .build();
+
+
         Map<String, GroupCalcRes> expected = new LinkedHashMap<>(Map.of(
                 "C1", commandResult, "C2", commandResult
         ));
 
+
+        assertThat(res.get("C1")).usingRecursiveComparison().isEqualTo(expected.get("C1"));
+        assertThat(res.get("C2")).usingRecursiveComparison().isEqualTo(expected.get("C2"));
+
         assertEquals(2, res.size());
 
-        /*
-        Assertions.assertThat(actual).containsExactlyInAnyOrderEntriesOf(
-                Map.of("Key1", "Value1", "Key2", "Value2")
-        );
-        * */
-       /* assertThat(res.get("C1")).usingRecursiveAssertion().isEqualTo(expected.get("C1"));
-        assertThat(res.get("C2")).usingRecursiveAssertion().isEqualTo(expected.get("C2"));*/
+
 
     }
 }
