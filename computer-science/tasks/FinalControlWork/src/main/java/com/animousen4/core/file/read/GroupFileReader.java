@@ -4,20 +4,21 @@ import com.animousen4.core.entites.Group;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class GroupFileReader extends InputReaderFile<List<Group>>{
-    public GroupFileReader(String fileName) {
-        super(fileName);
+    public GroupFileReader(InputStreamReader streamReader) {
+        super(streamReader);
     }
 
     @Override
     public List<Group> read() throws FileNotFoundException {
         List<Group> groups = new ArrayList<>();
-        Scanner s = new Scanner(new File(fileName));
+        Scanner s = new Scanner(streamReader);
         String curLine;
         List<String> parts;
         List<String> partsCommands;

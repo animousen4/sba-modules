@@ -5,6 +5,7 @@ import com.animousen4.core.entites.*;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,8 @@ import java.util.Map;
 
 
 public class CommandResultOutputWriter extends OutputWriterFile<MappedGroup>{
-    public CommandResultOutputWriter(String fileName) {
-        super(fileName);
+    public CommandResultOutputWriter(OutputStreamWriter streamWriter) {
+        super(streamWriter);
     }
 
 

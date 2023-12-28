@@ -4,6 +4,7 @@ import com.animousen4.core.entites.Match;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,14 +12,14 @@ import java.util.Scanner;
 
 public class MatchFileReader extends InputReaderFile<List<Match>>{
 
-    public MatchFileReader(String fileName) {
-        super(fileName);
+    public MatchFileReader(FileReader streamReader) {
+        super(streamReader);
     }
 
     @Override
     public List<Match> read() throws FileNotFoundException {
         ArrayList<Match> lines = new ArrayList<Match>();
-        Scanner s = new Scanner(new File(fileName));
+        Scanner s = new Scanner(streamReader);
         String curLine;
         List<String> parts;
         List<String> cm1;

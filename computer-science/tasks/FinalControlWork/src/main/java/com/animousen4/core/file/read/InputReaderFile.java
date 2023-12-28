@@ -1,9 +1,12 @@
 package com.animousen4.core.file.read;
 
-import com.animousen4.core.file.AbstractIOFIle;
+import com.animousen4.core.file.AbstractInputFile;
+import com.animousen4.core.file.AbstractOutputFile;
 
-abstract public class InputReaderFile<T> extends AbstractIOFIle implements InputReader<T>{
-    public InputReaderFile(String fileName) {
-        super(fileName);
+import java.io.InputStreamReader;
+
+abstract public class InputReaderFile<T> extends AbstractInputFile implements InputReader<T>{
+    public InputReaderFile(InputStreamReader streamReader) {
+        super(streamReader);
     }
 }

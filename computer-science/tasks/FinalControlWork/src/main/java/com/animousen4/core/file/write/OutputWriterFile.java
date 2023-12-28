@@ -1,14 +1,14 @@
 package com.animousen4.core.file.write;
 
-import com.animousen4.core.file.AbstractIOFIle;
+import com.animousen4.core.file.AbstractOutputFile;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
-abstract public class OutputWriterFile<T> extends AbstractIOFIle implements OutputWriter<T>{
-    public OutputWriterFile(String fileName) {
-        super(fileName);
+abstract public class OutputWriterFile<T> extends AbstractOutputFile implements OutputWriter<T>{
+    public OutputWriterFile(OutputStreamWriter writer) {
+        super(writer);
     }
 
     public void save(T entity) throws IOException {
@@ -17,7 +17,7 @@ abstract public class OutputWriterFile<T> extends AbstractIOFIle implements Outp
 
     abstract String convertEntityToString(T ent);
     private void write(String str) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        BufferedWriter writer = new BufferedWriter(streamWriter);
         writer.write(str);
         writer.close();
     }

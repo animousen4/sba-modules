@@ -12,14 +12,14 @@ import java.io.*;
 
 public class Main {
     public static String workPath = "computer-science/tasks/FinalControlWork/";
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException {
         System.out.println("Program started");
 
         TaskProcessor taskProcessor = new TaskProcessor(
-                new GroupFileReader(workPath.concat("groups.txt")),
-                new MatchFileReader(workPath.concat("game.txt")),
-                new GroupOutputWriter(workPath.concat("GroupsOut.txt")),
-                new CommandResultOutputWriter(workPath.concat("Results.txt")),
+                new GroupFileReader(new FileReader(workPath.concat("groups.txt"))),
+                new MatchFileReader(new FileReader(workPath.concat("game.txt"))),
+                new GroupOutputWriter(new FileWriter(workPath.concat("GroupsOut.txt"))),
+                new CommandResultOutputWriter(new FileWriter(workPath.concat("Results.txt"))),
                 new CommandAnalyzer()
         );
 

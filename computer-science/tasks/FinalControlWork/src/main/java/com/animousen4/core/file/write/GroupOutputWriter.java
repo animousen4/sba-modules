@@ -5,11 +5,12 @@ import com.animousen4.core.entites.CommandGroupResult;
 import com.animousen4.core.entites.MappedGroup;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class GroupOutputWriter extends OutputWriterFile<MappedGroup>{
 
-    public GroupOutputWriter(String fileName) {
-        super(fileName);
+    public GroupOutputWriter(OutputStreamWriter streamWriter) {
+        super(streamWriter);
     }
 
     @Override
