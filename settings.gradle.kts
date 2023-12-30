@@ -22,5 +22,6 @@ include (
     universityFolder.plus("StringBuilderNotifier"),
     universityFolder.plus("StringBuilderUndo"),
     universityFolder.plus("TemperatureConverter"),
-    universityFolder.plus("FinalControlWork")
+    universityFolder.plus("FinalControlWork"),
+    universityFolder.plus("ThreadState")
 )
