@@ -56,5 +56,15 @@ public class UserControllerTest extends AbstractControllerTest {
         executeAndCompare("updateExistUserEmailTest");
     }
 
+    @Test
+    void testFullEmpty() throws Exception {
+        executeAndCompare("updateAllEmptyTest");
+    }
+
+    @Test
+    void testNewUser() throws Exception {
+        //executeAndCompare("createNewUserTest");
+    }
+
 
 }

@@ -30,11 +30,11 @@ create table users
     id                bigserial
         constraint users_pk
             primary key,
-    username          varchar(50) not null,
-    registration_date timestamp   not null,
+    username          varchar(50)           not null,
+    registration_date timestamp  default CURRENT_TIMESTAMP not null,
     close_date        timestamp,
     email             varchar(200),
-    status_id         bigint      not null
+    status_id         bigint                not null
         constraint users_status_id_fk
             references status,
     status_reason_id  bigint

@@ -1,3 +1,8 @@
 {
-  "errors": null
+  "errors": [
+    {
+      "errorCode":"USER_NOT_FOUND",
+      "description":"User is not found with username=null"
+    }
+  ]
 }

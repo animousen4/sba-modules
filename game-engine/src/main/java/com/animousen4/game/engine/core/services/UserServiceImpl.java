@@ -68,7 +68,10 @@ public class UserServiceImpl implements UserService {
         UserEntity ent = userDao.getUserByUsername(requestUserModel.getUsername());
 
         if (ent == null)
-            return notFoundUser(requestUserModel);
+            if (requestUserModel.getUsername() == null && requestUserModel.getUpdatedUsername() == null)
+                return notFoundUser(requestUserModel);
+            else
+                return createUser(requestUserModel);
         else
             return updateUser(requestUserModel, ent);
 
@@ -80,6 +83,19 @@ public class UserServiceImpl implements UserService {
                     .withEmail(requestUserModel.getEmail())
                     .withUsername(requestUserModel.getUpdatedUsername() == null ? ent.getUsername() :requestUserModel.getUpdatedUsername())
 
+        );
+        return CreateOrUpdateUserResult.builder()
+
+                .build();
+    }
+
+    private CreateOrUpdateUserResult createUser(UserModel requestUserModel) {
+        userDao.saveUser(
+                UserEntity.builder()
+                        .username(requestUserModel.getUpdatedUsername())
+                        .creatorId(1)
+                        .email(requestUserModel.getEmail())
+                        .build()
         );
         return CreateOrUpdateUserResult.builder()
 
