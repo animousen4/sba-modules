@@ -31,8 +31,9 @@ class GameEngineApplicationTest {
     static void afterAll() {
         postgreSQLContainer.stop();
     }
-    /*@Test
+
+    @Test
     void contextLoadsTest() {
 
-    }*/
+    }
 }

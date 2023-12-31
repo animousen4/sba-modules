@@ -3,7 +3,7 @@ package com.animousen4.game.engine;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 public class GameEngineContainerTest extends PostgreSQLContainer<GameEngineContainerTest> {
-	private static final String IMAGE_VERSION = "postgres:15.7";
+	private static final String IMAGE_VERSION = "postgres:15.3";
 	private static GameEngineContainerTest container;
 
 	private GameEngineContainerTest() {
