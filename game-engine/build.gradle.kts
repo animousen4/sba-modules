@@ -30,7 +30,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.testcontainers:postgresql:1.17.3")
-
+    testImplementation("uk.org.webcompere:model-assert:1.0.0")
 
     annotationProcessor("org.projectlombok:lombok")
     compileOnly ("org.projectlombok:lombok")

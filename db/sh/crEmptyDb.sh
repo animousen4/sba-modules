@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 DB_SCOPE="dev"
-DB_PREFIX="user_sba_modules"
+DB_PREFIX="multi"
 DB_USER_ROLE="${DB_SCOPE}_${DB_PREFIX}_admin"
 DB_PASSWORD=$(cat /proc/sys/kernel/random/uuid | sed 's/[-]//g' | head -c 25) 2>&1
 DB_NAME="${DB_SCOPE}_${DB_PREFIX}_db"

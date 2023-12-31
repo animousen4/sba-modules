@@ -27,7 +27,12 @@ public class ErrorCodeUtil {
         String errorDescription = props.getProperty(errorCode);
         for(Placeholder placeholder : placeholders) {
             String placeholderToReplace = "${" + placeholder.getPlaceholderName() + "}";
-            errorDescription = errorDescription.replace(placeholderToReplace, placeholder.getPlaceholderValue());
+            errorDescription = errorDescription.replace(
+                    placeholderToReplace,
+                    placeholder.getPlaceholderValue() == null
+                            ? "null"
+                            : placeholder.getPlaceholderName()
+            );
         }
         return errorDescription;
     }

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @SuperBuilder
 @With
-@Table(name = "users", schema = "user_schema")
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

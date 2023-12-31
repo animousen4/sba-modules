@@ -7,6 +7,9 @@ create table status
     description varchar(300) not null
 );
 
+alter table status
+    owner to dev_user_sba_modules_admin;
+
 create table status_reason
 (
     id          bigserial
@@ -19,23 +22,29 @@ create table status_reason
             references status
 );
 
+alter table status_reason
+    owner to dev_user_sba_modules_admin;
+
 create table users
 (
     id                bigserial
         constraint users_pk
             primary key,
-    username          varchar(50)                           not null,
-    registration_date timestamp   default CURRENT_TIMESTAMP not null,
+    username          varchar(50) not null,
+    registration_date timestamp   not null,
     close_date        timestamp,
     email             varchar(200),
-    status_id         bigint                                not null
+    status_id         bigint      not null
         constraint users_status_id_fk
             references status,
     status_reason_id  bigint
         constraint users_status_reason_id_fk
             references status_reason,
-    creator_id        bigint                                not null
+    creator_id        bigint      not null
         constraint users_users_id_fk
             references users
 );
+
+alter table users
+    owner to dev_user_sba_modules_admin;
 

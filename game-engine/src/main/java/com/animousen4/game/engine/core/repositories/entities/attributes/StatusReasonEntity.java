@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "status_reason", schema = "user_schema")
+@Table(name = "status_reason")
 public class StatusReasonEntity {
 
     @Id

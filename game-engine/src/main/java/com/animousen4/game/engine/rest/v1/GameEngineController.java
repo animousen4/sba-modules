@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.rest;
+package com.animousen4.game.engine.rest.v1;
 
 import com.animousen4.game.engine.core.services.PositionSolverService;
 import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
