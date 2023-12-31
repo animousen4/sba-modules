@@ -6,7 +6,7 @@ import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserRe
 import java.util.List;
 
 public class StatusValidator implements
-        RequestValidator<CreateOrUpdateUserRequestV1>{
+        RequestValidatorInterface<CreateOrUpdateUserRequestV1> {
 
     @Override
     public List<ValidationError> validate(CreateOrUpdateUserRequestV1 entity) {

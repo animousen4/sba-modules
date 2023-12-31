@@ -18,4 +18,6 @@ public class AppConsts {
 
     public static final String USER_ID = "USER_ID";
 
+    public static final String USERNAME = "USERNAME";
+
 }

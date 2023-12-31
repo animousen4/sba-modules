@@ -12,7 +12,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(
-        value = "/api/status",
+        value = "/api/v1/status",
         consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE
 )

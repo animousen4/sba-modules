@@ -28,19 +28,19 @@ public class UsernameInputValidation implements UserValidation {
     }
 
     public Optional<ValidationError> validateUserSize(UserDto obj) {
-        return obj.getUsername().matches(validationRegex.usernameSizeRegex) ?
+        return obj.getUpdatedUsername().matches(validationRegex.usernameSizeRegex) ?
                 Optional.empty() :
                 Optional.of(validationErrorFactory.buildError(USERNAME_LENGTH_PROBLEM));
     }
 
     public Optional<ValidationError> validateUserSymbols(UserDto obj) {
-        return obj.getUsername().matches(validationRegex.usernameSymbolsRegex) ?
+        return obj.getUpdatedUsername().matches(validationRegex.usernameSymbolsRegex) ?
                 Optional.empty() :
                 Optional.of(validationErrorFactory.buildError(USERNAME_SYMBOLS_PROBLEM));
     }
 
     public Optional<ValidationError> validateUserMail(UserDto obj) {
-        return obj.getUsername().matches(validationRegex.mailRegex) ?
+        return obj.getUpdatedUsername().matches(validationRegex.mailRegex) ?
                 Optional.empty() :
                 Optional.of(validationErrorFactory.buildError(WRONG_EMAIL_TYPE));
     }
@@ -49,7 +49,7 @@ public class UsernameInputValidation implements UserValidation {
     public List<ValidationError> validateList(UserDto obj) {
         ArrayList<Optional<ValidationError>> res = new ArrayList<>();
 
-        if (obj != null && obj.getUsername() != null) {
+        if (obj != null && obj.getUpdatedUsername() != null) {
             res.add(validateUserSize(obj));
             res.add(validateUserSymbols(obj));
             res.add(validateUserMail(obj));

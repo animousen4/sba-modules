@@ -18,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(
-        value = "/api/user",
+        value = "/api/v1/user",
         consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE
 )
@@ -35,7 +35,7 @@ public class UserController {
     public GetUserInfoResponseV1 getUserInfo(
             @RequestBody GetUserInfoRequestV1 request
     ) {
-        return buildResponseGetUserInfo(request);
+        return GetUserInfoResponseV1.builder().build();
     }
 
     @PostMapping(path="/createOrUpdateUser")
@@ -49,15 +49,5 @@ public class UserController {
         var command = userConverterV1.buildCommand(requestV1);
         var result = userService.createOrUpdateUser(command);
         return userConverterV1.buildResponse(result);
-    }
-    public GetUserInfoResponseV1 buildResponseGetUserInfo(GetUserInfoRequestV1 request) {
-        UserCredsResult result = userService.getUserCredentials(request.getUserId());
-        requestLogger.logRequest(request);
-        return result.hasErrors() ?
-                new GetUserInfoResponseV1(result.getErrorList()) :
-                GetUserInfoResponseV1.builder()
-                        .creds(result.getUserCreds())
-                        .build();
-
     }
 }

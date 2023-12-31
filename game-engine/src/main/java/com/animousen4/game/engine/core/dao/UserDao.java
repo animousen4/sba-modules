@@ -14,7 +14,9 @@ public class UserDao{
     public UserEntity getUserById(Long id) {
         return userRepository.findUserEntityById(id);
     }
-
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.findUserEntityByUsername(username);
+    }
     public void updateUserById(UserEntity user) {
         userRepository.save(user);
     }

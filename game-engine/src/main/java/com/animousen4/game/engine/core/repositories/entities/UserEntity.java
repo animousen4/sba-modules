@@ -3,6 +3,7 @@ package com.animousen4.game.engine.core.repositories.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import lombok.experimental.WithBy;
 
 import java.sql.Timestamp;
 

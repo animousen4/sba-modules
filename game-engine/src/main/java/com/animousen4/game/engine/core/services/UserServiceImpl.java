@@ -7,7 +7,6 @@ import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.services.dto.UserCreds;
-import com.animousen4.game.engine.core.services.dto.UserDto;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.USER_ID;
-import static com.animousen4.game.engine.core.consts.AppConsts.USER_NOT_FOUND;
+import static com.animousen4.game.engine.core.consts.AppConsts.*;
 
 
 @Service
@@ -67,40 +65,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public CreateOrUpdateUserResult createOrUpdateUser(CreateOrUpdateUserCommand userCommand) {
         UserModel requestUserModel = userCommand.getUserModel();
-        UserEntity ent = userDao.getUserById(requestUserModel.getId());
+        UserEntity ent = userDao.getUserByUsername(requestUserModel.getUsername());
 
         if (ent == null)
-            return CreateOrUpdateUserResult.builder()
-                    .validationErrors(
-                            List.of(validationErrorFactory.buildError(
-                                    USER_NOT_FOUND,
-                                    new Placeholder(USER_ID, requestUserModel.getId())
-                                    ))
-                    )
-                    .build();
-        else {
-            userDao.updateUserById(
-                    ent
-                            .withEmail(requestUserModel.getEmail())
+            return notFoundUser(requestUserModel);
+        else
+            return updateUser(requestUserModel, ent);
 
-            );
-            return CreateOrUpdateUserResult.builder()
-
-                    .build();
-        }
     }
 
-    /*@Override
-    public void createOrUpdateUser(UserDto userDto) {
-        UserEntity ent =  userRepository.findUserEntityByUsername(userDto.getUsername());
+    private CreateOrUpdateUserResult updateUser(UserModel requestUserModel, UserEntity ent) {
+        userDao.updateUserById(
+                ent
+                    .withEmail(requestUserModel.getEmail())
+                    .withUsername(requestUserModel.getUpdatedUsername() == null ? ent.getUsername() :requestUserModel.getUpdatedUsername())
 
-        userRepository.save(
-                UserEntity.builder()
-                        .username(userDto.getUsername())
-                        .email(userDto.getEmail())
-                        .statusId(userDto.getStatusId())
-                        .statusReasonId(userDto.getStatusReasonId())
-                        .build()
         );
-    }*/
+        return CreateOrUpdateUserResult.builder()
+
+                .build();
+    }
+
+    private CreateOrUpdateUserResult notFoundUser(UserModel requestUserModel) {
+        return CreateOrUpdateUserResult.builder()
+                .validationErrors(
+                        List.of(validationErrorFactory.buildError(
+                                USER_NOT_FOUND,
+                                new Placeholder(USERNAME, requestUserModel.getUsername())
+                        ))
+                )
+                .build();
+    }
+
 }

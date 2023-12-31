@@ -1,7 +1,11 @@
 package com.animousen4.game.engine;
 
+
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -11,15 +15,24 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GameEngineApplication.class)
 @ActiveProfiles({"tc", "tc-auto"})
-public class GameEngineAppStartTest  {
+class GameEngineApplicationTest {
 
     @ClassRule
     public static PostgreSQLContainer<GameEngineContainerTest> postgreSQLContainer = GameEngineContainerTest.getInstance();
 
     //tests
 
-    @Test
-    void contextStartupWithContainersTest() {
-
+    @BeforeAll()
+    static void beforeAll() {
+        postgreSQLContainer.start();
     }
+
+    @AfterAll()
+    static void afterAll() {
+        postgreSQLContainer.stop();
+    }
+    /*@Test
+    void contextLoadsTest() {
+
+    }*/
 }

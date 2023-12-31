@@ -6,10 +6,9 @@ import lombok.Getter;
 @Builder
 @Getter
 public class UserModel {
-    Long id;
 
+    String updatedUsername;
     String username;
-    String oldUsername;
     String email;
 
     Long statusId;
