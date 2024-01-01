@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.underwriting.res;
 
-import com.animousen4.game.engine.core.services.dto.UserCreds;
+import com.animousen4.game.engine.core.services.dto.UserInfoDto;
 import com.animousen4.game.engine.dto.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Builder
 public class UserCredsResult {
-    UserCreds userCreds;
+    UserInfoDto userCreds;
     List<ValidationError> errorList;
 
     public boolean hasErrors() {

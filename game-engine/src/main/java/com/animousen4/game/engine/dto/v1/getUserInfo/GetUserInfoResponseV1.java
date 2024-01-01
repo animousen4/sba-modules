@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.dto.v1.getUserInfo;
 
-import com.animousen4.game.engine.core.services.dto.UserCreds;
+import com.animousen4.game.engine.core.services.dto.UserInfoDto;
 import com.animousen4.game.engine.dto.CoreResponse;
 import com.animousen4.game.engine.dto.ValidationError;
 import lombok.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @SuperBuilder
 public class GetUserInfoResponseV1 extends CoreResponse {
 
-    UserCreds creds;
+    UserInfoDto info;
     public GetUserInfoResponseV1(List<ValidationError> errors) {
         super(errors);
     }

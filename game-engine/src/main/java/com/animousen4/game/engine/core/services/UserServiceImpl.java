@@ -1,12 +1,14 @@
 package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.CreateOrUpdateUserCommand;
+import com.animousen4.game.engine.core.api.command.GetUserInfoCommand;
 import com.animousen4.game.engine.core.api.model.user.UserModel;
 import com.animousen4.game.engine.core.api.result.CreateOrUpdateUserResult;
+import com.animousen4.game.engine.core.api.result.GetUserInfoResult;
 import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
-import com.animousen4.game.engine.core.services.dto.UserCreds;
+import com.animousen4.game.engine.core.services.dto.UserInfoDto;
 import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
@@ -36,33 +38,37 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     TimestampService timestampService;
-    // Connect to db
+
     @Override
-    public UserCredsResult getUserCredentials(Long id) {
+    public GetUserInfoResult getUserInfo(GetUserInfoCommand command) {
+        UserEntity ent = userRepository.findUserEntityByUsername(command.getUsername());
 
-        UserEntity ent = userRepository.findUserEntityById(id);
+        if (ent != null)
+            return getUser(command, ent);
+        else
+            return notFoundUser(command);
 
-        if (ent != null) {
-            UserCredsResult result =
-                    UserCredsResult.builder()
-                            .userCreds(
-                                    UserCreds.builder()
-                                            .id(ent.getId())
-                                            .statusId(ent.getStatusId())
-                                            .username(ent.getUsername())
-                                            .build()
+    }
 
-                            )
-                            .build();
-            return result;
-        } else {
-            return UserCredsResult.builder()
-                    .errorList(List.of(validationErrorFactory.buildError(
-                            USER_NOT_FOUND,
-                            new Placeholder(USER_ID, id)
-                    )))
-                    .build();
-        }
+    GetUserInfoResult notFoundUser(GetUserInfoCommand command) {
+        return GetUserInfoResult.builder()
+                .validationErrors(List.of(validationErrorFactory.buildError(
+                        USER_NOT_FOUND,
+                        new Placeholder(USERNAME, command.getUsername() )
+                )))
+                .build();
+    }
+
+    GetUserInfoResult getUser(GetUserInfoCommand command, UserEntity ent) {
+        return GetUserInfoResult.builder()
+                .userModel(
+                        UserModel.builder()
+                                .username(ent.getUsername())
+                                .email(ent.getEmail())
+                                .statusId(ent.getStatusId())
+                                .statusReasonId(ent.getStatusReasonId())
+                                .build())
+                .build();
     }
 
     @Override

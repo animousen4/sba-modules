@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserCreds {
-    Long id;
+public class UserInfoDto {
     String username;
+    String email;
     Long statusId;
+    Long statusReasonId;
 }

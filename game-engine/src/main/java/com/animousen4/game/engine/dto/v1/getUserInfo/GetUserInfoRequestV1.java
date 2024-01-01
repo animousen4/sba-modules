@@ -7,5 +7,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GetUserInfoRequestV1 extends CoreRequest {
-    Long userId;
+    private String username;
 }

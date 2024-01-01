@@ -1,9 +1,9 @@
 package com.animousen4.game.engine.rest.v1;
 
 import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserConverterV1;
+import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoConverterV1;
 import com.animousen4.game.engine.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.UserService;
-import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserRequestV1;
 import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserResponseV1;
 import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoRequestV1;
@@ -31,11 +31,14 @@ public class UserController {
 
     @Autowired
     CreateOrUpdateUserConverterV1 userConverterV1;
+
+    @Autowired
+    GetUserInfoConverterV1 getUserInfoConverterV1;
     @PostMapping(path="/getUserInfo")
     public GetUserInfoResponseV1 getUserInfo(
             @RequestBody GetUserInfoRequestV1 request
     ) {
-        return GetUserInfoResponseV1.builder().build();
+        return buildResponseGetUserInfo(request);
     }
 
     @PostMapping(path="/createOrUpdateUser")
@@ -49,5 +52,11 @@ public class UserController {
         var command = userConverterV1.buildCommand(requestV1);
         var result = userService.createOrUpdateUser(command);
         return userConverterV1.buildResponse(result);
+    }
+
+    public GetUserInfoResponseV1 buildResponseGetUserInfo(GetUserInfoRequestV1 requestV1) {
+        var command = getUserInfoConverterV1.buildCommand(requestV1);
+        var result = userService.getUserInfo(command);
+        return getUserInfoConverterV1.buildResponse(result);
     }
 }
