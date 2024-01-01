@@ -46,12 +46,10 @@ public class UserControllerTest extends AbstractControllerTest {
         postgreSQLContainer.stop();
     }
 
-    @Sql(scripts = {
-            "script/fillStatus.sql",
-            "script/fillStatusReasons.sql",
-            "script/createTestUser.sql"
-    })
+
     @Test
+    @Sql(statements = "INSERT INTO users (username, email, status_id)\n" +
+            "VALUES ('testUser', 'email@example.com', 1);")
     void testUpdateUser() throws Exception {
         executeAndCompare("updateExistUserEmailTest");
     }
@@ -61,21 +59,15 @@ public class UserControllerTest extends AbstractControllerTest {
         executeAndCompare("updateAllEmptyTest");
     }
 
-    @Sql(scripts = {
-            "script/fillStatus.sql",
-            "script/fillStatusReasons.sql",
-    })
     @Test
     void testNewUser() throws Exception {
         executeAndCompare("createNewUserTest");
     }
 
-    @Sql(scripts = {
-            "script/fillStatus.sql",
-            "script/fillStatusReasons.sql",
-            "script/createTestUser.sql"
-    })
+
     @Test
+    @Sql(statements = "INSERT INTO users (username, email, status_id)\n" +
+            "VALUES ('testUserExist', 'email@example.com', 1);")
     void testNewExistUser() throws Exception {
         executeAndCompare("createExistUserTest");
     }

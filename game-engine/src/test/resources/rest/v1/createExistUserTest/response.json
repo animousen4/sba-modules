@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "USER_EXISTS",
-      "description": "User exists with username=testUser"
+      "description": "User exists with username=testUserExist"
     }
   ]
 }
