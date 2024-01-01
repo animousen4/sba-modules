@@ -8,6 +8,4 @@ public class TestContainerConstants {
 
     public static final String DB_PASSWORD = "DB_PASSWORD";
 
-
-
 }

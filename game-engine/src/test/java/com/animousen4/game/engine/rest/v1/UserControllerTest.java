@@ -61,9 +61,23 @@ public class UserControllerTest extends AbstractControllerTest {
         executeAndCompare("updateAllEmptyTest");
     }
 
+    @Sql(scripts = {
+            "script/fillStatus.sql",
+            "script/fillStatusReasons.sql",
+    })
     @Test
     void testNewUser() throws Exception {
-        //executeAndCompare("createNewUserTest");
+        executeAndCompare("createNewUserTest");
+    }
+
+    @Sql(scripts = {
+            "script/fillStatus.sql",
+            "script/fillStatusReasons.sql",
+            "script/createTestUser.sql"
+    })
+    @Test
+    void testNewExistUser() throws Exception {
+        executeAndCompare("createExistUserTest");
     }
 
 

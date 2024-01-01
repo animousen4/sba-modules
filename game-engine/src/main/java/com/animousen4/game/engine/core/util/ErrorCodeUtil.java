@@ -31,7 +31,7 @@ public class ErrorCodeUtil {
                     placeholderToReplace,
                     placeholder.getPlaceholderValue() == null
                             ? "null"
-                            : placeholder.getPlaceholderName()
+                            : placeholder.getPlaceholderValue()
             );
         }
         return errorDescription;

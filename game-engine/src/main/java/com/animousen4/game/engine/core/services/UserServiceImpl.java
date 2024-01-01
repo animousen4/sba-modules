@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    TimestampService timestampService;
     // Connect to db
     @Override
     public UserCredsResult getUserCredentials(Long id) {
@@ -68,7 +71,7 @@ public class UserServiceImpl implements UserService {
         UserEntity ent = userDao.getUserByUsername(requestUserModel.getUsername());
 
         if (ent == null)
-            if (requestUserModel.getUsername() == null && requestUserModel.getUpdatedUsername() == null)
+            if (requestUserModel.getUpdatedUsername() == null)
                 return notFoundUser(requestUserModel);
             else
                 return createUser(requestUserModel);
@@ -90,16 +93,27 @@ public class UserServiceImpl implements UserService {
     }
 
     private CreateOrUpdateUserResult createUser(UserModel requestUserModel) {
-        userDao.saveUser(
-                UserEntity.builder()
-                        .username(requestUserModel.getUpdatedUsername())
-                        .creatorId(1)
-                        .email(requestUserModel.getEmail())
-                        .build()
-        );
-        return CreateOrUpdateUserResult.builder()
-
-                .build();
+        UserEntity existEntity = userDao.getUserByUsername(requestUserModel.getUpdatedUsername());
+        if (existEntity == null) {
+            userDao.saveUser(
+                    UserEntity.builder()
+                            .username(requestUserModel.getUpdatedUsername())
+                            .registrationDate(timestampService.getCurrentTime())
+                            .email(requestUserModel.getEmail())
+                            .statusId(1L)
+                            .build()
+            );
+            return CreateOrUpdateUserResult.builder()
+                    .build();
+        }
+        else
+            return CreateOrUpdateUserResult.builder()
+                    .validationErrors(
+                            List.of(validationErrorFactory.buildError(
+                                    USER_EXISTS,
+                                    new Placeholder(USERNAME, existEntity.getUsername())
+                                    )))
+                    .build();
     }
 
     private CreateOrUpdateUserResult notFoundUser(UserModel requestUserModel) {
