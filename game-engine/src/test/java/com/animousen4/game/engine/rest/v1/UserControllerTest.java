@@ -48,8 +48,8 @@ public class UserControllerTest extends AbstractControllerTest {
 
 
     @Test
-    @Sql(statements = "INSERT INTO users (username, email, status_id)\n" +
-            "VALUES ('testUser', 'email@example.com', 1);")
+    @Sql(statements = "INSERT INTO users (username, email, status_id, password)\n" +
+            "VALUES ('testUser', 'email@example.com', 1, 'pss');")
     void testUpdateUser() throws Exception {
         executeAndCompare("updateExistUserEmailTest");
     }
@@ -66,8 +66,8 @@ public class UserControllerTest extends AbstractControllerTest {
 
 
     @Test
-    @Sql(statements = "INSERT INTO users (username, email, status_id)\n" +
-            "VALUES ('testUserExist', 'email@example.com', 1);")
+    @Sql(statements = "INSERT INTO users (username, email, status_id, password)\n" +
+            "VALUES ('testUserExist', 'email@example.com', 1, 'pss');")
     void testNewExistUser() throws Exception {
         executeAndCompare("createExistUserTest");
     }

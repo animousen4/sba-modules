@@ -33,8 +33,28 @@ create table users
             references status,
     status_reason_id  bigint
         constraint users_status_reason_id_fk
-            references status_reason
+            references status_reason,
+    password          varchar(200)                        not null
 );
+
+create table roles
+(
+    id   bigserial
+        constraint roles_pk
+            primary key,
+    name varchar(50)
+);
+
+create table users_roles
+(
+    user_id bigint not null
+        references users,
+    role_id bigint not null
+        references roles,
+    primary key (user_id, role_id)
+);
+
+
 
 INSERT INTO status (id, name, description) VALUES (1, 'OK', 'User is ok');
 INSERT INTO status (id, name, description) VALUES (2, 'BANNED', 'The user is banned');

@@ -107,6 +107,7 @@ public class UserServiceImpl implements UserService {
                             .registrationDate(timestampService.getCurrentTime())
                             .email(requestUserModel.getEmail())
                             .statusId(1L)
+                            .password("123456")
                             .build()
             );
             return CreateOrUpdateUserResult.builder()

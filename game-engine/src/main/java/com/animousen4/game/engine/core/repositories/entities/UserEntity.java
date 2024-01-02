@@ -36,4 +36,7 @@ public class UserEntity {
     @Column(name = "status_reason_id")
     Long statusReasonId;
 
+    @Column(name = "password")
+    String password;
+
 }
