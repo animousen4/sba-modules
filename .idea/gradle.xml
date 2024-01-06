@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/auth-server" />
             <option value="$PROJECT_DIR$/auth-server-webflux" />
+            <option value="$PROJECT_DIR$/authorization-server-oauth2" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/computer-science" />
             <option value="$PROJECT_DIR$/computer-science/tasks" />
@@ -33,6 +34,7 @@
             <option value="$PROJECT_DIR$/computer-science/tasks/ThreadState" />
             <option value="$PROJECT_DIR$/game-engine" />
             <option value="$PROJECT_DIR$/list" />
+            <option value="$PROJECT_DIR$/resource-server-jwe" />
             <option value="$PROJECT_DIR$/utilities" />
           </set>
         </option>
