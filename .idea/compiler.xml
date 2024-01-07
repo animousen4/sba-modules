@@ -10,7 +10,7 @@
         </processorPath>
         <module name="sba-modules.abs-app.main" />
         <module name="sba-modules.auth-server.main" />
-        <module name="sba-modules.game-engine.main" />
+        <module name="sba-modules.core-app.main" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />

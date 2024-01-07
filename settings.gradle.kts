@@ -18,7 +18,7 @@ plugins {
 
 rootProject.name = "sba-modules"
 include(
-    "app", "list", "utilities", "game-engine", "abs-app", "auth-server", "auth-server-webflux",
+    "app", "list", "utilities", "abs-app", "core-app", "auth-server", "auth-server-webflux",
     "authorization-server-oauth2", "resource-server-jwe")
 include (
     universityFolder.plus("StringBuilderNotifier"),

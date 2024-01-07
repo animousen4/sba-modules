@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/abs-app/sba-modules.abs-app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server/sba-modules.auth-server.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.main.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.test.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.test.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine/sba-modules.game-engine.test.iml" />
     </modules>
   </component>
 </project>
