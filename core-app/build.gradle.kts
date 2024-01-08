@@ -6,6 +6,12 @@
 group = "com.animousen4"
 version = "0.0.1-SNAPSHOT"
 
+repositories {
+    mavenCentral()
+    maven {url = uri("https://jitpack.io")}
+}
+
+
 plugins {
     java
     id("org.springframework.boot") version "3.2.0"
@@ -29,6 +35,9 @@ dependencies {
     implementation("org.postgresql:postgresql:42.5.1")
 
     implementation("net.andreinc:neatchess:1.0")
+
+    implementation("com.github.bhlangonijr:chesslib:1.3.3")
+
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")

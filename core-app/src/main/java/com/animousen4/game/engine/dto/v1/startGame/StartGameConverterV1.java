@@ -21,7 +21,7 @@ public class StartGameConverterV1 implements
     @Override
     public StartGameCommand buildCommand(StartGameRequestV1 request) {
         return StartGameCommand.builder()
-                .name(request.getName())
+                .gameInfo(request.getGameInfo())
                 .build();
     }
 
@@ -29,6 +29,8 @@ public class StartGameConverterV1 implements
     public StartGameResponseV1 buildResponse(StartGameResult result) {
         return StartGameResponseV1.builder()
                 .status(result.getStatus())
+                .gameModel(result.getGameModel())
+                .errors(result.getValidationErrors())
                 .build();
     }
 }

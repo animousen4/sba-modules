@@ -5,7 +5,9 @@ import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 
 public interface GameService {
-    StartGameResult startGameRequest(StartGameCommand command);
+    StartGameResult startGame(StartGameCommand command);
 
     AllCurrentGamesResult getAllCurrentGames();
+
+    void removeAllCurrentGames();
 }
