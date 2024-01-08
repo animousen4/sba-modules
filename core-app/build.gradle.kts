@@ -19,13 +19,16 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.0")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+
+
 
     implementation("org.projectlombok:lombok:1.18.28")
     implementation("org.postgresql:postgresql:42.5.1")
 
     implementation("net.andreinc:neatchess:1.0")
-    implementation("org.apache.logging.log4j:log4j-api:2.20.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")

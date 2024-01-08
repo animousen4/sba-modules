@@ -15,7 +15,7 @@ import static com.animousen4.game.engine.core.consts.AppConsts.STATUS_NOT_FOUND;
 
 
 @Service
-public class StatusServiceImpl implements StatusService{
+class StatusServiceImpl implements StatusService{
 
     @Autowired
     AttributesDao attributesDao;

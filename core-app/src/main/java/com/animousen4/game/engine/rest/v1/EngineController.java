@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
         consumes = "application/json",
         produces = "application/json"
 )
-public class GameEngineController {
+public class EngineController {
 
     @Autowired
     SolvePositionConverterV1 solvePositionConverterV1;

@@ -21,7 +21,7 @@ public class StatefulChessEngineImpl implements StatefulChessEngine{
     @Override
     public void startNewPosition(String fen, Integer depth, Long maxMoveTime) {
         gameEngineLogger.logNewFenPosition(fen);
-        uci.positionFen(fen);
+        uci.positionFen(fen );
         response = uci.analysis(maxMoveTime);
     }
 

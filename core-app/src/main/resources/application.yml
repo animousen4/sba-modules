@@ -3,6 +3,15 @@ spring:
     url: jdbc:postgresql://localhost:5432/dev_multi_db
     username: dev_multi_admin
     password: de1720d92bff4769befe37692
+  data:
+    redis:
+      repositories:
+        enabled: true
+      port: 6379
+      timeout: 2000
+  cache:
+    redis:
+      time-to-live: 86400
 game:
   engine:
     stockfish: /engine/stockfish16

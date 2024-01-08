@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class PositionSolverServiceImpl implements PositionSolverService {
+class PositionSolverServiceImpl implements PositionSolverService {
 
     @Autowired
     private StatefulChessEngineFactory chessEngineFactory;

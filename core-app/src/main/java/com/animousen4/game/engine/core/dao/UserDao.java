@@ -17,11 +17,7 @@ public class UserDao{
     public UserEntity getUserByUsername(String username) {
         return userRepository.findUserEntityByUsername(username);
     }
-    public UserEntity updateUserById(UserEntity user) {
-        return userRepository.save(user);
-    }
-
-    public UserEntity saveUser(UserEntity user) {
+    public UserEntity saveOrUpdateUser(UserEntity user) {
         return userRepository.save(user);
     }
 }

@@ -8,8 +8,6 @@ import com.animousen4.game.engine.core.api.result.GetUserInfoResult;
 import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
-import com.animousen4.game.engine.core.services.dto.UserInfoDto;
-import com.animousen4.game.engine.core.underwriting.res.UserCredsResult;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validations.UserValidator;
 import com.animousen4.game.engine.core.validations.ValidationErrorFactory;
@@ -22,7 +20,7 @@ import static com.animousen4.game.engine.core.consts.AppConsts.*;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     @Autowired
     UserValidator validator;
@@ -87,7 +85,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private CreateOrUpdateUserResult updateUser(UserModel requestUserModel, UserEntity ent) {
-        userDao.updateUserById(
+        userDao.saveOrUpdateUser(
                 ent
                     .withEmail(requestUserModel.getEmail())
                     .withUsername(requestUserModel.getUpdatedUsername() == null ? ent.getUsername() :requestUserModel.getUpdatedUsername())
@@ -101,7 +99,7 @@ public class UserServiceImpl implements UserService {
     private CreateOrUpdateUserResult createUser(UserModel requestUserModel) {
         UserEntity existEntity = userDao.getUserByUsername(requestUserModel.getUpdatedUsername());
         if (existEntity == null) {
-            userDao.saveUser(
+            userDao.saveOrUpdateUser(
                     UserEntity.builder()
                             .username(requestUserModel.getUpdatedUsername())
                             .registrationDate(timestampService.getCurrentTime())
