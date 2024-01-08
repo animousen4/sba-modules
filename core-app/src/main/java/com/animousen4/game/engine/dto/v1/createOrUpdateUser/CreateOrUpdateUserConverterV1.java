@@ -8,7 +8,7 @@ import com.animousen4.game.engine.dto.AbstractConverter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateOrUpdateUserConverterV1 extends
+public class CreateOrUpdateUserConverterV1 implements
         AbstractConverter<
                 CreateOrUpdateUserRequestV1,
                 CreateOrUpdateUserCommand,

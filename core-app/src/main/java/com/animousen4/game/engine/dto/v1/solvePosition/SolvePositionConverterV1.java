@@ -10,7 +10,7 @@ import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserRe
 import org.springframework.stereotype.Component;
 
 @Component
-public class SolvePositionConverterV1 extends
+public class SolvePositionConverterV1 implements
         AbstractConverter<
                 SolvePositionRequestV1,
                 SolvePositionCommand,

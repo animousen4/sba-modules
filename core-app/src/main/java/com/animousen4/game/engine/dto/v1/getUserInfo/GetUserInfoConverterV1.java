@@ -7,7 +7,7 @@ import com.animousen4.game.engine.dto.AbstractConverter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetUserInfoConverterV1 extends AbstractConverter<
+public class GetUserInfoConverterV1 implements AbstractConverter<
         GetUserInfoRequestV1,
         GetUserInfoCommand,
         GetUserInfoResponseV1,

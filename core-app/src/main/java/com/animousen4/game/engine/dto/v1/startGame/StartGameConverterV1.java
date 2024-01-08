@@ -10,7 +10,7 @@ import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionResponseV1;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StartGameConverterV1 extends
+public class StartGameConverterV1 implements
         AbstractConverter<
                 StartGameRequestV1,
                 StartGameCommand,
