@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.api.model.game;
 
-import com.animousen4.game.engine.core.api.model.game.board.ChessBoardModel;
+import com.animousen4.game.engine.core.api.model.game.board.ChessBoardStoredModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,10 +10,10 @@ import org.springframework.data.redis.core.RedisHash;
 @Builder
 @Getter
 @RedisHash("game")
-public class GameModel {
-    Long id;
+public class GameStoredModel {
+    private Long id;
 
-    GameInfoModel gameInfoModel;
+    private GameInfoModel gameInfoModel;
 
-    ChessBoardModel chessBoardModel;
+    private ChessBoardStoredModel chessBoardStoredModel;
 }

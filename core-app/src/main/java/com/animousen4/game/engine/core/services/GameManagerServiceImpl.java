@@ -2,7 +2,7 @@ package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.mapper.GameMapper;
-import com.animousen4.game.engine.core.api.model.game.GameModel;
+import com.animousen4.game.engine.core.api.model.game.GameStoredModel;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.core.repositories.redis.CurrentGameRepository;
@@ -22,20 +22,20 @@ class GameManagerServiceImpl implements GameManagerService {
     private final GameMapper gameMapper;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
-        GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfo());
+        GameStoredModel gameStoredModel = gameModelFactory.createNewClassicGame(command.getGameInfo());
 
         currentGameRepository.save(
-                gameModel
+                gameStoredModel
         );
         return StartGameResult.builder()
                 .status("STARTED")
-                .gameModel(gameModel)
+                .gameStoredModel(gameStoredModel)
                 .build();
     }
 
     @Override
     public AllCurrentGamesResult getAllCurrentGames() {
-        List<GameModel> games = (List<GameModel>) currentGameRepository.findAll();
+        List<GameStoredModel> games = (List<GameStoredModel>) currentGameRepository.findAll();
         return AllCurrentGamesResult.builder()
                 .games(games)
                 .build();

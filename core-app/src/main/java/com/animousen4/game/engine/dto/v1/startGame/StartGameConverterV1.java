@@ -30,7 +30,7 @@ public class StartGameConverterV1 implements
     public StartGameResponseV1 buildResponse(StartGameResult result) {
         return StartGameResponseV1.builder()
                 .status(result.getStatus())
-                .game(gameMapper.map(result.getGameModel()))
+                .game(gameMapper.map(result.getGameStoredModel()))
                 .errors(result.getValidationErrors())
                 .build();
     }

@@ -1,14 +1,14 @@
 package com.animousen4.game.engine.core.validate.validator.internal.game;
 
 import com.animousen4.game.engine.core.api.command.MakeMoveCommand;
+import com.animousen4.game.engine.core.api.mapper.internal.ChessInternalFromStorageBoardMapper;
 import com.animousen4.game.engine.core.dao.CurrentGameDao;
 import com.animousen4.game.engine.core.util.Placeholder;
+import com.animousen4.game.engine.core.util.game.MoveUtil;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.validate.regex.GameRegex;
 import com.animousen4.game.engine.dto.ValidationError;
-import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Square;
-import com.github.bhlangonijr.chesslib.game.GameContext;
 import com.github.bhlangonijr.chesslib.move.Move;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,13 +22,16 @@ import static com.animousen4.game.engine.core.consts.AppConsts.*;
 @Component
 @RequiredArgsConstructor
 public class AllowedMoveValidation implements MoveValidation{
-    final CurrentGameDao currentGameDao;
+    private final CurrentGameDao currentGameDao;
 
-    final GameExistValidation gameExistValidation;
+    private final GameExistValidation gameExistValidation;
 
-    final ValidationErrorFactory validationErrorFactory;
+    private final ValidationErrorFactory validationErrorFactory;
 
-    final GameRegex gameRegex;
+    private final ChessInternalFromStorageBoardMapper chessInternalBoardMapper;
+
+    private final GameRegex gameRegex;
+    private final MoveUtil moveUtil;
     @Override
     public List<ValidationError> validateList(MakeMoveCommand obj) {
         return gameExistValidation.validate(obj).isEmpty()
@@ -48,17 +51,18 @@ public class AllowedMoveValidation implements MoveValidation{
 
     Optional<ValidationError> validateMovePossibility(MakeMoveCommand obj) {
         var game = currentGameDao.getCurrentGameById(obj.getGameId()).get();
-        var board = setupValidationBoard(game.getChessBoardModel().getFen());
-        boolean isLegal = false;
+        var internalBoard = game.getChessBoardInternalModel();
 
-        try {
-            isLegal = board.isMoveLegal(
-                    new Move(Square.fromValue(obj.getMoveFrom().toUpperCase()),
-                            Square.fromValue(obj.getMoveTo().toUpperCase())),
-                    false);
-        } catch (RuntimeException ignored) {
+        System.out.println(internalBoard.getBoard().getFen());
+        System.out.println(internalBoard.getBoard().legalMoves());
+        boolean isLegal = internalBoard.getBoard().legalMoves().contains(
+                moveUtil.getMoveFromString(
+                        obj.getMoveFrom(),
+                        obj.getMoveTo()
+                )
+        );
 
-        }
+
         return isLegal
                 ? Optional.empty()
                 : Optional.of(validationErrorFactory.buildError(
@@ -89,13 +93,4 @@ public class AllowedMoveValidation implements MoveValidation{
                 );
     }
 
-
-    Board setupValidationBoard(String fen) {
-        GameContext gameContext = new GameContext();
-        gameContext.setStartFEN(fen);
-        Board board = new Board();
-        board.setContext(gameContext);
-
-        return board;
-    }
 }
