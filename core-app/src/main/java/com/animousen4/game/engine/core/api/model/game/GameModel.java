@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.RedisHash;
 public class GameModel {
     Long id;
 
-    GameInfo gameInfo;
+    GameInfoModel gameInfo;
 
     ChessBoardModel chessBoardModel;
 }

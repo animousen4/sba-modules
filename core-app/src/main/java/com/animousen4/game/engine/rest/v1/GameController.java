@@ -3,7 +3,7 @@ package com.animousen4.game.engine.rest.v1;
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
-import com.animousen4.game.engine.core.services.GameService;
+import com.animousen4.game.engine.core.services.GameManagerService;
 import com.animousen4.game.engine.dto.v1.getAllCurrentGames.GetAllCurrentGamesConverterV1;
 import com.animousen4.game.engine.dto.v1.getAllCurrentGames.GetAllCurrentGamesResponseV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameConverterV1;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 )
 public class GameController {
     @Autowired
-    GameService gameService;
+    GameManagerService gameManagerService;
 
     @Autowired
     StartGameConverterV1 startGameConverterV1;
@@ -46,19 +46,19 @@ public class GameController {
             "/removeAllCurrentGames"
     )
     public ResponseEntity<String> clearAllGames() {
-        gameService.removeAllCurrentGames();
+        gameManagerService.removeAllCurrentGames();
         return ResponseEntity.ok().body("REMOVED");
 
     }
     StartGameResponseV1 buildResponseGetAllGames(StartGameRequestV1 requestV1) {
         StartGameCommand command = startGameConverterV1.buildCommand(requestV1);
-        StartGameResult result = gameService.startGame(command);
+        StartGameResult result = gameManagerService.startGame(command);
 
         return startGameConverterV1.buildResponse(result);
     }
 
     GetAllCurrentGamesResponseV1 buildResponseGetAllGames() {
-        AllCurrentGamesResult result = gameService.getAllCurrentGames();
+        AllCurrentGamesResult result = gameManagerService.getAllCurrentGames();
         return getAllCurrentGamesConverterV1.buildResponse(result);
     }
 }

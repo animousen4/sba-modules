@@ -1,12 +1,8 @@
 package com.animousen4.game.engine.dto.v1.startGame;
 
-import com.animousen4.game.engine.core.api.command.SolvePositionCommand;
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
-import com.animousen4.game.engine.core.api.result.SolvePositionResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.dto.AbstractConverter;
-import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
-import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionResponseV1;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +17,7 @@ public class StartGameConverterV1 implements
     @Override
     public StartGameCommand buildCommand(StartGameRequestV1 request) {
         return StartGameCommand.builder()
-                .gameInfo(request.getGameInfo())
+                .gameInfoModel(request.getGameInfo())
                 .build();
     }
 

@@ -9,18 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-class GameServiceImpl implements GameService{
+class GameManagerServiceImpl implements GameManagerService {
 
     private final CurrentGameRepository currentGameRepository;
 
     private final GameModelFactory gameModelFactory;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
-        GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfo());
+        GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfoModel());
         currentGameRepository.save(
                 gameModel
         );

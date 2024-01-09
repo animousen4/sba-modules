@@ -9,7 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-abstract public class AbstractValidator<E, T extends AbstractValidation<E>> implements AbstractValidatorInterface<E>{
+abstract public class AbstractValidator
+        <E, T extends AbstractValidation<E>> implements AbstractValidatorInterface<E>{
     abstract List<T> validationComponentsList();
     @Override
     public List<ValidationError> validate(E entity) {

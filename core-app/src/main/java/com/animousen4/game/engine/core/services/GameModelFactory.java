@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.services;
 
-import com.animousen4.game.engine.core.api.model.game.GameInfo;
+import com.animousen4.game.engine.core.api.model.game.GameInfoModel;
 import com.animousen4.game.engine.core.api.model.game.GameModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class GameModelFactory {
 
     private final ChessBoardModelFactory chessBoardModelFactory;
-    public GameModel createNewClassicGame(GameInfo gameInfo) {
+    public GameModel createNewClassicGame(GameInfoModel gameInfo) {
         return GameModel.builder()
                 .id(-1L)
                 .gameInfo(gameInfo)

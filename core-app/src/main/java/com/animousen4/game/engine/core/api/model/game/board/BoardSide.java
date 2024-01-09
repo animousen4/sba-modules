@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardSide {
 
-    Long leftTime;
+    ChessClock chessClock;
 
     List<Piece> takenPieces;
 }
