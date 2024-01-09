@@ -13,11 +13,8 @@ public class ChessInternalFromStorageBoardMapper implements Mapper<ChessBoardSto
     @Override
     public ChessBoardInternalModel map(ChessBoardStoredModel model) {
 
-
-        GameContext gameContext = new GameContext();
-        gameContext.setStartFEN(model.getFen());
         Board board = new Board();
-        board.setContext(gameContext);
+        board.loadFromFen(model.getFen());
 
         return ChessBoardInternalModel.builder()
                 .whiteSide(model.getWhiteSide())

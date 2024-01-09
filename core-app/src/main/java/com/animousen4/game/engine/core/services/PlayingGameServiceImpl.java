@@ -24,10 +24,6 @@ class PlayingGameServiceImpl implements PlayingGameService{
 
     private final CurrentGameDao currentGameDao;
 
-    private final ChessInternalFromStorageGameMapper gameInternalMapper;
-
-    private final ValidationErrorFactory validationErrorFactory;
-
     private final MoveUtil moveUtil;
 
     @Override
@@ -49,7 +45,6 @@ class PlayingGameServiceImpl implements PlayingGameService{
 
     MakeMoveResult buildMakeMoveGame(MakeMoveCommand command) {
         GameInternalModel game = currentGameDao.getCurrentGameById(command.getGameId()).get();
-
 
         game.getChessBoardInternalModel().getBoard().doMove(
                 moveUtil.getMoveFromString(

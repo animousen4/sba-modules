@@ -53,14 +53,16 @@ public class AllowedMoveValidation implements MoveValidation{
         var game = currentGameDao.getCurrentGameById(obj.getGameId()).get();
         var internalBoard = game.getChessBoardInternalModel();
 
-        System.out.println(internalBoard.getBoard().getFen());
-        System.out.println(internalBoard.getBoard().legalMoves());
-        boolean isLegal = internalBoard.getBoard().legalMoves().contains(
-                moveUtil.getMoveFromString(
-                        obj.getMoveFrom(),
-                        obj.getMoveTo()
-                )
-        );
+
+        boolean isLegal = false;
+        try {
+            isLegal = internalBoard.getBoard().isMoveLegal(moveUtil.getMoveFromString(
+                    obj.getMoveFrom(),
+                    obj.getMoveTo()
+            ), true);
+        } catch (RuntimeException ignore) {
+
+        }
 
 
         return isLegal
