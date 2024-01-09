@@ -6,5 +6,5 @@ import lombok.Getter;
 
 @Getter
 public class StartGameRequestV1 extends CoreRequest {
-    private GameInfoDTO gameInfoDTO;
+    private GameInfoDTO gameInfo;
 }

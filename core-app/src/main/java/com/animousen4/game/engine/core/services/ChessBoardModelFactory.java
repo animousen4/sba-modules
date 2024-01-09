@@ -12,7 +12,7 @@ import java.util.List;
 public class ChessBoardModelFactory {
     public ChessBoardModel createNewClassicModel(GameInfoModel gameInfoModel) {
         return ChessBoardModel.builder()
-                .board(new Board())
+                .fen(new Board().getFen())
                 .whiteSide(
                         BoardSide.builder()
                                 .chessClock(gameInfoModel.getWhiteSide().getClock())

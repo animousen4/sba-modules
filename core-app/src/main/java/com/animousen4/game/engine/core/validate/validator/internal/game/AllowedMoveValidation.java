@@ -48,7 +48,7 @@ public class AllowedMoveValidation implements MoveValidation{
 
     Optional<ValidationError> validateMovePossibility(MakeMoveCommand obj) {
         var game = currentGameDao.getCurrentGameById(obj.getGameId()).get();
-        var board = game.getChessBoardModel().getBoard();
+        var board = setupValidationBoard(game.getChessBoardModel().getFen());
         boolean isLegal = false;
 
         try {

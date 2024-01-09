@@ -26,18 +26,18 @@ public class GameModelFactory {
                 .build();
     }
 
-    private GameInfoModel createGameInfo(GameInfoDTO gameInfoDTO) {
+    private GameInfoModel createGameInfo(GameInfoDTO gameInfoDto) {
         return GameInfoModel.builder()
                 .whiteSide(
                         SideInfoModel.builder()
-                                .sideId(gameInfoDTO.getWhiteSide().getSideId())
-                                .clock(gameInfoDTO.getWhiteSide().getClock())
+                                .sideId(gameInfoDto.getWhiteSide().getSideId())
+                                .clock(gameInfoDto.getWhiteSide().getClock())
                                 .build()
                 )
                 .blackSide(
                         SideInfoModel.builder()
-                                .sideId(gameInfoDTO.getBlackSide().getSideId())
-                                .clock(gameInfoDTO.getBlackSide().getClock())
+                                .sideId(gameInfoDto.getBlackSide().getSideId())
+                                .clock(gameInfoDto.getBlackSide().getClock())
                                 .build()
                 )
                 .build();

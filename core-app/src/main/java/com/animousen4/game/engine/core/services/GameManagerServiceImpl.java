@@ -22,7 +22,8 @@ class GameManagerServiceImpl implements GameManagerService {
     private final GameMapper gameMapper;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
-        GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfoModel());
+        GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfo());
+
         currentGameRepository.save(
                 gameModel
         );

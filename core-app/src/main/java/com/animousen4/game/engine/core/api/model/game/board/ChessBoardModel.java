@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class ChessBoardModel {
-    Board board;
+    String fen;
 
     BoardSide whiteSide;
     BoardSide blackSide;

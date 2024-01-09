@@ -22,7 +22,7 @@ public class StartGameConverterV1 implements
     @Override
     public StartGameCommand buildCommand(StartGameRequestV1 request) {
         return StartGameCommand.builder()
-                .gameInfoModel(request.getGameInfoDTO())
+                .gameInfo(request.getGameInfo())
                 .build();
     }
 

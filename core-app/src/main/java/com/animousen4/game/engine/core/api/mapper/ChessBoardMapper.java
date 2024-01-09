@@ -9,7 +9,7 @@ public class ChessBoardMapper implements ModelDtoMapper<ChessBoardModel, ChessBo
     @Override
     public ChessBoardDTO map(ChessBoardModel chessBoardModel) {
         return ChessBoardDTO.builder()
-                .fen(chessBoardModel.getBoard().getFen())
+                .fen(chessBoardModel.getFen())
                 .whiteSide(chessBoardModel.getWhiteSide())
                 .blackSide(chessBoardModel.getBlackSide())
                 .build();
