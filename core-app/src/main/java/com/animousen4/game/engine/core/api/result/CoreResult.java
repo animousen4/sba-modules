@@ -19,4 +19,6 @@ public abstract class CoreResult {
     public boolean hasErrors() {
         return  validationErrors != null && !validationErrors.isEmpty();
     }
+
+
 }

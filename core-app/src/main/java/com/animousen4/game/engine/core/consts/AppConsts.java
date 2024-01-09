@@ -26,4 +26,15 @@ public class AppConsts {
 
     public static final String GAME_NOT_EXISTS = "GAME_NOT_EXISTS";
 
+    public static final String MOVE_NOT_LEGAL = "MOVE_NOT_LEGAL";
+
+    public static final String MOVE_FROM = "MOVE_FROM";
+
+    public static final String MOVE_TO = "MOVE_TO";
+
+    public static final String MOVE = "MOVE";
+
+    public static final String INVALID_MOVE_FORMAT = "INVALID_MOVE_FORMAT";
+
+
 }

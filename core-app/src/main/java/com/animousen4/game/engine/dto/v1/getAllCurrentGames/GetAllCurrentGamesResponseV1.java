@@ -1,5 +1,6 @@
 package com.animousen4.game.engine.dto.v1.getAllCurrentGames;
 
+import com.animousen4.game.engine.core.api.dto.game.GameDTO;
 import com.animousen4.game.engine.core.api.model.game.GameModel;
 import com.animousen4.game.engine.dto.CoreResponse;
 import lombok.Getter;
@@ -11,5 +12,5 @@ import java.util.List;
 @Getter
 public class GetAllCurrentGamesResponseV1 extends CoreResponse {
     // not use model!
-    List<GameModel> games;
+    List<GameDTO> games;
 }

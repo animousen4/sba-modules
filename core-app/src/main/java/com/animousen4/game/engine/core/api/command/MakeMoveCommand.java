@@ -7,5 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 public class MakeMoveCommand extends CoreCommand{
     Long gameId;
-    String move;
+    String moveFrom;
+    String moveTo;
 }

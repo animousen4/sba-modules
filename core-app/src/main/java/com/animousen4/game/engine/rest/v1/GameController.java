@@ -1,14 +1,21 @@
 package com.animousen4.game.engine.rest.v1;
 
+import com.animousen4.game.engine.core.api.command.MakeMoveCommand;
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
+import com.animousen4.game.engine.core.api.result.MakeMoveResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.core.services.GameManagerService;
+import com.animousen4.game.engine.core.services.PlayingGameService;
 import com.animousen4.game.engine.dto.v1.getAllCurrentGames.GetAllCurrentGamesConverterV1;
 import com.animousen4.game.engine.dto.v1.getAllCurrentGames.GetAllCurrentGamesResponseV1;
+import com.animousen4.game.engine.dto.v1.makeMove.MakeMoveConverterV1;
+import com.animousen4.game.engine.dto.v1.makeMove.MakeMoveRequestV1;
+import com.animousen4.game.engine.dto.v1.makeMove.MakeMoveResponseV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameConverterV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameRequestV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameResponseV1;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,37 +26,46 @@ import org.springframework.web.bind.annotation.*;
         consumes = "application/json",
         produces = "application/json"
 )
+@RequiredArgsConstructor
 public class GameController {
-    @Autowired
-    GameManagerService gameManagerService;
+    final GameManagerService gameManagerService;
 
-    @Autowired
-    StartGameConverterV1 startGameConverterV1;
+    final StartGameConverterV1 startGameConverterV1;
 
-    @Autowired
-    GetAllCurrentGamesConverterV1 getAllCurrentGamesConverterV1;
-    @PostMapping(
-            "/start"
-    )
+    final GetAllCurrentGamesConverterV1 getAllCurrentGamesConverterV1;
+
+    final MakeMoveConverterV1 makeMoveConverterV1;
+
+    final PlayingGameService playingGameService;
+    @PostMapping("/start")
     public StartGameResponseV1 startGame(@RequestBody StartGameRequestV1 requestV1) {
         return buildResponseGetAllGames(requestV1);
     }
 
-    @GetMapping(
-            "/getAllCurrentGames"
-    )
+    @GetMapping("/getAllCurrentGames")
     public GetAllCurrentGamesResponseV1 getAllCurrentGames() {
         return buildResponseGetAllGames();
     }
 
-    @GetMapping(
-            "/removeAllCurrentGames"
-    )
+    @GetMapping("/removeAllCurrentGames")
     public ResponseEntity<String> clearAllGames() {
         gameManagerService.removeAllCurrentGames();
         return ResponseEntity.ok().body("REMOVED");
-
     }
+
+    @PostMapping("/makeMove")
+    public MakeMoveResponseV1 startGame(@RequestBody MakeMoveRequestV1 requestV1) {
+        return buildResponseMakeMove(requestV1);
+    }
+
+    MakeMoveResponseV1 buildResponseMakeMove(MakeMoveRequestV1 requestV1) {
+        MakeMoveCommand command = makeMoveConverterV1.buildCommand(requestV1);
+        MakeMoveResult res = playingGameService.makeMove(command);
+
+        return makeMoveConverterV1.buildResponse(res);
+    }
+
+
     StartGameResponseV1 buildResponseGetAllGames(StartGameRequestV1 requestV1) {
         StartGameCommand command = startGameConverterV1.buildCommand(requestV1);
         StartGameResult result = gameManagerService.startGame(command);
