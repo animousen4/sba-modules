@@ -11,15 +11,14 @@ import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.core.repositories.redis.CurrentGameRepository;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
-import com.animousen4.game.engine.dto.ValidationError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.GAME_ID;
-import static com.animousen4.game.engine.core.consts.AppConsts.GAME_NOT_EXISTS;
+import static com.animousen4.game.engine.core.values.AppConsts.GAME_ID;
+import static com.animousen4.game.engine.core.values.AppConsts.GAME_NOT_EXISTS;
 
 @Service
 @RequiredArgsConstructor

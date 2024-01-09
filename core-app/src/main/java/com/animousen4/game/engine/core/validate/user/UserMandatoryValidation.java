@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.validate.user;
 
-import com.animousen4.game.engine.core.consts.AppConsts;
+import com.animousen4.game.engine.core.values.AppConsts;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.UserValidation;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;

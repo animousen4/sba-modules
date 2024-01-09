@@ -11,10 +11,10 @@ import lombok.Setter;
 public class StatusReasonEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO, generator = "status_reason_generator")
+    @SequenceGenerator(name="status_reason_generator", sequenceName = "status_reason_id_seq", allocationSize=1)
     Long id;
     String name;
-    String description;
 
     @Column(name = "status_id")
     Long statusId;

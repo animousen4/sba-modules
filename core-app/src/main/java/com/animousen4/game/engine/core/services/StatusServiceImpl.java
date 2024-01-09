@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.STATUS_ID;
-import static com.animousen4.game.engine.core.consts.AppConsts.STATUS_NOT_FOUND;
+import static com.animousen4.game.engine.core.values.AppConsts.STATUS_ID;
+import static com.animousen4.game.engine.core.values.AppConsts.STATUS_NOT_FOUND;
 
 
 @Service

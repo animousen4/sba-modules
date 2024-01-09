@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.core.consts;
+package com.animousen4.game.engine.core.values;
 
 public class AppConsts {
     public static final String MANDATORY_FIELD_MISSING = "MANDATORY_FIELD_MISSING";

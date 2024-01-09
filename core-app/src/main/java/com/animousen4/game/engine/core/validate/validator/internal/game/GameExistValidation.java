@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.GAME_ID;
-import static com.animousen4.game.engine.core.consts.AppConsts.GAME_NOT_EXISTS;
+import static com.animousen4.game.engine.core.values.AppConsts.GAME_ID;
+import static com.animousen4.game.engine.core.values.AppConsts.GAME_NOT_EXISTS;
 
 @Component
 @RequiredArgsConstructor

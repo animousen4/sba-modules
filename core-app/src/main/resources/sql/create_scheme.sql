@@ -1,22 +1,20 @@
-create table status
+create table user_status
 (
-    id          bigserial
+    id   bigserial
         constraint status_pk
             primary key,
-    name        varchar(30)  not null,
-    description varchar(300) not null
+    name varchar(30) not null
 );
 
 create table status_reason
 (
-    id          bigserial
+    id        bigserial
         constraint status_reason_pk
             primary key,
-    name        varchar(30)  not null,
-    description varchar(300) not null,
-    status_id   bigint       not null
+    name      varchar(30) not null,
+    status_id bigint      not null
         constraint status_reason_status_id_fk
-            references status
+            references user_status
 );
 
 create table users
@@ -30,7 +28,7 @@ create table users
     email             varchar(200),
     status_id         bigint                              not null
         constraint users_status_id_fk
-            references status,
+            references user_status,
     status_reason_id  bigint
         constraint users_status_reason_id_fk
             references status_reason,
@@ -45,12 +43,33 @@ create table roles
     name varchar(50)
 );
 
-create table users_roles
+create table user_roles
 (
     user_id bigint not null
-        references users,
+        constraint users_roles_user_id_fkey
+            references users,
     role_id bigint not null
-        references roles,
-    primary key (user_id, role_id)
+        constraint users_roles_role_id_fkey
+            references roles,
+    constraint users_roles_pkey
+        primary key (user_id, role_id)
+);
+
+create table game_status
+(
+    id   bigserial
+        constraint games_status_pk
+            primary key,
+    name varchar(50)
+);
+
+create table games
+(
+    id             bigserial
+        constraint games_pk
+            primary key,
+    game_status_id bigint not null
+        constraint games_games_status_id_fk
+            references game_status
 );
 

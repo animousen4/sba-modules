@@ -8,8 +8,6 @@ import com.animousen4.game.engine.core.util.game.MoveUtil;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.validate.regex.GameRegex;
 import com.animousen4.game.engine.dto.ValidationError;
-import com.github.bhlangonijr.chesslib.Square;
-import com.github.bhlangonijr.chesslib.move.Move;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.*;
+import static com.animousen4.game.engine.core.values.AppConsts.*;
 
 @Component
 @RequiredArgsConstructor

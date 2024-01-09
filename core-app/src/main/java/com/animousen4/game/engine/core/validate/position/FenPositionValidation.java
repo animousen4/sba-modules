@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.FIELD_NAME;
-import static com.animousen4.game.engine.core.consts.AppConsts.MANDATORY_FIELD_MISSING;
+import static com.animousen4.game.engine.core.values.AppConsts.FIELD_NAME;
+import static com.animousen4.game.engine.core.values.AppConsts.MANDATORY_FIELD_MISSING;
 
 @Component
 class FenPositionValidation extends PositionValidationImpl {

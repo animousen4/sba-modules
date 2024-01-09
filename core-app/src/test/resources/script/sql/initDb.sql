@@ -1,22 +1,20 @@
-create table status
+create table user_status
 (
-    id          bigserial
+    id   bigserial
         constraint status_pk
             primary key,
-    name        varchar(30)  not null,
-    description varchar(300) not null
+    name varchar(30) not null
 );
 
 create table status_reason
 (
-    id          bigserial
+    id        bigserial
         constraint status_reason_pk
             primary key,
-    name        varchar(30)  not null,
-    description varchar(300) not null,
-    status_id   bigint       not null
+    name      varchar(30) not null,
+    status_id bigint      not null
         constraint status_reason_status_id_fk
-            references status
+            references user_status
 );
 
 create table users
@@ -30,7 +28,7 @@ create table users
     email             varchar(200),
     status_id         bigint                              not null
         constraint users_status_id_fk
-            references status,
+            references user_status,
     status_reason_id  bigint
         constraint users_status_reason_id_fk
             references status_reason,
@@ -45,24 +43,33 @@ create table roles
     name varchar(50)
 );
 
-create table users_roles
+create table user_roles
 (
     user_id bigint not null
-        references users,
+        constraint users_roles_user_id_fkey
+            references users,
     role_id bigint not null
-        references roles,
-    primary key (user_id, role_id)
+        constraint users_roles_role_id_fkey
+            references roles,
+    constraint users_roles_pkey
+        primary key (user_id, role_id)
 );
 
+create table game_status
+(
+    id   bigserial
+        constraint games_status_pk
+            primary key,
+    name varchar(50)
+);
 
-
-INSERT INTO status (id, name, description) VALUES (1, 'OK', 'User is ok');
-INSERT INTO status (id, name, description) VALUES (2, 'BANNED', 'The user is banned');
-INSERT INTO status (id, name, description) VALUES (3, 'SUSPENDED', 'The user is suspended');
-
-INSERT INTO status_reason (id, name, description, status_id) VALUES (1, 'CHEATING', 'The player was banned for cheating', 2);
-INSERT INTO status_reason (id, name, description, status_id) VALUES (3, 'ABUSE', 'The player was banned for abusing a system', 2);
-INSERT INTO status_reason (id, name, description, status_id) VALUES (2, 'SCAM', 'The player was banned for scamming other players', 2);
-INSERT INTO status_reason (id, name, description, status_id) VALUES (4, 'STRANGE_ACTIVITY', 'The player account was suspended for a strange activity', 3);
-INSERT INTO status_reason (id, name, description, status_id) VALUES (5, 'ALL_OK', 'The player is playing according the rules of platform', 1);
+create table games
+(
+    id             bigserial
+        constraint games_pk
+            primary key,
+    game_status_id bigint not null
+        constraint games_games_status_id_fk
+            references game_status
+);
 

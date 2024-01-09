@@ -17,7 +17,6 @@ import com.animousen4.game.engine.dto.v1.startGame.StartGameConverterV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameRequestV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameResponseV1;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,12 +40,12 @@ public class GameController {
     final PlayingGameService playingGameService;
     @PostMapping("/start")
     public StartGameResponseV1 startGame(@RequestBody StartGameRequestV1 requestV1) {
-        return buildResponseGetAllGames(requestV1);
+        return buildResponseStartGame(requestV1);
     }
 
     @GetMapping("/getAllCurrentGames")
     public GetAllCurrentGamesResponseV1 getAllCurrentGames() {
-        return buildResponseGetAllGames();
+        return buildResponseStartGame();
     }
 
     @GetMapping(path=
@@ -81,14 +80,14 @@ public class GameController {
     }
 
 
-    StartGameResponseV1 buildResponseGetAllGames(StartGameRequestV1 requestV1) {
+    StartGameResponseV1 buildResponseStartGame(StartGameRequestV1 requestV1) {
         StartGameCommand command = startGameConverterV1.buildCommand(requestV1);
         StartGameResult result = gameManagerService.startGame(command);
 
         return startGameConverterV1.buildResponse(result);
     }
 
-    GetAllCurrentGamesResponseV1 buildResponseGetAllGames() {
+    GetAllCurrentGamesResponseV1 buildResponseStartGame() {
         AllCurrentGamesResult result = gameManagerService.getAllCurrentGames();
         return getAllCurrentGamesConverterV1.buildResponse(result);
     }

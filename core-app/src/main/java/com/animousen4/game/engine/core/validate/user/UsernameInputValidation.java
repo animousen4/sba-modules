@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.animousen4.game.engine.core.consts.AppConsts.*;
+import static com.animousen4.game.engine.core.values.AppConsts.*;
 
 @Component
 public class UsernameInputValidation implements UserValidation {
