@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 public class GameModelFactory {
 
     private final ChessBoardModelFactory chessBoardModelFactory;
-    public GameStoredModel createNewClassicGame(GameInfoDTO gameInfoDto) {
+    public GameStoredModel createNewClassicGame(GameInfoDTO gameInfoDto, Long id) {
 
         GameInfoModel gameInfoModel = createGameInfo(gameInfoDto);
         return GameStoredModel.builder()
-                .id(-1L)
+                .id(id)
                 .gameInfoModel(
                         gameInfoModel
                 )

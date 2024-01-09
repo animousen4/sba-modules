@@ -1,0 +1,18 @@
+{
+  "gameInfo": {
+    "whiteSide": {
+      "sideId": 1,
+      "clock": {
+        "bonusTime": 0,
+        "leftTime": 1000
+      }
+    },
+    "blackSide": {
+      "sideId": 1,
+      "clock": {
+        "bonusTime": 0,
+        "leftTime": 1000
+      }
+    }
+  }
+}

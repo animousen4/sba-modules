@@ -1,0 +1,40 @@
+{
+  "errors": null,
+  "status": "READY",
+  "game": {
+    "id": 1,
+    "gameInfo": {
+      "whiteSide": {
+        "sideId": 1,
+        "clock": {
+          "bonusTime": 0,
+          "leftTime": 1000
+        }
+      },
+      "blackSide": {
+        "sideId": 1,
+        "clock": {
+          "bonusTime": 0,
+          "leftTime": 1000
+        }
+      }
+    },
+    "chessBoard": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "whiteSide": {
+        "chessClock": {
+          "bonusTime": 0,
+          "leftTime": 1000
+        },
+        "takenPieces": []
+      },
+      "blackSide": {
+        "chessClock": {
+          "bonusTime": 0,
+          "leftTime": 1000
+        },
+        "takenPieces": []
+      }
+    }
+  }
+}

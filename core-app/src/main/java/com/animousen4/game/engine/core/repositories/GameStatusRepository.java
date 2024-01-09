@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface GameStatusRepository extends JpaRepository<GameStatusEntity, Long> {
     Optional<GameStatusEntity> findGameStatusEntityById(Long id);
 
-    Optional<GameStatusEntity> findGameStatusEntityByName(GameStatus status);
+    GameStatusEntity findGameStatusEntityByName(GameStatus status);
 
 
 }

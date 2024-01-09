@@ -35,13 +35,13 @@ public class ReferenceSyncBean {
     }
 
     private void syncGameStatus() {
-        log.info("Started syncing game_status");
+        log.info("Syncing game_status");
         Arrays.stream(GameStatus.values()).forEach(
                 status -> {
-                    Optional<GameStatusEntity> entity =
+                    GameStatusEntity entity =
                             gameStatusRepository.findGameStatusEntityByName(status);
 
-                    if (entity.isEmpty()){
+                    if (entity == null) {
                         gameStatusRepository.save(
                                 GameStatusEntity.builder()
                                         .name(status)
@@ -50,19 +50,19 @@ public class ReferenceSyncBean {
 
                         log.info("Saved a new gameStatus: %s".formatted(status.name()));
                     }
+
                 }
         );
-        log.info("Finished syncing game_status");
     }
 
     private void syncUserStatus() {
-        log.info("Started syncing user_status");
+        log.info("Syncing user_status");
         Arrays.stream(UserStatus.values()).forEach(
                 status -> {
-                    Optional<UserStatusEntity> entity =
+                    UserStatusEntity entity =
                             userStatusRepository.findStatusEntityByName(status);
 
-                    if (entity.isEmpty()){
+                    if (entity == null){
                         userStatusRepository.save(
                                 UserStatusEntity.builder()
                                         .name(status)
@@ -73,7 +73,5 @@ public class ReferenceSyncBean {
                     }
                 }
         );
-
-        log.info("Finished syncing user_status");
     }
 }
