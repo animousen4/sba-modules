@@ -3,6 +3,7 @@ package com.animousen4.game.engine.rest.v1;
 import com.animousen4.game.engine.core.api.command.MakeMoveCommand;
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
+import com.animousen4.game.engine.core.api.result.GetGamePositionResult;
 import com.animousen4.game.engine.core.api.result.MakeMoveResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.core.services.GameManagerService;
@@ -17,6 +18,7 @@ import com.animousen4.game.engine.dto.v1.startGame.StartGameRequestV1;
 import com.animousen4.game.engine.dto.v1.startGame.StartGameResponseV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +47,19 @@ public class GameController {
     @GetMapping("/getAllCurrentGames")
     public GetAllCurrentGamesResponseV1 getAllCurrentGames() {
         return buildResponseGetAllGames();
+    }
+
+    @GetMapping(path=
+            "/getGamePosition/{id}",
+            produces = MediaType.ALL_VALUE,
+            consumes = MediaType.ALL_VALUE
+    )
+    public ResponseEntity<String> getGamePosition(@PathVariable Long id) {
+        GetGamePositionResult gamePositionResult = gameManagerService.getGamePosition(id);
+
+        return gamePositionResult.hasErrors()
+                ? ResponseEntity.ok().body(gamePositionResult.getValidationErrors().toString())
+                : ResponseEntity.ok().body(gamePositionResult.getPosition());
     }
 
     @GetMapping("/removeAllCurrentGames")

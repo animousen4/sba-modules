@@ -13,4 +13,8 @@ public class ValidationError {
     private String errorCode;
     private String description;
 
+    @Override
+    public String toString() {
+        return "%s : %s".formatted(errorCode, description);
+    }
 }
