@@ -6,10 +6,10 @@ create table user_status
     name varchar(30) not null
 );
 
-create table status_reason
+create table user_status_reason
 (
     id        bigserial
-        constraint status_reason_pk
+        constraint user_status_reason_pk
             primary key,
     name      varchar(30) not null,
     status_id bigint      not null
@@ -31,11 +31,11 @@ create table users
             references user_status,
     status_reason_id  bigint
         constraint users_status_reason_id_fk
-            references status_reason,
+            references user_status_reason,
     password          varchar(200)                        not null
 );
 
-create table roles
+create table user_roles
 (
     id   bigserial
         constraint roles_pk
@@ -43,14 +43,14 @@ create table roles
     name varchar(50)
 );
 
-create table user_roles
+create table user_belong_roles
 (
     user_id bigint not null
         constraint users_roles_user_id_fkey
             references users,
     role_id bigint not null
         constraint users_roles_role_id_fkey
-            references roles,
+            references user_roles,
     constraint users_roles_pkey
         primary key (user_id, role_id)
 );
