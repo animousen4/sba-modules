@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class GameInfoDTO {
-    SideInfoModel whiteSide;
-    SideInfoModel blackSide;
+    SideInfoDTO whiteSide;
+    SideInfoDTO blackSide;
 }

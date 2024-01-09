@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class BoardSide {
-
     ChessClock chessClock;
 
     List<Piece> takenPieces;

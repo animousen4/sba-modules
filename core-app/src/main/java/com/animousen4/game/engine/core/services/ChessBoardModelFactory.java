@@ -10,19 +10,18 @@ import java.util.List;
 
 @Service
 public class ChessBoardModelFactory {
-    final Board board = new Board();
-    public ChessBoardModel createNewClassicModel(GameInfoModel gameInfo) {
+    public ChessBoardModel createNewClassicModel(GameInfoModel gameInfoModel) {
         return ChessBoardModel.builder()
-                .fen(board.getFen())
+                .board(new Board())
                 .whiteSide(
                         BoardSide.builder()
-                                .chessClock(gameInfo.getWhiteSide().getClock())
+                                .chessClock(gameInfoModel.getWhiteSide().getClock())
                                 .takenPieces(List.of())
                                 .build()
                 )
                 .blackSide(
                         BoardSide.builder()
-                                .chessClock(gameInfo.getBlackSide().getClock())
+                                .chessClock(gameInfoModel.getBlackSide().getClock())
                                 .takenPieces(List.of())
                                 .build()
                 )

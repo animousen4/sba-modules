@@ -1,6 +1,7 @@
 package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
+import com.animousen4.game.engine.core.api.mapper.GameMapper;
 import com.animousen4.game.engine.core.api.model.game.GameModel;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
@@ -17,6 +18,8 @@ class GameManagerServiceImpl implements GameManagerService {
     private final CurrentGameRepository currentGameRepository;
 
     private final GameModelFactory gameModelFactory;
+
+    private final GameMapper gameMapper;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
         GameModel gameModel = gameModelFactory.createNewClassicGame(command.getGameInfoModel());

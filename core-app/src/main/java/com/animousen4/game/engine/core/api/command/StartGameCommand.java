@@ -1,5 +1,6 @@
 package com.animousen4.game.engine.core.api.command;
 
+import com.animousen4.game.engine.core.api.dto.game.GameInfoDTO;
 import com.animousen4.game.engine.core.api.model.game.GameInfoModel;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -7,5 +8,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 public class StartGameCommand extends CoreCommand{
-    GameInfoModel gameInfoModel;
+    GameInfoDTO gameInfoModel;
 }
