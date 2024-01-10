@@ -13,7 +13,7 @@ public class TestContainerConstants {
 
     // Redis
 
-    public static final String DOCKER_REDIS_IMAGE_VERSION = "redis:5.0.3";
+    public static final String DOCKER_REDIS_IMAGE_VERSION = "redis:6.2.6";
 
     public static final Integer REDIS_TEST_PORT = 6379;
 

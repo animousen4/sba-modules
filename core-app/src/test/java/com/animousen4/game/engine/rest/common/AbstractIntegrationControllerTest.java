@@ -9,16 +9,19 @@ import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import static com.animousen4.game.engine.TestContainerConstants.REDIS_TEST_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
-public abstract class AbstractControllerTest {
+public abstract class AbstractIntegrationControllerTest {
 
     @ClassRule
     public static PostgreSQLContainer<PostgresContainerSettings> postgreSQLContainer =
@@ -29,6 +32,11 @@ public abstract class AbstractControllerTest {
     public static RedisContainerSettings redisContainer = RedisContainerSettings.getInstance();
     //tests
 
+    @DynamicPropertySource
+    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.redis.host", redisContainer::getHost);
+        registry.add("spring.data.redis.port", () -> redisContainer.getMappedPort(REDIS_TEST_PORT).toString());
+    }
     @BeforeAll()
     static void beforeAll() {
         postgreSQLContainer.start();
