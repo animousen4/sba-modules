@@ -40,8 +40,11 @@ dependencies {
 
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")
+
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.testcontainers:postgresql:1.17.3")
+    testImplementation("com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6")
     testImplementation("uk.org.webcompere:model-assert:1.0.0")
 
     annotationProcessor("org.projectlombok:lombok")

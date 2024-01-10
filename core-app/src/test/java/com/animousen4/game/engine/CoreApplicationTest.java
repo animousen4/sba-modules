@@ -18,8 +18,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 class CoreApplicationTest {
 
     @ClassRule
-    public static PostgreSQLContainer<GameEngineContainerSettings> postgreSQLContainer =
-            GameEngineContainerSettings.getInstance(TestContainerGameEngineConstants.INIT_DB_SCRIPT_PATH);
+    public static PostgreSQLContainer<PostgresContainerSettings> postgreSQLContainer =
+            PostgresContainerSettings.getInstance(TestContainerGameEngineConstants.INIT_DB_SCRIPT_PATH);
 
     //tests
 

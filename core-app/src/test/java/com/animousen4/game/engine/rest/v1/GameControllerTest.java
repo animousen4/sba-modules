@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.rest.v1;
 
-import com.animousen4.game.engine.GameEngineContainerSettings;
+import com.animousen4.game.engine.PostgresContainerSettings;
 import com.animousen4.game.engine.TestContainerGameEngineConstants;
 import com.animousen4.game.engine.rest.common.AbstractControllerTest;
 import org.junit.ClassRule;
@@ -18,19 +18,6 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @AutoConfigureMockMvc
 public class GameControllerTest extends AbstractControllerTest {
 
-    @ClassRule
-    public static PostgreSQLContainer<GameEngineContainerSettings> postgreSQLContainer =
-            GameEngineContainerSettings.getInstance(TestContainerGameEngineConstants.INIT_DB_SCRIPT_PATH);
-
-    @BeforeAll()
-    static void beforeAll() {
-        postgreSQLContainer.start();
-    }
-
-    @AfterAll()
-    static void afterAll() {
-        postgreSQLContainer.stop();
-    }
 
     @Override
     protected String getBaseUrl() {

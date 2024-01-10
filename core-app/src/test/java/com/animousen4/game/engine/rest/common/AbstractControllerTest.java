@@ -1,17 +1,45 @@
 package com.animousen4.game.engine.rest.common;
 
+import com.animousen4.game.engine.PostgresContainerSettings;
+import com.animousen4.game.engine.RedisContainerSettings;
+import com.animousen4.game.engine.TestContainerGameEngineConstants;
+import org.junit.ClassRule;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 public abstract class AbstractControllerTest {
+
+    @ClassRule
+    public static PostgreSQLContainer<PostgresContainerSettings> postgreSQLContainer =
+            PostgresContainerSettings.getInstance(TestContainerGameEngineConstants.INIT_DB_SCRIPT_PATH);
+
+
+    @ClassRule
+    public static RedisContainerSettings redisContainer = RedisContainerSettings.getInstance();
+    //tests
+
+    @BeforeAll()
+    static void beforeAll() {
+        postgreSQLContainer.start();
+        redisContainer.start();
+    }
+
+    @AfterAll()
+    static void afterAll() {
+        postgreSQLContainer.stop();
+        redisContainer.stop();
+    }
 
     @Autowired
     private MockMvc mockMvc;

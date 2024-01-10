@@ -4,16 +4,16 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 import static com.animousen4.game.engine.TestContainerConstants.*;
 
-public class GameEngineContainerSettings extends PostgreSQLContainer<GameEngineContainerSettings> {
-	private static GameEngineContainerSettings container;
+public class PostgresContainerSettings extends PostgreSQLContainer<PostgresContainerSettings> {
+	private static PostgresContainerSettings container;
 
-	private GameEngineContainerSettings() {
-		super(DOCKER_IMAGE_VERSION);
+	private PostgresContainerSettings() {
+		super(DOCKER_POSTGRES_IMAGE_VERSION);
 	}
 
-	public static GameEngineContainerSettings getInstance(String script) {
+	public static PostgresContainerSettings getInstance(String script) {
 		if (container == null) {
-			container = new GameEngineContainerSettings()
+			container = new PostgresContainerSettings()
 					.withInitScript(script);
 		}
 		return container;
