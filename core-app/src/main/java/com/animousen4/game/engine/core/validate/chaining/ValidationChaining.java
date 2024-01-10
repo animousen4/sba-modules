@@ -1,70 +1,82 @@
 package com.animousen4.game.engine.core.validate.chaining;
 
-import com.animousen4.game.engine.dto.ValidationError;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 
-public class ValidationChaining {
-    private final List<ValidationError> parentErrors;
+public class ValidationChaining<V> {
 
-    private final List<ValidationError> errors;
+    private final List<V> parentErrors;
 
-    private final List<ValidationError> childErrors;
+    private final List<V> errors;
 
-    private final ValidationChaining parent;
-    ValidationChaining() {
+    private final List<V> childErrors;
+
+    private final ValidationChaining<V> parent;
+    protected ValidationChaining() {
         errors = new ArrayList<>();
         parentErrors = new ArrayList<>();
         childErrors = new ArrayList<>();
         parent = null;
     }
 
-    ValidationChaining(ValidationChaining parent) {
+
+    protected ValidationChaining(ValidationChaining<V> parent) {
         errors = new ArrayList<>();
         childErrors = new ArrayList<>();
         parentErrors = new ArrayList<>(parent.errors);
         this.parent = parent;
     }
 
-    public static ValidationChaining start() {
-        return new ValidationChaining();
-    }
-    public <T> ValidationChaining goNextIfOk(FuncGetter<T> getter, FuncValidator<T> validator) {
-        if (errors.isEmpty() && parentErrors.isEmpty())
-            return goNext(getter, validator);
-        return this;
+
+
+    public ValidationChaining<V> startParallel() {
+        return new ValidationChaining<>(this);
     }
 
-    public ValidationChaining startParallel() {
-        return new ValidationChaining(this);
-    }
-
-    public ValidationChaining endParallel() {
+    public ValidationChaining<V> endParallel() {
         assert (parent != null);
 
         parent.addErrors(errors);
         return parent;
     }
 
-    public <T> ValidationChaining goNext(FuncGetter<T> getter, FuncValidator<T> validator) {
+    public <T> ValidationChaining<V> goIfOk(FuncGetter<T> getter, FuncValidator<V, T> validator) {
+        if (errors.isEmpty() && parentErrors.isEmpty())
+            return go(getter, validator);
+        return this;
+    }
+
+    public <T> ValidationChaining<V> go(FuncGetter<T> getter, FuncValidator<V, T> validator) {
         validator.validate(getter.get()).ifPresent(errors::add);
 
         return this;
     }
 
-    private void addErrors(List<ValidationError> errors) {
+    public <T> ValidationChaining<V> goListIfOk(FuncGetter<T> getter, FuncValidatorList<V, T> validator) {
+        if (errors.isEmpty() && parentErrors.isEmpty())
+            return goList(getter, validator);
+
+        return this;
+    }
+    public <T> ValidationChaining<V> goList(FuncGetter<T> getter, FuncValidatorList<V, T> validator) {
+        var validatedErrors = validator.validate(getter.get());
+
+        if (validatedErrors != null) {
+            errors.addAll(validatedErrors);
+        }
+        return this;
+    }
+
+    private void addErrors(List<V> errors) {
         this.childErrors.addAll(errors);
     }
 
-    public List<ValidationError> validate() {
-        List<ValidationError> totalErrors = new ArrayList<>();
+    public List<V> validate() {
+        List<V> totalErrors = new ArrayList<>();
         totalErrors.addAll(errors);
         totalErrors.addAll(childErrors);
 

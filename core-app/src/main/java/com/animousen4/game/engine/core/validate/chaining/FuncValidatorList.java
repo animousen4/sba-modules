@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 @FunctionalInterface
-public interface FuncValidator<V, T> {
-    Optional<V> validate(T toValidate);
+public interface FuncValidatorList<V, T> {
+    List<V> validate(T toValidate);
 }

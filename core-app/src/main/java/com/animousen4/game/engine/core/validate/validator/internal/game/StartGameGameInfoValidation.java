@@ -2,7 +2,7 @@ package com.animousen4.game.engine.core.validate.validator.internal.game;
 
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.dto.game.GameInfoDTO;
-import com.animousen4.game.engine.core.validate.chaining.ValidationChaining;
+import com.animousen4.game.engine.core.validate.chaining.ValidationErrorChaining;
 import com.animousen4.game.engine.core.validate.validator.micro.MandatoryMicroValidator;
 import com.animousen4.game.engine.dto.ValidationError;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +18,13 @@ public class StartGameGameInfoValidation implements StartGameValidation {
 
     @Override
     public List<ValidationError> validateList(StartGameCommand gameCommand) {
-        return ValidationChaining.start()
-                .goNext(gameCommand::getGameInfo, x -> mandatoryMicroValidator.validate(x, "gameInfo"))
+        return ValidationErrorChaining.start()
+                .go(gameCommand::getGameInfo, (GameInfoDTO x) -> mandatoryMicroValidator.validate(x, "gameInfo"))
                     .startParallel()
-                        .goNextIfOk(() -> gameCommand.getGameInfo().getBlackSide(), x -> mandatoryMicroValidator.validate(x, "blackSide"))
+                        .goIfOk(() -> gameCommand.getGameInfo().getBlackSide(), x -> mandatoryMicroValidator.validate(x, "blackSide"))
                     .endParallel()
                     .startParallel()
-                        .goNextIfOk(() -> gameCommand.getGameInfo().getWhiteSide(), x -> mandatoryMicroValidator.validate(x, "whiteSide"))
+                        .goIfOk(() -> gameCommand.getGameInfo().getWhiteSide(), x -> mandatoryMicroValidator.validate(x, "whiteSide"))
                     .endParallel()
                 .validate();
     }
