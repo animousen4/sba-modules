@@ -27,4 +27,5 @@ class GameExistValidation
                 ? Optional.empty()
                 : Optional.of(validationErrorFactory.buildError(GAME_NOT_EXISTS, new Placeholder(GAME_ID, command.getGameId())));
     }
+
 }

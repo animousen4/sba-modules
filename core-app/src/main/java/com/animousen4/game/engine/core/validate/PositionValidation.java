@@ -6,8 +6,6 @@ import com.animousen4.game.engine.dto.v1.solvePosition.SolvePositionRequestV1;
 import java.util.List;
 import java.util.Optional;
 
-public interface PositionValidation extends AbstractValidation<SolvePositionRequestV1> {
-    Optional<ValidationError> validate(SolvePositionRequestV1 obj);
+public interface PositionValidation extends AbstractDefaultValidation<SolvePositionRequestV1> {
 
-    List<ValidationError> validateList(SolvePositionRequestV1 obj);
 }

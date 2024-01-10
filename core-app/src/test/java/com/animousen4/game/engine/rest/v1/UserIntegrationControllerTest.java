@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.rest.v1;
 
-import com.animousen4.game.engine.rest.common.AbstractIntegrationControllerTest;
+import com.animousen4.game.engine.rest.common.AbstractControllerBootTest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserIntegrationControllerTest extends AbstractIntegrationControllerTest {
+public class UserIntegrationControllerTest extends AbstractControllerBootTest {
     @Override
     protected String getBaseUrl() {
         return "/api/v1/user/createOrUpdateUser";

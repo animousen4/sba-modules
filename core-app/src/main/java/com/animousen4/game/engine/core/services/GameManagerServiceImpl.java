@@ -46,7 +46,7 @@ class GameManagerServiceImpl implements GameManagerService {
     private final GameMapper gameMapper;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
-        GameEntity game = gameRepository.save(
+        /*GameEntity game = gameRepository.save(
                 GameEntity.builder()
                         .gameStatus(
                                 gameStatusRepository.findGameStatusEntityByName(
@@ -60,12 +60,14 @@ class GameManagerServiceImpl implements GameManagerService {
 
         currentGameRepository.save(
                 gameStoredModel
-        );
+        );*/
+
+
 
 
         return StartGameResult.builder()
                 .status(GameStatus.READY)
-                .gameStoredModel(gameStoredModel)
+                .gameStoredModel(null)
                 .build();
     }
 

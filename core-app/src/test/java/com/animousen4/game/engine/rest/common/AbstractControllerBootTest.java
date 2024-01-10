@@ -21,33 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
-public abstract class AbstractIntegrationControllerTest {
-
-    @ClassRule
-    public static PostgreSQLContainer<PostgresContainerSettings> postgreSQLContainer =
-            PostgresContainerSettings.getInstance(TestContainerGameEngineConstants.INIT_DB_SCRIPT_PATH);
+public abstract class AbstractControllerBootTest extends AbstractTestcontainersConnections{
 
 
-    @ClassRule
-    public static RedisContainerSettings redisContainer = RedisContainerSettings.getInstance();
-    //tests
-
-    @DynamicPropertySource
-    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.data.redis.host", redisContainer::getHost);
-        registry.add("spring.data.redis.port", () -> redisContainer.getMappedPort(REDIS_TEST_PORT).toString());
-    }
-    @BeforeAll()
-    static void beforeAll() {
-        postgreSQLContainer.start();
-        redisContainer.start();
-    }
-
-    @AfterAll()
-    static void afterAll() {
-        postgreSQLContainer.stop();
-        redisContainer.stop();
-    }
 
     @Autowired
     private MockMvc mockMvc;

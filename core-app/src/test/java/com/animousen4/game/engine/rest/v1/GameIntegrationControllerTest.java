@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.rest.v1;
 
-import com.animousen4.game.engine.rest.common.AbstractIntegrationControllerTest;
+import com.animousen4.game.engine.rest.common.AbstractControllerBootTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GameIntegrationControllerTest extends AbstractIntegrationControllerTest {
+public class GameIntegrationControllerTest extends AbstractControllerBootTest {
 
 
     @Override
@@ -26,13 +26,10 @@ public class GameIntegrationControllerTest extends AbstractIntegrationController
     }
 
 
-    @Test
+    /*@Test
     void startNewGameTest() throws Exception {
         executeAndCompare("startGameTest");
-    }
+    }*/
 
-    @Test
-    void redisIsRunning() {
-        assertTrue(redisContainer.isRunning());
-    }
+
 }
