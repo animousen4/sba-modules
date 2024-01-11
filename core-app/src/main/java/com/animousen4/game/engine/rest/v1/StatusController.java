@@ -2,8 +2,8 @@ package com.animousen4.game.engine.rest.v1;
 
 import com.animousen4.game.engine.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.StatusService;
-import com.animousen4.game.engine.dto.v1.getFullStatusInfo.GetFullStatusInfoRequestV1;
-import com.animousen4.game.engine.dto.v1.getFullStatusInfo.GetFullStatusInfoResponseV1;
+import com.animousen4.game.engine.dto.h1.v1.getFullStatusInfo.GetFullStatusInfoRequestV1;
+import com.animousen4.game.engine.dto.h1.v1.getFullStatusInfo.GetFullStatusInfoResponseV1;
 import com.animousen4.game.engine.logger.ResponseLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -23,6 +23,7 @@ dependencies {
     implementation("org.apache.commons:commons-text")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.0")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis

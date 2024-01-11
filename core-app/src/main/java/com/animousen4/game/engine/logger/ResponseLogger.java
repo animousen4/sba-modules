@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.logger;
 
-import com.animousen4.game.engine.dto.CoreResponse;
+import com.animousen4.game.engine.dto.h1.CoreResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;

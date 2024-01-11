@@ -1,13 +1,13 @@
 package com.animousen4.game.engine.rest.v1;
 
-import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserConverterV1;
-import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoConverterV1;
+import com.animousen4.game.engine.dto.h1.v1.createOrUpdateUser.CreateOrUpdateUserConverterV1;
+import com.animousen4.game.engine.dto.h1.v1.getUserInfo.GetUserInfoConverterV1;
 import com.animousen4.game.engine.logger.RequestLogger;
 import com.animousen4.game.engine.core.services.UserService;
-import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserRequestV1;
-import com.animousen4.game.engine.dto.v1.createOrUpdateUser.CreateOrUpdateUserResponseV1;
-import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoRequestV1;
-import com.animousen4.game.engine.dto.v1.getUserInfo.GetUserInfoResponseV1;
+import com.animousen4.game.engine.dto.h1.v1.createOrUpdateUser.CreateOrUpdateUserRequestV1;
+import com.animousen4.game.engine.dto.h1.v1.createOrUpdateUser.CreateOrUpdateUserResponseV1;
+import com.animousen4.game.engine.dto.h1.v1.getUserInfo.GetUserInfoRequestV1;
+import com.animousen4.game.engine.dto.h1.v1.getUserInfo.GetUserInfoResponseV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

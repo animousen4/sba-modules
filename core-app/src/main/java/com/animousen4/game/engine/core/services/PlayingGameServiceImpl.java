@@ -1,16 +1,12 @@
 package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.MakeMoveCommand;
-import com.animousen4.game.engine.core.api.mapper.internal.ChessInternalFromStorageGameMapper;
 import com.animousen4.game.engine.core.api.model.game.GameInternalModel;
-import com.animousen4.game.engine.core.api.model.game.board.ChessBoardInternalModel;
 import com.animousen4.game.engine.core.api.result.MakeMoveResult;
 import com.animousen4.game.engine.core.dao.CurrentGameDao;
 import com.animousen4.game.engine.core.util.game.MoveUtil;
-import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.validate.validator.internal.game.GameMovesValidator;
-import com.animousen4.game.engine.dto.ValidationError;
-import com.github.bhlangonijr.chesslib.move.Move;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

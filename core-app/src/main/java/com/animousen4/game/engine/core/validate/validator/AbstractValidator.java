@@ -1,7 +1,7 @@
 package com.animousen4.game.engine.core.validate.validator;
 
 import com.animousen4.game.engine.core.validate.AbstractValidation;
-import com.animousen4.game.engine.dto.ValidationError;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 
 import java.util.Collection;
 import java.util.List;

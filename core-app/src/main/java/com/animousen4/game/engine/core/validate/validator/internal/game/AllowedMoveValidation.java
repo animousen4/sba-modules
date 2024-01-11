@@ -7,7 +7,7 @@ import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.util.game.MoveUtil;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.validate.regex.GameRegex;
-import com.animousen4.game.engine.dto.ValidationError;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

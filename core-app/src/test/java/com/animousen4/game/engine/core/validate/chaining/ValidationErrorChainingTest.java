@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.validate.chaining;
 
-import com.animousen4.game.engine.dto.ValidationError;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

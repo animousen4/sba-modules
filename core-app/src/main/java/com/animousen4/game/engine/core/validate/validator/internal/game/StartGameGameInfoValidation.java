@@ -4,7 +4,7 @@ import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.dto.game.GameInfoDTO;
 import com.animousen4.game.engine.core.validate.chaining.ValidationErrorChaining;
 import com.animousen4.game.engine.core.validate.validator.micro.MandatoryMicroValidator;
-import com.animousen4.game.engine.dto.ValidationError;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

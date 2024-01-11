@@ -5,7 +5,7 @@ import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.UserValidation;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.services.dto.UserDto;
-import com.animousen4.game.engine.dto.ValidationError;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
