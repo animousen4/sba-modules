@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.test.iml" filepath="$PROJECT_DIR$/.idea/modules/computer-science/tasks/FinalControlWork/sba-modules.computer-science.tasks.FinalControlWork.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-app/sba-modules.core-app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core-app/sba-modules.core-app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-app/sba-modules.core-app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core-app/sba-modules.core-app.test.iml" />
     </modules>
   </component>
 </project>

@@ -50,6 +50,9 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     compileOnly ("org.projectlombok:lombok")
 
+    testCompileOnly ("org.projectlombok:lombok:")
+    testAnnotationProcessor ("org.projectlombok:lombok")
+
     implementation(project(":utilities"))
 }
 configurations.forEach { it.exclude("org.springframework.boot", "spring-boot-starter-logging") }

@@ -3,10 +3,9 @@ package com.animousen4.game.engine.core.validate.chaining;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
-public class Engine{
+@Getter
+public class ElementMaterial {
     final String name;
-    final Long capacity;
-    final ElementMaterial elementMaterial;
+    final Integer id;
 }

@@ -34,11 +34,13 @@ public class PrettyValidationChaining<V> {
 
 
     public PrettyValidationChaining<V> parallel(Function<PrettyValidationChaining<V>, PrettyValidationChaining<V>> function) {
-        if (errors.isEmpty())
+        if (errors.isEmpty()) {
+            PrettyValidationChaining<V> v = function.apply(
+                    new PrettyValidationChaining<>(this)
+            );
             this.addErrors(
-                    function.apply(
-                            new PrettyValidationChaining<>(this)
-                    ).errors);
+                    v.getSubErrors());
+        }
         return this;
     }
 
@@ -64,12 +66,15 @@ public class PrettyValidationChaining<V> {
         this.childErrors.addAll(errors);
     }
 
-    public List<V> validate() {
-        List<V> totalErrors = new ArrayList<>();
-        totalErrors.addAll(errors);
-        totalErrors.addAll(childErrors);
+    private List<V> getSubErrors() {
+        List<V> subErrors = new ArrayList<>();
+        subErrors.addAll(errors);
+        subErrors.addAll(childErrors);
+        return subErrors;
+    }
 
-        return totalErrors;
+    public List<V> validate() {
+        return getSubErrors();
     }
 
 }

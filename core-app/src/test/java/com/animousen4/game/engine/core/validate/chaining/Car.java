@@ -3,10 +3,10 @@ package com.animousen4.game.engine.core.validate.chaining;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class Car {
-    String manufacturer;
-    String model;
-    Engine engine;
+    final String manufacturer;
+    final String model;
+    final Engine engine;
 }

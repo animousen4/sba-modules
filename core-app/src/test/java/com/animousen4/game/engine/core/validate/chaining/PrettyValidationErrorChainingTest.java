@@ -1,13 +1,10 @@
 package com.animousen4.game.engine.core.validate.chaining;
 
 import com.animousen4.game.engine.dto.ValidationError;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.testcontainers.shaded.org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 import java.util.Optional;
@@ -88,19 +85,86 @@ public class PrettyValidationErrorChainingTest {
         assertEquals(1, errors.size());
     }
 
-    /*@Test
-    void testChainingByCarExample() {
-
+    @Test
+    void testChainingAllOkByCarExample() {
         Car car = new Car(
                 "Tesla",
                 "Model X",
                 new Engine(
                         "ElectroV5",
-                        4L
+                        4L,
+                        new ElementMaterial(
+                                "metall",
+                                4
+                        )
                 )
         );
 
-        List<ValidationError> errors = PrettyValidationErrorChaining.start()
+        List<ValidationError> errors = validateCar(car);
+
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testChainingFailByCarExample() {
+
+        Car car = new Car(
+                "Tesla",
+                "Model X",
+                new Engine(
+                        null,
+                        4L,
+                        new ElementMaterial(
+                                "metall",
+                                4
+                        )
+                )
+        );
+
+        List<ValidationError> errors = validateCar(car);
+
+        assertEquals(1, errors.size());
+    }
+
+    @Test
+    void testChainingFailInsideEngineSubElementByCarExample() {
+
+        Car car = new Car(
+                "Tesla",
+                "Model X",
+                new Engine(
+                        null,
+                        4L,
+                        new ElementMaterial(
+                                null,
+                                null
+                        )
+                )
+        );
+
+        List<ValidationError> errors = validateCar(car);
+
+        assertEquals(3, errors.size());
+    }
+    @Test
+    void testChainingFailInsideEngineByCarExample() {
+
+        Car car = new Car(
+                "Tesla",
+                "Model X",
+                null
+        );
+
+        List<ValidationError> errors = validateCar(car);
+
+        assertEquals(1, errors.size());
+    }
+
+
+
+
+    List<ValidationError> validateCar(Car car) {
+        return PrettyValidationErrorChaining.start()
                 .go(
                         () -> car,
                         x -> getErrorIfEmpty(car, "car")
@@ -119,27 +183,42 @@ public class PrettyValidationErrorChainingTest {
                 )
                 .parallel(
                         carV -> carV.go(
-                                car::getEngine,
-                                x->getErrorIfEmpty(x, "engine")
-                        )
+                                        car::getEngine,
+                                        x->getErrorIfEmpty(x, "engine")
+                                )
                                 .parallel(
                                         engineV -> engineV.go(
-                                                car.getEngine()::getName,
+                                                () -> car.getEngine().getName(),
                                                 x->getErrorIfEmpty(x, "name")
                                         )
                                 )
                                 .parallel(
                                         engineV -> engineV.go(
-                                                car.getEngine()::getCapacity,
+                                                () -> car.getEngine().getCapacity(),
                                                 x->getErrorIfEmpty(x, "capacity")
                                         )
                                 )
+                                .parallel(
+                                        engineV -> engineV.go(
+                                                () -> car.getEngine().getElementMaterial(),
+                                                x->getErrorIfEmpty(x, "elementMaterial")
+                                        )
+                                                .parallel(
+                                                        materialV -> materialV.go(
+                                                                ()-> car.getEngine().getElementMaterial().getId(),
+                                                                x->getErrorIfEmpty(x, "id")
+                                                        )
+                                                )
+                                                .parallel(
+                                                        materialV -> materialV.go(
+                                                                ()-> car.getEngine().getElementMaterial().getName(),
+                                                                x->getErrorIfEmpty(x, "name")
+                                                        )
+                                                )
+                                )
                 )
                 .validate();
-
-        assertEquals(0, errors.size());
     }
-
     Optional<ValidationError> getErrorIfEmpty(Object object, String fieldName) {
         return object == null
                 ? Optional.of(new ValidationError(
@@ -147,6 +226,6 @@ public class PrettyValidationErrorChainingTest {
                                  "Field '%s' is missing".formatted(fieldName))
                 )
                 : Optional.empty();
-    }*/
+    }
 
 }
