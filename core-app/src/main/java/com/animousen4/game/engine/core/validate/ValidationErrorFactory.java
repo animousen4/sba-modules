@@ -2,6 +2,7 @@ package com.animousen4.game.engine.core.validate;
 
 import com.animousen4.game.engine.core.util.ErrorCodeUtil;
 import com.animousen4.game.engine.core.util.Placeholder;
+import com.animousen4.game.engine.core.validate.description.ErrorPair;
 import com.animousen4.game.engine.dto.h1.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,5 +26,9 @@ public class ValidationErrorFactory {
 
     public ValidationError buildError(String errorCode, Placeholder placeholder) {
         return buildError(errorCode, List.of(placeholder));
+    }
+
+    public ValidationError buildError(ErrorPair errorPair) {
+        return buildError(errorPair.getErrorCode(), errorPair.getPlaceholderList());
     }
 }

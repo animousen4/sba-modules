@@ -10,6 +10,8 @@ import java.util.List;
 
 @Service
 public class ChessBoardModelFactory {
+
+    // need to fix, use IoC
     public ChessBoardStoredModel createNewClassicModel(GameInfoModel gameInfoModel) {
         return ChessBoardStoredModel.builder()
                 .fen(new Board().getFen())

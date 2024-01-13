@@ -12,22 +12,14 @@ import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
 
-/*
 @Controller
 public class GameWebSocketController {
 
-    @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/secured/room")
-    public void sendSpecific(
-            @Payload GameAction msg,
-            Principal user,
-            @Header("simpSessionId") String sessionId) throws Exception {
-        GameActionResponse out = new GameActionResponse("OK");
-        simpMessagingTemplate.convertAndSendToUser(
-                msg.getTo(), "/secured/user/queue/specific-user", out);
+    @MessageMapping("/chat")
+    @SendTo("topic/messages")
+    public GameActionResponse s(GameAction gameAction) {
+        return new GameActionResponse("OK");
     }
 
 }
-*/
