@@ -13,6 +13,8 @@ public class GameMapper implements ModelDtoMapper<GameStoredModel, GameDTO>{
     private final GameInfoMapper gameInfoMapper;
     @Override
     public GameDTO map(GameStoredModel gameStoredModel) {
+        if (gameStoredModel == null)
+            return null;
         return GameDTO.builder()
                 .id(gameStoredModel.getId())
                 .chessBoard(chessBoardStoredMapper.map(gameStoredModel.getChessBoardStoredModel()))

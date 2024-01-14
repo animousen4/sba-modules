@@ -15,7 +15,11 @@ import com.animousen4.game.engine.core.repositories.entities.game.GameStatusEnti
 import com.animousen4.game.engine.core.repositories.redis.CurrentGameRepository;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
+import com.animousen4.game.engine.core.validate.description.GameNotExists;
+import com.animousen4.game.engine.core.validate.game.startGame.StartGameValidation;
+import com.animousen4.game.engine.core.validate.game.startGame.StartGameValidator;
 import com.animousen4.game.engine.core.values.GameStatus;
+import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -43,32 +47,14 @@ class GameManagerServiceImpl implements GameManagerService {
 
     private final GameStatusRepository gameStatusRepository;
 
-    private final GameMapper gameMapper;
+    private final StartGameValidator startGameValidator;
     @Override
     public StartGameResult startGame(StartGameCommand command) {
-        /*GameEntity game = gameRepository.save(
-                GameEntity.builder()
-                        .gameStatus(
-                                gameStatusRepository.findGameStatusEntityByName(
-                                        GameStatus.READY
-                                )
-                        )
-                        .build()
-        );
+        var errors = startGameValidator.validate(command);
 
-        GameStoredModel gameStoredModel = gameModelFactory.createNewClassicGame(command.getGameInfo(), game.getId());
-
-        currentGameRepository.save(
-                gameStoredModel
-        );*/
-
-
-
-
-        return StartGameResult.builder()
-                .status(GameStatus.READY)
-                .gameStoredModel(null)
-                .build();
+        return errors.isEmpty()
+                ? buildOkStartGame(command)
+                : buildFailStartGame(errors);
     }
 
     @Override
@@ -83,26 +69,13 @@ class GameManagerServiceImpl implements GameManagerService {
     public GetGamePositionResult getGamePosition(Long id) {
         Optional<GameStoredModel> gameStoredModel = currentGameRepository.findById(id);
 
-        GameInternalModel gameInternalModel;
-        if (gameStoredModel.isPresent()) {
-            gameInternalModel = storageGameMapper.map(gameStoredModel.get());
-            String pos = gameInternalModel.getChessBoardInternalModel().getBoard().toString();
-
-            return GetGamePositionResult.builder()
-                    .position(pos)
-                    .build();
-        } else
-            return GetGamePositionResult.builder()
-                    .validationErrors(
-                            List.of(
-                                   validationErrorFactory.buildError(
-                                           GAME_NOT_EXISTS,
-                                           new Placeholder(GAME_ID, id)
-                                   )
-                            )
-                    )
-                    .build();
+        if (gameStoredModel.isPresent())
+            return buildFoundResult(gameStoredModel.get());
+        else
+            return buildFailPositionResult(id);
     }
+
+
 
     @Override
     public void removeAllCurrentGames() {
@@ -122,5 +95,55 @@ class GameManagerServiceImpl implements GameManagerService {
                 }
         );
         currentGameRepository.deleteAll();
+    }
+
+    private StartGameResult buildFailStartGame(List<ValidationError> errors) {
+        return StartGameResult.builder()
+                .validationErrors(errors)
+                .build();
+    }
+
+    private StartGameResult buildOkStartGame(StartGameCommand command) {
+        GameEntity game = gameRepository.save(
+                GameEntity.builder()
+                        .gameStatus(
+                                gameStatusRepository.findGameStatusEntityByName(
+                                        GameStatus.READY
+                                )
+                        )
+                        .build()
+        );
+
+        GameStoredModel gameStoredModel = gameModelFactory.createNewClassicGame(command.getGameInfo(), game.getId());
+
+        currentGameRepository.save(
+                gameStoredModel
+        );
+
+        return StartGameResult.builder()
+                .gameStoredModel(gameStoredModel)
+                .status(GameStatus.READY)
+                .build();
+    }
+
+    private GetGamePositionResult buildFoundResult(GameStoredModel gameStoredModel) {
+        GameInternalModel gameInternalModel = storageGameMapper.map(gameStoredModel);
+        String pos = gameInternalModel.getChessBoardInternalModel().getBoard().toString();
+
+        return GetGamePositionResult.builder()
+                .position(pos)
+                .build();
+    }
+
+    private GetGamePositionResult buildFailPositionResult(Long id) {
+        return GetGamePositionResult.builder()
+                .validationErrors(
+                        List.of(
+                                validationErrorFactory.buildError(
+                                        GameNotExists.of(id)
+                                )
+                        )
+                )
+                .build();
     }
 }

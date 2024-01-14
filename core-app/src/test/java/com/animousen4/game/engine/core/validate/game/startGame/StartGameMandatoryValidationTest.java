@@ -1,10 +1,10 @@
 package com.animousen4.game.engine.core.validate.game.startGame;
 
+import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.dto.game.GameInfoDTO;
 import com.animousen4.game.engine.core.util.error.NullCheckUtil;
 import com.animousen4.game.engine.core.validate.game.dto.GameInfoDtoValidator;
 import com.animousen4.game.engine.dto.h1.ValidationError;
-import com.animousen4.game.engine.dto.h1.v1.startGame.StartGameRequestV1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class StartGameMandatoryValidationV1Test {
+public class StartGameMandatoryValidationTest {
 
     @Mock
     GameInfoDtoValidator gameInfoDtoValidator;
@@ -29,22 +29,22 @@ public class StartGameMandatoryValidationV1Test {
     NullCheckUtil nullCheckUtil;
 
     @InjectMocks
-    StartGameMandatoryValidationV1 mandatoryValidationV1;
+    StartGameMandatoryValidation mandatoryValidationV1;
 
 
     @Test
     void testGameInfoMandatoryNoErrors() {
 
-        StartGameRequestV1 requestV1 = mock();
+        StartGameCommand command = mock();
         GameInfoDTO gameInfoDTO = mock();
 
-        when(requestV1.getGameInfo()).thenReturn(gameInfoDTO);
+        when(command.getGameInfo()).thenReturn(gameInfoDTO);
 
 
         when(nullCheckUtil.checkForNull(eq(gameInfoDTO), eq("gameInfo"))).thenReturn(Optional.empty());
         when(gameInfoDtoValidator.validate(gameInfoDTO)).thenReturn(List.of());
 
-        List<ValidationError> errors = mandatoryValidationV1.validateList(requestV1);
+        List<ValidationError> errors = mandatoryValidationV1.validateList(command);
 
         assertEquals(0, errors.size());
     }
@@ -52,14 +52,14 @@ public class StartGameMandatoryValidationV1Test {
     @Test
     void testGameInfoMandatoryGameInfoEmpty() {
 
-        StartGameRequestV1 requestV1 = mock();
+        StartGameCommand command = mock();
         GameInfoDTO gameInfoDTO = mock();
         ValidationError validationError = mock();
-        when(requestV1.getGameInfo()).thenReturn(gameInfoDTO);
+        when(command.getGameInfo()).thenReturn(gameInfoDTO);
 
         when(nullCheckUtil.checkForNull(eq(gameInfoDTO), eq("gameInfo"))).thenReturn(Optional.of(validationError));
 
-        List<ValidationError> errors = mandatoryValidationV1.validateList(requestV1);
+        List<ValidationError> errors = mandatoryValidationV1.validateList(command);
 
         assertEquals(1, errors.size());
     }
@@ -67,17 +67,34 @@ public class StartGameMandatoryValidationV1Test {
     @Test
     void testGameInfoMandatoryHasGameInfoErrors() {
 
-        StartGameRequestV1 requestV1 = mock();
+        StartGameCommand command = mock();
         GameInfoDTO gameInfoDTO = mock();
         ValidationError validationError = mock();
 
-        when(requestV1.getGameInfo()).thenReturn(gameInfoDTO);
+        when(command.getGameInfo()).thenReturn(gameInfoDTO);
 
         when(nullCheckUtil.checkForNull(eq(gameInfoDTO), eq("gameInfo"))).thenReturn(Optional.empty());
         when(gameInfoDtoValidator.validate(gameInfoDTO)).thenReturn(List.of(validationError));
 
-        List<ValidationError> errors = mandatoryValidationV1.validateList(requestV1);
+        List<ValidationError> errors = mandatoryValidationV1.validateList(command);
 
         assertEquals(1, errors.size());
+    }
+
+    @Test
+    void testGameInfoMandatoryHasSeveralGameInfoErrors() {
+
+        StartGameCommand command = mock();
+        GameInfoDTO gameInfoDTO = mock();
+        ValidationError validationError = mock();
+
+        when(command.getGameInfo()).thenReturn(gameInfoDTO);
+
+        when(nullCheckUtil.checkForNull(eq(gameInfoDTO), eq("gameInfo"))).thenReturn(Optional.empty());
+        when(gameInfoDtoValidator.validate(gameInfoDTO)).thenReturn(List.of(validationError, validationError));
+
+        List<ValidationError> errors = mandatoryValidationV1.validateList(command);
+
+        assertEquals(2, errors.size());
     }
 }

@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "errorCode": "MANDATORY_FIELD_MISSING",
+      "description": "Missing mandatory field: whiteSide"
+    }
+  ],
+  "status": null,
+  "game": null
+}

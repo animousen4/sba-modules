@@ -4,6 +4,7 @@ import com.animousen4.game.engine.core.api.command.StartGameCommand;
 import com.animousen4.game.engine.core.api.dto.game.GameInfoDTO;
 import com.animousen4.game.engine.core.api.dto.game.SideInfoDTO;
 import com.animousen4.game.engine.core.api.model.game.board.ChessClock;
+import com.animousen4.game.engine.core.validate.game.startGame.StartGameValidator;
 import com.animousen4.game.engine.dto.h1.ValidationError;
 import com.animousen4.game.engine.rest.common.AbstractTestcontainersConnections;
 import org.junit.jupiter.api.Test;
