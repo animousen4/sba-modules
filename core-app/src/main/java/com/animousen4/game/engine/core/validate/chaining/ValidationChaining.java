@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-
+@Deprecated
 public class ValidationChaining<V> {
 
     private final List<V> parentErrors;

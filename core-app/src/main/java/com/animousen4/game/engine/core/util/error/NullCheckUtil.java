@@ -16,7 +16,7 @@ import static com.animousen4.game.engine.core.values.AppConsts.MANDATORY_FIELD_M
 public class NullCheckUtil {
 
     private final ValidationErrorFactory validationErrorFactory;
-    <T> Optional<ValidationError> checkForNull(T object, String name) {
+    public <T> Optional<ValidationError> checkForNull(T object, String name) {
         if (object == null)
             return Optional.of(
                     validationErrorFactory.buildError(

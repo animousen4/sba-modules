@@ -2,6 +2,7 @@ package com.animousen4.game.engine.core.validate.validator;
 
 import com.animousen4.game.engine.core.validate.AbstractValidation;
 import com.animousen4.game.engine.dto.h1.ValidationError;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,9 @@ abstract public class AbstractValidator
     protected abstract List<T> validationComponentsList();
     @Override
     public List<ValidationError> validate(ENTITY entity) {
+        if (validationComponentsList() == null) {
+            return List.of();
+        }
         List<ValidationError> singleErrors = collectSingleErrors(entity);
         List<ValidationError> listErrors = collectListErrors(entity);
         return concatenateLists(singleErrors, listErrors);
