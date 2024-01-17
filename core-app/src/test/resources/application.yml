@@ -7,3 +7,7 @@ spring:
 game:
   engine:
     stockfish: /engine/stockfish16
+
+jwt:
+  secret: 1111111111111111111111111111111111111111111111111111111111111
+  lifetime: 20m

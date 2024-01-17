@@ -29,8 +29,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.0")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-security:3.2.1")
+
+    testImplementation("org.springframework.security:spring-security-test:6.2.1")
+
+
+
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
+
 
 
 
@@ -58,6 +67,9 @@ dependencies {
     testAnnotationProcessor ("org.projectlombok:lombok")
 
     implementation(project(":utilities"))
+
+
+
 }
 
 
