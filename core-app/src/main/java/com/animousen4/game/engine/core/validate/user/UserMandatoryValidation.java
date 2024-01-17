@@ -1,5 +1,6 @@
 package com.animousen4.game.engine.core.validate.user;
 
+import com.animousen4.game.engine.core.validate.description.MandatoryFieldMissing;
 import com.animousen4.game.engine.core.values.AppConsts;
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.UserValidation;
@@ -26,22 +27,9 @@ class UserMandatoryValidation implements UserValidation {
                 Optional.of(
                         validationErrorFactory.
                                 buildError(
-                                        AppConsts.MANDATORY_FIELD_MISSING,
-                                        List.of(
-                                                new Placeholder(
-                                                        AppConsts.FIELD_NAME,
-                                                        "user"
-                                                )
-                                        )
+                                        MandatoryFieldMissing.of("user")
                                 )
                 );
     }
 
-
-
-    @Override
-    public List<ValidationError> validateList(UserDto obj) {
-
-        return null;
-    }
 }

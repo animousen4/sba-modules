@@ -14,7 +14,7 @@ public class MandatoryFieldMissing extends ErrorPair{
         super(placeholderList);
     }
 
-    static MandatoryFieldMissing of(String fieldName) {
+    public static MandatoryFieldMissing of(String fieldName) {
         return new MandatoryFieldMissing(List.of(
                 new Placeholder(FIELD_NAME, fieldName)
         ));

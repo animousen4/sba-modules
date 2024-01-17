@@ -19,11 +19,11 @@ plugins {
 rootProject.name = "sba-modules"
 include(
     "app", "list", "utilities", "abs-app", "core-app", "auth-server", "auth-server-webflux",
-    "authorization-server-oauth2", "resource-server-jwe")
+    "authorization-server-oauth2", "resource-server-jwe", "p-auth-server")
 include (
     universityFolder.plus("StringBuilderNotifier"),
     universityFolder.plus("StringBuilderUndo"),
     universityFolder.plus("TemperatureConverter"),
     universityFolder.plus("FinalControlWork"),
-    universityFolder.plus("ThreadState")
+    universityFolder.plus("ThreadState"),
 )

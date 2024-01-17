@@ -15,16 +15,25 @@ plugins {
 
 dependencies {
     implementation("org.apache.commons:commons-text")
+
+    // starters
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.projectlombok:lombok:1.18.28")
-    implementation("net.andreinc:neatchess:1.0")
+
+    // starters-db
+
+
+    // test starters
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // testing components
+
+
+    // lombok
 
     annotationProcessor("org.projectlombok:lombok")
     compileOnly ("org.projectlombok:lombok")
 
-    implementation(project(":utilities"))
 }
 
 application {

@@ -34,6 +34,7 @@
             <option value="$PROJECT_DIR$/computer-science/tasks/ThreadState" />
             <option value="$PROJECT_DIR$/core-app" />
             <option value="$PROJECT_DIR$/list" />
+            <option value="$PROJECT_DIR$/p-auth-server" />
             <option value="$PROJECT_DIR$/resource-server-jwe" />
             <option value="$PROJECT_DIR$/utilities" />
           </set>

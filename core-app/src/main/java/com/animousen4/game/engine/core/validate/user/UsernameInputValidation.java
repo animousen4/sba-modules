@@ -22,10 +22,6 @@ public class UsernameInputValidation implements UserValidation {
 
     @Autowired
     ValidationRegistrationRegex validationRegex;
-    @Override
-    public Optional<ValidationError> validate(UserDto obj) {
-        return Optional.empty();
-    }
 
     public Optional<ValidationError> validateUserSize(UserDto obj) {
         return obj.getUpdatedUsername().matches(validationRegex.usernameSizeRegex) ?
