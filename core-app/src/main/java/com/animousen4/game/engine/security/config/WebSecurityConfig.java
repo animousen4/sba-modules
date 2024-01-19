@@ -1,25 +1,23 @@
 package com.animousen4.game.engine.security.config;
 import com.animousen4.game.engine.core.repositories.UserNamePasswordRepository;
-import com.animousen4.game.engine.security.JwtSecretKey;
+import com.animousen4.game.engine.security.JwtPrivateKey;
+import com.animousen4.game.engine.security.JwtPublicKey;
 import com.animousen4.game.engine.security.UserDetailsSpringService;
 import com.animousen4.game.engine.security.filter.JwtAuthenticationFilter;
 import com.animousen4.game.engine.security.service.JwtService;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+
 import lombok.RequiredArgsConstructor;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,13 +26,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    @Value("${jwt.secret}")
-    private String jwtSigningKey;
+    @Value("classpath:${jwt.secret.public}")
+    private Resource rsaPublicKey;
+
+    @Value("classpath:${jwt.secret.private}")
+    private Resource rsaPrivateKey;
+
 
     @Bean
     JwtAuthenticationFilter jwtAuthenticationFilter (JwtService jwtService, UserDetailsService userDetailsService) {
@@ -82,9 +92,38 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    JwtSecretKey jwtSecretKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
-        return new JwtSecretKey(Keys.hmacShaKeyFor(keyBytes));
+    KeyFactory keyFactoryRsa() throws NoSuchAlgorithmException {
+        Security.addProvider(new BouncyCastleProvider());
+        return KeyFactory.getInstance("RSA");
+    }
+    @Bean
+    JwtPrivateKey jwtSecretKey(KeyFactory kf) throws InvalidKeySpecException, IOException {
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(
+                Base64.getDecoder().decode(
+                        rsaPrivateKey.getContentAsString(Charset.defaultCharset())
+                                .replace("-----BEGIN RSA PRIVATE KEY-----", "")
+                                .replaceAll(System.lineSeparator(), "")
+                                .replace("-----END RSA PRIVATE KEY-----", "")
+                )
+        );
+        PrivateKey privKey = kf.generatePrivate(keySpec);
+
+        return new JwtPrivateKey(privKey);
+    }
+
+    @Bean
+    JwtPublicKey jwtPublicKey(KeyFactory kf) throws InvalidKeySpecException, IOException {
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(
+                Base64.getDecoder().decode(
+                        rsaPublicKey.getContentAsString(Charset.defaultCharset())
+                                .replace("-----BEGIN PUBLIC KEY-----", "")
+                                .replaceAll(System.lineSeparator(), "")
+                                .replace("-----END PUBLIC KEY-----", "")
+                )
+        );
+        PublicKey publicKey = kf.generatePublic(keySpec);
+
+        return new JwtPublicKey(publicKey);
     }
 
 

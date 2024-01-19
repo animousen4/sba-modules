@@ -32,6 +32,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-security:3.2.1")
 
+    implementation("org.bouncycastle:bcprov-jdk18on:1.77")
+
+
     testImplementation("org.springframework.security:spring-security-test:6.2.1")
 
 

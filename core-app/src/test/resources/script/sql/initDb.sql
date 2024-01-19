@@ -31,14 +31,12 @@ create table user_roles
 
 create table user_belong_roles
 (
-    user_id bigint not null
-        constraint users_roles_user_id_fkey
+    user_id bigint
+        constraint user_belong_roles_users_id_fk
             references users,
-    role_id bigint not null
-        constraint users_roles_role_id_fkey
-            references user_roles,
-    constraint users_roles_pkey
-        primary key (user_id, role_id)
+    role_id bigint
+        constraint user_belong_roles_user_roles_id_fk
+            references user_roles
 );
 
 create table game_status

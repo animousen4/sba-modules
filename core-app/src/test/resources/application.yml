@@ -12,5 +12,7 @@ time:
   zoneId: Europe/Minsk
 
 jwt:
-  secret: 1111111111111111111111111111111111111111111111111111111111111
+  secret:
+    public: jwt-keys/rsaPub.pub
+    private: jwt-keys/rsaPriv.priv
   lifetime: 20m

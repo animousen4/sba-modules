@@ -1,11 +1,13 @@
 package com.animousen4.game.engine.startupConfig;
 
 import com.animousen4.game.engine.core.repositories.GameStatusRepository;
+import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.UserRoleRepository;
 import com.animousen4.game.engine.core.repositories.UserStatusRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserRoleEntity;
 import com.animousen4.game.engine.core.repositories.entities.attributes.UserStatusEntity;
 import com.animousen4.game.engine.core.repositories.entities.game.GameStatusEntity;
+import com.animousen4.game.engine.core.services.factory.UserEntityFactory;
 import com.animousen4.game.engine.core.values.GameStatus;
 import com.animousen4.game.engine.core.values.UserRole;
 import com.animousen4.game.engine.core.values.UserStatus;
@@ -26,10 +28,23 @@ public class ReferenceSyncBean {
 
     private final UserStatusRepository userStatusRepository;
 
+    private final RootUserRegisterer rootUserRegisterer;
+
+
     private final UserRoleRepository userRoleRepository;
 
     @EventListener
     public void contextStartupEvent(ContextRefreshedEvent event) throws InterruptedException {
+        syncReferences();
+        syncRootUser();
+    }
+
+    private void syncRootUser() {
+        log.info("Started syncing ROOT user");
+        rootUserRegisterer.registerIfNotExists();
+        log.info("Finished syncing ROOT user");
+    }
+    private void syncReferences() {
         log.info("Started syncing all reference values");
 
         syncGameStatus();
@@ -37,7 +52,6 @@ public class ReferenceSyncBean {
         syncRoles();
 
         log.info("Finished syncing all reference values");
-
     }
 
     private void syncGameStatus() {

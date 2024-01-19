@@ -19,6 +19,12 @@ game:
 time:
   zoneId: Europe/Minsk
 
+user:
+  root:
+    username: root
+    password: 123456
 jwt:
-  secret: sdhifuohnsdjkihusidfnokdsdfsdfdsfsdfsdfdfsfhlisbndfijsdbn
-  lifetime: 20m
+  secret:
+    public: rsaPub.pub
+    private: rsaPriv.priv
+  lifetime: 1m

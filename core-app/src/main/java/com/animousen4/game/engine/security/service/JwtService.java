@@ -2,19 +2,16 @@ package com.animousen4.game.engine.security.service;
 
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.util.DateTimeUtil;
-import com.animousen4.game.engine.security.JwtSecretKey;
+import com.animousen4.game.engine.security.JwtPrivateKey;
+import com.animousen4.game.engine.security.JwtPublicKey;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
 import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,7 +25,9 @@ public class JwtService {
 
     private final DateTimeUtil dateTimeUtil;
 
-    private final JwtSecretKey jwtSecretKey;
+    private final JwtPrivateKey jwtPrivateKey;
+
+    private final JwtPublicKey jwtPublicKey;
 
     @Value("${jwt.lifetime}")
     private Duration tokenLifeTime;
@@ -51,7 +50,7 @@ public class JwtService {
     public boolean isTokenSignatureValid(String token) {
         try {
             Jwts.parser()
-                    .verifyWith(jwtSecretKey.getKey()).build().parseSignedContent(token);
+                    .verifyWith(jwtPublicKey.getKey()).build().parse(token);
             return true;
         } catch (Exception e) {
             return false;
@@ -78,7 +77,7 @@ public class JwtService {
                         dateTimeUtil.getCurrentDate(),
                         tokenLifeTime
                 ))
-                .signWith(jwtSecretKey.getKey())
+                .signWith(jwtPrivateKey.getKey())
                 .compact();
     }
 
@@ -91,7 +90,7 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().verifyWith(jwtSecretKey.getKey()).build().parseSignedClaims(token)
+        return Jwts.parser().verifyWith(jwtPublicKey.getKey()).build().parseSignedClaims(token)
                 .getPayload();
     }
 

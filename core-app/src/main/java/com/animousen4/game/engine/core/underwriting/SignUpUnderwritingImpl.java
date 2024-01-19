@@ -68,7 +68,7 @@ public class SignUpUnderwritingImpl implements SignUpUnderwriting{
                 userEntityFactory.createNewUser(
                         userDto.getUsername(),
                         userDto.getEmail(),
-                        passwordEncoder.encode(userDto.getPassword()),
+                        userDto.getPassword(),
                         UserStatus.OK
                 )
         );

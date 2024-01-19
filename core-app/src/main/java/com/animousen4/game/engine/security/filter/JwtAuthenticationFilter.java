@@ -45,37 +45,41 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (jwtService.isTokenSignatureValid(jwt)) {
             continueValidatedSignature(request, response, filterChain, jwt);
-
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
-        filterChain.doFilter(request, response);
 
     }
 
     private void continueValidatedSignature(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String jwt) throws ServletException, IOException {
         var username = jwtService.extractUserName(jwt);
 
-        if (StringUtils.isNotEmpty(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (StringUtils.isNotEmpty(username) &&
+                SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userService
                     .loadUserByUsername(username);
 
             if (jwtService.isTokenTimeValid(jwt, userDetails)) {
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
-
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
-                );
-
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                context.setAuthentication(authToken);
-                SecurityContextHolder.setContext(context);
+                addToSecurityContext(userDetails, request);
+                filterChain.doFilter(request, response);
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         }
 
+    }
+
+    private void addToSecurityContext(UserDetails userDetails, HttpServletRequest request) {
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                null,
+                userDetails.getAuthorities()
+        );
+
+        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        context.setAuthentication(authToken);
+        SecurityContextHolder.setContext(context);
     }
 }
