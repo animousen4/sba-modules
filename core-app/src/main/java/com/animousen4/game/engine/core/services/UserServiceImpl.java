@@ -63,8 +63,7 @@ class UserServiceImpl implements UserService {
                         UserModel.builder()
                                 .username(ent.getUsername())
                                 .email(ent.getEmail())
-                                .statusId(ent.getStatusId())
-                                .statusReasonId(ent.getStatusReasonId())
+                                .status(ent.getStatus().getStatus())
                                 .build())
                 .build();
     }
@@ -104,7 +103,6 @@ class UserServiceImpl implements UserService {
                             .username(requestUserModel.getUpdatedUsername())
                             .registrationDate(timestampService.getCurrentTime())
                             .email(requestUserModel.getEmail())
-                            .statusId(1L)
                             .password("123456")
                             .build()
             );

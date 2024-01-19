@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.core.stateful;
+package com.animousen4.game.engine.core.stateful.chessEngine;
 
 public interface StatefulChessEngine {
 

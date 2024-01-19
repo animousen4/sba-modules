@@ -1,5 +1,6 @@
 package com.animousen4.game.engine.core.services.dto;
 
+import com.animousen4.game.engine.core.values.UserStatus;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,6 +9,5 @@ import lombok.Data;
 public class UserInfoDto {
     String username;
     String email;
-    Long statusId;
-    Long statusReasonId;
+    UserStatus status;
 }

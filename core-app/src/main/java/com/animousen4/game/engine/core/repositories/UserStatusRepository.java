@@ -5,12 +5,10 @@ import com.animousen4.game.engine.core.values.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public interface UserStatusRepository extends JpaRepository<UserStatusEntity, Long> {
     UserStatusEntity findStatusEntityById(Long id);
 
-   UserStatusEntity findStatusEntityByName(UserStatus status);
+   UserStatusEntity findStatusEntityByStatus(UserStatus status);
 
 }

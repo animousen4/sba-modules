@@ -36,5 +36,6 @@ public class AppConsts {
 
     public static final String INVALID_MOVE_FORMAT = "INVALID_MOVE_FORMAT";
 
+    public static final String INVALID_LOGIN_OR_PASSWORD = "INVALID_LOGIN_OR_PASSWORD";
 
 }

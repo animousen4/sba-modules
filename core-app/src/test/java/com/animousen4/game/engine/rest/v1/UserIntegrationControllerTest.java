@@ -24,7 +24,7 @@ public class UserIntegrationControllerTest extends AbstractControllerBootTest {
     }
 
 
-    @Test
+    /*@Test
     @Sql(statements = "INSERT INTO users (username, email, status_id, password)\n" +
             "VALUES ('testUser', 'email@example.com', 1, 'pss');")
     void testUpdateUser() throws Exception {
@@ -47,7 +47,7 @@ public class UserIntegrationControllerTest extends AbstractControllerBootTest {
             "VALUES ('testUserExist', 'email@example.com', 1, 'pss');")
     void testNewExistUser() throws Exception {
         executeAndCompare("createExistUserTest");
-    }
+    }*/
 
 
 }

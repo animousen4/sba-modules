@@ -33,8 +33,7 @@ public class GetUserInfoConverterV1 implements AbstractConverter<
                         UserInfoDto.builder()
                                 .username(result.getUserModel().getUsername())
                                 .email(result.getUserModel().getEmail())
-                                .statusId(result.getUserModel().getStatusId())
-                                .statusReasonId(result.getUserModel().getStatusReasonId())
+                                .status(result.getUserModel().getStatus())
                                 .build()
                 )
                 .build();

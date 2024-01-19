@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
-public class JwtResult {
+public class JwtResult extends CoreResult{
     String jwt;
 }

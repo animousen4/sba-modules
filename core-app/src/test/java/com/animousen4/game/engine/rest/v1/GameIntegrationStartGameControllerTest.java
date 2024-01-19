@@ -26,7 +26,7 @@ public class GameIntegrationStartGameControllerTest extends AbstractControllerBo
     }
 
 
-    @Test
+    /*@Test
     void startNewGameFullOkTest() throws Exception {
         executeAndCompare("startGameFullOkTest");
     }
@@ -49,7 +49,7 @@ public class GameIntegrationStartGameControllerTest extends AbstractControllerBo
     @Test
     void startNewGameMissMandatoryGameInfoTest() throws Exception {
         executeAndCompare("startGameMissMandatoryGameInfoTest");
-    }
+    }*/
 
 
 

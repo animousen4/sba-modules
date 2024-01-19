@@ -16,6 +16,9 @@ game:
   engine:
     stockfish: /engine/stockfish16
 
+time:
+  zoneId: Europe/Minsk
+
 jwt:
   secret: sdhifuohnsdjkihusidfnokdsdfsdfdsfsdfsdfdfsfhlisbndfijsdbn
   lifetime: 20m

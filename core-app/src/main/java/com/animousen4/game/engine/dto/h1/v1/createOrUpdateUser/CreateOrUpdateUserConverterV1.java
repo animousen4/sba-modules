@@ -28,8 +28,7 @@ public class CreateOrUpdateUserConverterV1 implements
                                 .updatedUsername(user.getUpdatedUsername())
                                 .username(user.getUsername())
                                 .email(user.getEmail())
-                                .statusId(user.getStatusId())
-                                .statusReasonId(user.getStatusReasonId())
+                                .status(user.getStatus())
                                 .build()
                 )
                 .build();

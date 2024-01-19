@@ -1,6 +1,7 @@
 package com.animousen4.game.engine.rest.v1;
 
 import com.animousen4.game.engine.core.api.command.SignInCommand;
+import com.animousen4.game.engine.core.api.command.SignUpCommand;
 import com.animousen4.game.engine.core.api.result.JwtResult;
 import com.animousen4.game.engine.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ public class AuthController {
     @PostMapping("/signIn")
     JwtResult signIn(@RequestBody SignInCommand signInCommand) {
         return authenticationService.signIn(signInCommand);
+    }
+
+    @PostMapping("/signUp")
+    JwtResult signUp(@RequestBody SignUpCommand signInCommand) {
+        return authenticationService.signUp(signInCommand);
     }
 
 }

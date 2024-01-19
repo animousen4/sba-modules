@@ -2,9 +2,8 @@ package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.SolvePositionCommand;
 import com.animousen4.game.engine.core.api.result.SolvePositionResult;
-import com.animousen4.game.engine.core.stateful.StatefulChessEngine;
-import com.animousen4.game.engine.core.stateful.StatefulChessEngineFactory;
-import lombok.RequiredArgsConstructor;
+import com.animousen4.game.engine.core.stateful.chessEngine.StatefulChessEngine;
+import com.animousen4.game.engine.core.stateful.chessEngine.StatefulChessEngineFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

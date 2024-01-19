@@ -2,6 +2,7 @@ package com.animousen4.game.engine.core.validate.validator.micro;
 
 import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
+import com.animousen4.game.engine.core.validate.description.MandatoryFieldMissing;
 import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,7 @@ public class MandatoryMicroValidator {
                 ? Optional.empty()
                 : Optional.of(
                         validationErrorFactory.buildError(
-                                MANDATORY_FIELD_MISSING,
-                                new Placeholder(FIELD_NAME, fieldName)
+                                MandatoryFieldMissing.of(fieldName)
                         )
         );
     }

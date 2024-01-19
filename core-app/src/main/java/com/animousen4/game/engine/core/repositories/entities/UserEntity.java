@@ -1,5 +1,7 @@
 package com.animousen4.game.engine.core.repositories.entities;
 
+import com.animousen4.game.engine.core.repositories.entities.attributes.UserStatusEntity;
+import com.animousen4.game.engine.core.values.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -33,18 +35,24 @@ public class UserEntity implements UserDetails {
     @Column(name = "close_date")
     Timestamp closeDate;
 
-
     @Column(name = "email")
     String email;
 
-    @Column(name = "status_id")
-    Long statusId;
-
-    @Column(name = "status_reason_id")
-    Long statusReasonId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id")
+    UserStatusEntity status;
 
     @Column(name = "password")
     String password;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_belong_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    List<UserRoleEntity> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,7 +66,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isNotClosed();
     }
 
     @Override
@@ -68,6 +76,10 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isNotClosed();
+    }
+
+    private boolean isNotClosed() {
+        return closeDate == null;
     }
 }

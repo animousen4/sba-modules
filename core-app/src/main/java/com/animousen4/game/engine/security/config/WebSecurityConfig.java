@@ -1,6 +1,4 @@
 package com.animousen4.game.engine.security.config;
-
-import com.animousen4.game.engine.security.AuthenticationAppManager;
 import com.animousen4.game.engine.security.UserDetailsSpringService;
 import com.animousen4.game.engine.security.filter.JwtAuthenticationFilter;
 import com.animousen4.game.engine.security.service.JwtService;

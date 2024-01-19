@@ -1,5 +1,6 @@
 package com.animousen4.game.engine.core.api.model.user;
 
+import com.animousen4.game.engine.core.values.UserStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,6 +12,5 @@ public class UserModel {
     String username;
     String email;
 
-    Long statusId;
-    Long statusReasonId;
+    UserStatus status;
 }

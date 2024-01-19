@@ -22,7 +22,7 @@ public class AttributesDao {
         UserStatusEntity status = userStatusRepository.findStatusEntityById(id);
 
         return StatusInfoDto.builder()
-                .statusName(status.getName())
+                .statusName(status.getStatus())
                 .build();
     }
 }

@@ -19,5 +19,6 @@ public class UserStatusEntity {
     Long id;
 
     @Enumerated(EnumType.STRING)
-    UserStatus name;
+    @Column(name = "name")
+    UserStatus status;
 }

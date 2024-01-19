@@ -6,17 +6,6 @@ create table user_status
     name varchar(30) not null
 );
 
-create table user_status_reason
-(
-    id        bigserial
-        constraint user_status_reason_pk
-            primary key,
-    name      varchar(30) not null,
-    status_id bigint      not null
-        constraint status_reason_status_id_fk
-            references user_status
-);
-
 create table users
 (
     id                bigserial
@@ -29,9 +18,6 @@ create table users
     status_id         bigint                              not null
         constraint users_status_id_fk
             references user_status,
-    status_reason_id  bigint
-        constraint users_status_reason_id_fk
-            references user_status_reason,
     password          varchar(200)                        not null
 );
 
