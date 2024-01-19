@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -21,6 +22,9 @@ public class DateTimeUtil {
         return Date.from(zonedDateTime.toInstant());
     }
 
+    public Timestamp getCurrentTimestamp() {
+        return Timestamp.from(getCurrentDate().toInstant());
+    }
     public Date getDateWithDuration(Date date, Duration duration) {
         return Date.from(date.toInstant().plus(duration));
     }

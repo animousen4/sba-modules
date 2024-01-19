@@ -8,8 +8,10 @@ import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.services.factory.UserEntityFactory;
 import com.animousen4.game.engine.core.underwriting.SignInUnderwriting;
+import com.animousen4.game.engine.core.underwriting.SignUpUnderwriting;
 import com.animousen4.game.engine.core.validate.validator.SignInExistValidator;
 import com.animousen4.game.engine.core.validate.validator.SignInMandatoryValidator;
+import com.animousen4.game.engine.core.validate.validator.SignUpMandatoryValidator;
 import com.animousen4.game.engine.core.values.UserStatus;
 import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.RequiredArgsConstructor;
@@ -31,32 +33,27 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserEntityFactory userEntityFactory;
     private final SignInMandatoryValidator signInMandatoryValidator;
-    private final SignInExistValidator signInExistValidator;
 
     private final SignInUnderwriting signInUnderwriting;
 
+    private final SignUpMandatoryValidator signUpMandatoryValidator;
+
+    private final SignUpUnderwriting signUpUnderwriting;
+
     public JwtResult signUp(SignUpCommand request) {
 
-        // creating user;
-        UserDto userDto = request.getUserDto();
+        List<ValidationError> errors = signUpMandatoryValidator.validate(request);
 
-        UserEntity ent = userDao.saveOrUpdateUser(
-                userEntityFactory.createNewUser(
-                        userDto.getUsername(),
-                        userDto.getEmail(),
-                        userDto.getPassword(),
-                        UserStatus.OK
-                )
-        );
+        if (errors.isEmpty())
+            return signUpUnderwriting.signUpUser(request);
 
-        var jwt = jwtService.generateToken(ent);
+
         return JwtResult.builder()
-                .jwt(jwt)
+                .validationErrors(errors)
                 .build();
     }
 
     public JwtResult signIn(SignInCommand request) {
-        log.info(request.getUsername() + " | " + request.getPassword());
 
         List<ValidationError> errors = signInMandatoryValidator.validate(request);
 

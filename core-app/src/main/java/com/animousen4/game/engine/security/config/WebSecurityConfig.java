@@ -1,4 +1,5 @@
 package com.animousen4.game.engine.security.config;
+import com.animousen4.game.engine.core.repositories.UserNamePasswordRepository;
 import com.animousen4.game.engine.security.UserDetailsSpringService;
 import com.animousen4.game.engine.security.filter.JwtAuthenticationFilter;
 import com.animousen4.game.engine.security.service.JwtService;
@@ -38,8 +39,8 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        return new UserDetailsSpringService(passwordEncoder);
+    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder, UserNamePasswordRepository userNamePasswordRepository) {
+        return new UserDetailsSpringService(passwordEncoder, userNamePasswordRepository);
     }
 
     @Bean

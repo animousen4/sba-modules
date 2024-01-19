@@ -26,21 +26,19 @@ public class SignInUnderwritingImpl implements SignInUnderwriting{
 
     private final UserDetailsService userDetailsService;
 
-    private final JwtService jwtService;
-
     private final UserDao userDao;
 
-    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    private final UserNamePasswordRepository userNamePasswordRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private final ValidationErrorFactory validationErrorFactory;
 
     @Override
     public JwtResult authenticateUser(SignInCommand command) {
 
-        //UserNamePassword userNamePassword = userNamePasswordRepository.findByUsername(command.getUsername());
-        UserDetails userDetails = userDetailsService.loadUserByUsername(command.getUsername());
+        UserDetails userDetails = userDao.getUserByUsername(command.getUsername());
+
         if (userDetails != null &&
                 passwordEncoder.matches(command.getPassword(), userDetails.getPassword())
         )
