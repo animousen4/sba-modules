@@ -10,6 +10,7 @@ public class UserModel {
 
     String updatedUsername;
     String username;
+    String password;
     String email;
 
     UserStatus status;

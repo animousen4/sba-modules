@@ -1,22 +1,12 @@
 package com.animousen4.game.engine.rest.common;
 
-import com.animousen4.game.engine.PostgresContainerSettings;
-import com.animousen4.game.engine.RedisContainerSettings;
-import com.animousen4.game.engine.TestContainerGameEngineConstants;
-import org.junit.ClassRule;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
-import org.testcontainers.containers.PostgreSQLContainer;
 
-import static com.animousen4.game.engine.TestContainerConstants.REDIS_TEST_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
@@ -34,6 +24,9 @@ public abstract class AbstractControllerBootTest extends AbstractTestcontainersC
 
     abstract protected String getJsonLocation();
 
+    protected String getJwtToken() {
+        return null;
+    }
     protected void executeAndCompare(String jsonFolder) throws Exception {
         executeAndCompare(jsonFolder, status().isOk());
     }
@@ -51,6 +44,7 @@ public abstract class AbstractControllerBootTest extends AbstractTestcontainersC
 
         MvcResult result = mockMvc.perform(post(getBaseUrl())
                         .content(jsonRequest)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(getJwtToken() == null ? "null" : getJwtToken()))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(expectedResult)
                 .andReturn();

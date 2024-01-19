@@ -1,6 +1,7 @@
 {
   "user": {
     "updatedUsername": "testNewUser",
+    "password": "password111",
     "email": "email@example.com"
   }
 }

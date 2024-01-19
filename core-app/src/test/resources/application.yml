@@ -20,4 +20,4 @@ jwt:
   secret:
     public: jwt-keys/rsaPub.pub
     private: jwt-keys/rsaPriv.priv
-  lifetime: 20m
+  lifetime: 60m

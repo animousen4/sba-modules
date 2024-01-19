@@ -8,9 +8,13 @@ import com.animousen4.game.engine.core.api.result.GetUserInfoResult;
 import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserRepository;
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
+import com.animousen4.game.engine.core.services.factory.UserEntityFactory;
 import com.animousen4.game.engine.core.util.Placeholder;
+import com.animousen4.game.engine.core.validate.description.UserNotFound;
 import com.animousen4.game.engine.core.validate.validator.UserValidator;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
+import com.animousen4.game.engine.core.values.UserStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,22 +24,20 @@ import static com.animousen4.game.engine.core.values.AppConsts.*;
 
 
 @Service
+@RequiredArgsConstructor
 class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserValidator validator;
+    private final UserValidator validator;
 
-    @Autowired
-    ValidationErrorFactory validationErrorFactory;
+    private final ValidationErrorFactory validationErrorFactory;
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    UserDao userDao;
+    private final UserDao userDao;
 
-    @Autowired
-    TimestampService timestampService;
+    private final UserEntityFactory userEntityFactory;
+
+
 
     @Override
     public GetUserInfoResult getUserInfo(GetUserInfoCommand command) {
@@ -51,8 +53,7 @@ class UserServiceImpl implements UserService {
     GetUserInfoResult notFoundUser(GetUserInfoCommand command) {
         return GetUserInfoResult.builder()
                 .validationErrors(List.of(validationErrorFactory.buildError(
-                        USER_NOT_FOUND,
-                        new Placeholder(USERNAME, command.getUsername() )
+                        UserNotFound.of(command.getUsername())
                 )))
                 .build();
     }
@@ -98,13 +99,14 @@ class UserServiceImpl implements UserService {
     private CreateOrUpdateUserResult createUser(UserModel requestUserModel) {
         UserEntity existEntity = userDao.getUserByUsername(requestUserModel.getUpdatedUsername());
         if (existEntity == null) {
+            var user = userEntityFactory.createNewUser(
+                    requestUserModel.getUpdatedUsername(),
+                    requestUserModel.getEmail(),
+                    requestUserModel.getPassword(),
+                    requestUserModel.getStatus()
+            );
             userDao.saveOrUpdateUser(
-                    UserEntity.builder()
-                            .username(requestUserModel.getUpdatedUsername())
-                            .registrationDate(timestampService.getCurrentTime())
-                            .email(requestUserModel.getEmail())
-                            .password("123456")
-                            .build()
+                    user
             );
             return CreateOrUpdateUserResult.builder()
                     .build();

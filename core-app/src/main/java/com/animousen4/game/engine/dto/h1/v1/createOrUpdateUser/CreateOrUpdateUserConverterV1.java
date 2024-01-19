@@ -27,6 +27,7 @@ public class CreateOrUpdateUserConverterV1 implements
                         UserModel.builder()
                                 .updatedUsername(user.getUpdatedUsername())
                                 .username(user.getUsername())
+                                .password(user.getPassword())
                                 .email(user.getEmail())
                                 .status(user.getStatus())
                                 .build()
