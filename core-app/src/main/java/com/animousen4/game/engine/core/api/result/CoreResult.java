@@ -3,6 +3,7 @@ package com.animousen4.game.engine.core.api.result;
 import com.animousen4.game.engine.dto.h1.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @SuperBuilder
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public abstract class CoreResult {
     List<ValidationError> validationErrors;
 

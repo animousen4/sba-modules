@@ -2,6 +2,7 @@ package com.animousen4.game.engine.security.service;
 
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.util.DateTimeUtil;
+import com.animousen4.game.engine.core.values.UserRole;
 import com.animousen4.game.engine.security.JwtPrivateKey;
 import com.animousen4.game.engine.security.JwtPublicKey;
 import io.jsonwebtoken.Claims;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -34,6 +36,13 @@ public class JwtService {
 
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public List<UserRole> extractRoles(String token) {
+
+        return ((List<String>) extractAllClaims(token).get("roles")).stream()
+                .map(x -> UserRole.valueOf("ROLE_" + x))
+                .collect(Collectors.toList());
     }
 
     public String generateToken(UserDetails userDetails) {

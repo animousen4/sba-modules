@@ -1,11 +1,17 @@
 package com.animousen4.game.engine.rest.common;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
+import java.io.UnsupportedEncodingException;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,7 +19,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 public abstract class AbstractControllerBootTest extends AbstractTestcontainersConnections{
 
-
+    ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,19 +43,40 @@ public abstract class AbstractControllerBootTest extends AbstractTestcontainersC
                 expectedResult
         );
     }
+    private  <T> T mapJsonTo(String json, Class<T> type) throws JsonProcessingException {
+        return mapper.readValue(json, type);
+    }
+    private  String getResponseBodyContent(String jsonRequest, ResultMatcher expectedResult) throws Exception {
+
+        MockHttpServletRequestBuilder requestBuilder = post(getBaseUrl())
+                .content(jsonRequest)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+
+        if (getJwtToken() != null) {
+            requestBuilder = requestBuilder.header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(getJwtToken()));
+        }
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(expectedResult)
+                .andReturn();
+
+        return result.getResponse().getContentAsString();
+    }
+
+    protected <T> T execute(String jsonFolder, ResultMatcher expectedResult, Class<T> type) throws Exception {
+        String jsonRequestFilePath = getJsonLocation().concat("/").concat(jsonFolder).concat("/request.json");
+
+        String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
+
+        String responseBodyContent = getResponseBodyContent(jsonRequest, expectedResult);
+
+        return mapJsonTo(responseBodyContent, type);
+    }
 
     protected void executeAndCompare(String jsonRequestFilePath,
                                      String jsonResponseFilePath, ResultMatcher expectedResult) throws Exception {
         String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
 
-        MvcResult result = mockMvc.perform(post(getBaseUrl())
-                        .content(jsonRequest)
-                        .header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(getJwtToken() == null ? "null" : getJwtToken()))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(expectedResult)
-                .andReturn();
-
-        String responseBodyContent = result.getResponse().getContentAsString();
+        String responseBodyContent = getResponseBodyContent(jsonRequest, expectedResult);
 
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
 

@@ -1,0 +1,7 @@
+{
+  "user" : {
+    "username" : "admin1",
+    "password" : "admin1",
+    "email": "email@meow.com"
+  }
+}
