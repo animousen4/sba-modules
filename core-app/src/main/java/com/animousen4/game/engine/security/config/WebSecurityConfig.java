@@ -1,4 +1,5 @@
 package com.animousen4.game.engine.security.config;
+import com.animousen4.game.engine.core.dao.UserDao;
 import com.animousen4.game.engine.core.repositories.UserNamePasswordRepository;
 import com.animousen4.game.engine.security.JwtPrivateKey;
 import com.animousen4.game.engine.security.JwtPublicKey;
@@ -56,8 +57,8 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    UserDetailsService userDetailsService(UserNamePasswordRepository userNamePasswordRepository) {
-        return new UserDetailsSpringService(userNamePasswordRepository);
+    UserDetailsService userDetailsService(UserDao userDao) {
+        return new UserDetailsSpringService(userDao);
     }
 
     @Bean
@@ -81,7 +82,7 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
-                                .requestMatchers("/api/v1/user/getUserInfo").authenticated()
+                                .requestMatchers("/api/v1/user/getUserInfo").hasAuthority("USER")
                                 .requestMatchers("/internal/api/v1/auth/**").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

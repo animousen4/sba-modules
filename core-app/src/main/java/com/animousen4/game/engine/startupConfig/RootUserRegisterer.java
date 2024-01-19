@@ -38,7 +38,7 @@ class RootUserRegisterer {
                 null,
                 password,
                 UserStatus.OK,
-                List.of(UserRole.USER, UserRole.USER, UserRole.BOT)
+                List.of(UserRole.ROLE_USER, UserRole.ROLE_USER, UserRole.ROLE_BOT)
         );
 
         userRepository.save(user);

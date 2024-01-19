@@ -42,7 +42,7 @@ public class UserEntityFactoryImpl implements UserEntityFactory{
                 .registrationDate(timeUtil.getCurrentTimestamp())
                 .roles(
                         List.of(
-                                userRoleRepository.findUserRoleEntityByRole(UserRole.USER)
+                                userRoleRepository.findUserRoleEntityByRole(UserRole.ROLE_USER)
                         )
                 )
                 .password(passwordEncoder.encode(rawPassword))
