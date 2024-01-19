@@ -42,21 +42,18 @@ public class SignInUnderwritingImpl implements SignInUnderwriting{
         if (userDetails != null &&
                 passwordEncoder.matches(command.getPassword(), userDetails.getPassword())
         )
-            return buildAuthenticatedResponse(command);
+            return buildAuthenticatedResponse(command, userDetails);
 
         return buildInvalidPasswordAuthenticationResponse(command);
     }
 
-    private JwtResult buildAuthenticatedResponse(SignInCommand command) {
+    private JwtResult buildAuthenticatedResponse(SignInCommand command, UserDetails userDetails) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 command.getUsername(),
                 command.getPassword()
         ));
 
-        var user = userDetailsService
-                .loadUserByUsername(command.getUsername());
-
-        var jwt = jwtService.generateToken(user);
+        var jwt = jwtService.generateToken(userDetails);
 
         return JwtResult.builder()
                 .jwt(jwt)

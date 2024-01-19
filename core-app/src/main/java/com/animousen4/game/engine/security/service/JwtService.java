@@ -2,6 +2,7 @@ package com.animousen4.game.engine.security.service;
 
 import com.animousen4.game.engine.core.repositories.entities.UserEntity;
 import com.animousen4.game.engine.core.util.DateTimeUtil;
+import com.animousen4.game.engine.security.JwtSecretKey;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -9,7 +10,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +28,7 @@ public class JwtService {
 
     private final DateTimeUtil dateTimeUtil;
 
-    @Value("${jwt.secret}")
-    private String jwtSigningKey;
+    private final JwtSecretKey jwtSecretKey;
 
     @Value("${jwt.lifetime}")
     private Duration tokenLifeTime;
@@ -39,14 +40,24 @@ public class JwtService {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         if (userDetails instanceof UserEntity customUserDetails) {
-            claims.put("id", customUserDetails.getId());
-            claims.put("email", customUserDetails.getEmail());
-            claims.put("role", "ADMIN");
+            claims.put("roles",
+                    customUserDetails.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toList())
+            );
         }
         return generateToken(claims, userDetails);
     }
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean isTokenSignatureValid(String token) {
+        try {
+            Jwts.parser()
+                    .verifyWith(jwtSecretKey.getKey()).build().parseSignedContent(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean isTokenTimeValid(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
@@ -57,7 +68,9 @@ public class JwtService {
     }
 
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return Jwts.builder().claims(extraClaims).subject(userDetails.getUsername())
+        return Jwts.builder()
+                .claims(extraClaims)
+                .subject(userDetails.getUsername())
                 .issuedAt(
                         dateTimeUtil.getCurrentDate()
                 )
@@ -65,7 +78,8 @@ public class JwtService {
                         dateTimeUtil.getCurrentDate(),
                         tokenLifeTime
                 ))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+                .signWith(jwtSecretKey.getKey())
+                .compact();
     }
 
     private boolean isTokenExpired(String token) {
@@ -77,12 +91,8 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
-                .getBody();
+        return Jwts.parser().verifyWith(jwtSecretKey.getKey()).build().parseSignedClaims(token)
+                .getPayload();
     }
 
-    private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
 }

@@ -1,9 +1,13 @@
 package com.animousen4.game.engine.security.config;
 import com.animousen4.game.engine.core.repositories.UserNamePasswordRepository;
+import com.animousen4.game.engine.security.JwtSecretKey;
 import com.animousen4.game.engine.security.UserDetailsSpringService;
 import com.animousen4.game.engine.security.filter.JwtAuthenticationFilter;
 import com.animousen4.game.engine.security.service.JwtService;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -29,6 +33,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    @Value("${jwt.secret}")
+    private String jwtSigningKey;
+
     @Bean
     JwtAuthenticationFilter jwtAuthenticationFilter (JwtService jwtService, UserDetailsService userDetailsService) {
         return new JwtAuthenticationFilter(jwtService, userDetailsService);
@@ -39,8 +46,8 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder, UserNamePasswordRepository userNamePasswordRepository) {
-        return new UserDetailsSpringService(passwordEncoder, userNamePasswordRepository);
+    UserDetailsService userDetailsService(UserNamePasswordRepository userNamePasswordRepository) {
+        return new UserDetailsSpringService(userNamePasswordRepository);
     }
 
     @Bean
@@ -72,6 +79,12 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    JwtSecretKey jwtSecretKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
+        return new JwtSecretKey(Keys.hmacShaKeyFor(keyBytes));
     }
 
 

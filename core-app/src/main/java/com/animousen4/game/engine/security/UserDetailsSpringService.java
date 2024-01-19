@@ -15,8 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Log4j2
 public class UserDetailsSpringService implements UserDetailsService {
 
-    private final PasswordEncoder passwordEncoder;
-
     private final UserNamePasswordRepository userNamePasswordRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
