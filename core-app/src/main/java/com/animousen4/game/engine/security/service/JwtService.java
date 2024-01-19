@@ -41,7 +41,7 @@ public class JwtService {
     public List<UserRole> extractRoles(String token) {
 
         return ((List<String>) extractAllClaims(token).get("roles")).stream()
-                .map(x -> UserRole.valueOf("ROLE_" + x))
+                .map(UserRole::valueOf)
                 .collect(Collectors.toList());
     }
 

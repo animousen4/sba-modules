@@ -1,9 +1,9 @@
 package com.animousen4.game.engine.core.values;
 
 public enum UserRole {
-    ROLE_USER,
+    USER,
 
-    ROLE_ADMIN,
+    ADMIN,
 
-    ROLE_BOT
+    BOT
 }

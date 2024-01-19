@@ -20,7 +20,7 @@ public class SignUpMandatoryValidator implements AbstractValidatorInterface<Sign
     public List<ValidationError> validate(SignUpCommand entity) {
         return PrettyValidationErrorChaining.start()
                 .go(
-                        () -> entity,
+                        entity::getUser,
                         x -> mandatoryMicroValidator.validate(x, "user")
                 )
                 .goList(

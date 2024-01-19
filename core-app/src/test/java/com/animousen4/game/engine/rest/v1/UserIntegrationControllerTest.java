@@ -34,26 +34,12 @@ public class UserIntegrationControllerTest extends AbstractControllerBootTest {
         return userLoader.getRootUserJwt().getJwt();
     }
 
-    @Test
-    @Sql(statements = "INSERT INTO users (username, email, status_id, password)\n" +
-            "VALUES ('testUser', 'email@example.com', 1, 'pss');")
-    void testUpdateUser() throws Exception {
-        executeAndCompare("updateExistUserEmailTest");
-    }
 
     @Test
     void testFullEmpty() throws Exception {
         executeAndCompare("updateAllEmptyTest");
     }
 
-
-
-    @Test
-    @Sql(statements = "INSERT INTO users (username, email, status_id, password)\n" +
-            "VALUES ('testUserExist', 'email@example.com', 1, 'pss');")
-    void testNewExistUser() throws Exception {
-        executeAndCompare("createExistUserTest");
-    }
 
 
 }

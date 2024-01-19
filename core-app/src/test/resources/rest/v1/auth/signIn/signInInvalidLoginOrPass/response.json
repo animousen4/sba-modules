@@ -1,0 +1,9 @@
+{
+  "validationErrors": [
+    {
+      "errorCode": "INVALID_LOGIN_OR_PASSWORD",
+      "description": "Invalid login or password"
+    }
+  ],
+  "jwt": null
+}

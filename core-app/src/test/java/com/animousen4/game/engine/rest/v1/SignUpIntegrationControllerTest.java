@@ -31,7 +31,7 @@ public class SignUpIntegrationControllerTest extends AbstractControllerBootTest 
 
     @Override
     protected String getJsonLocation() {
-        return "rest/v1/auth";
+        return "rest/v1/auth/signUp";
     }
 
 
@@ -45,6 +45,37 @@ public class SignUpIntegrationControllerTest extends AbstractControllerBootTest 
 
         assertEquals("admin1", username);
         assertEquals(1, roles.size());
+
+    }
+
+    @Test
+    void testSignMandatoryOneMissing() throws Exception {
+        JwtResult res = execute("signUpOneMandatoryMissing", status().isOk(), JwtResult.class);
+
+        assertEquals(1, res.getValidationErrors().size());
+
+    }
+    @Test
+    void testSignMandatoryTwoMissing() throws Exception {
+        JwtResult res = execute("signUpTwoMandatoryMissing", status().isOk(), JwtResult.class);
+
+        assertEquals(2, res.getValidationErrors().size());
+
+    }
+
+    @Test
+    void testSignMandatoryAllMissing() throws Exception {
+        JwtResult res = execute("signUpAllMandatoryMissing", status().isOk(), JwtResult.class);
+
+        assertEquals(3, res.getValidationErrors().size());
+
+    }
+
+    @Test
+    void testSignMandatoryUserMissing() throws Exception {
+        JwtResult res = execute("signUpUserMandatoryMissing", status().isOk(), JwtResult.class);
+
+        assertEquals(1, res.getValidationErrors().size());
 
     }
 
