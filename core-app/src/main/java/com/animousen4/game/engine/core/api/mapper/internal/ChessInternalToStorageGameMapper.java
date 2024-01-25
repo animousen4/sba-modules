@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ChessInternalToStorageGameMapper implements Mapper<GameInternalModel, GameStoredModel> {
+public class ChessInternalToStorageGameMapper extends Mapper<GameInternalModel, GameStoredModel> {
 
     private final ChessInternalToStorageBoardMapper internalToStorageBoardMapper;
 

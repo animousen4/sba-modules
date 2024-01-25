@@ -1,5 +1,5 @@
 package com.animousen4.game.engine.core.api.mapper;
 
-public interface Mapper<FROM, TO>{
-    TO map(FROM model);
+public abstract class Mapper<FROM, TO>{
+    public abstract TO map(FROM model);
 }

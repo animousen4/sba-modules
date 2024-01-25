@@ -8,7 +8,7 @@ import com.github.bhlangonijr.chesslib.game.GameContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChessInternalFromStorageBoardMapper implements Mapper<ChessBoardStoredModel, ChessBoardInternalModel> {
+public class ChessInternalFromStorageBoardMapper extends Mapper<ChessBoardStoredModel, ChessBoardInternalModel> {
 
     @Override
     public ChessBoardInternalModel map(ChessBoardStoredModel model) {

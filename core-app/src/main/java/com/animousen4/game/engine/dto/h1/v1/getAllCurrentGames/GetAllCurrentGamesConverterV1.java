@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.dto.h1.v1.getAllCurrentGames;
 
-import com.animousen4.game.engine.core.api.mapper.GameMapper;
+import com.animousen4.game.engine.core.api.mapper.game.GameMapper;
 import com.animousen4.game.engine.core.api.result.AllCurrentGamesResult;
 import com.animousen4.game.engine.dto.h1.AbstractResultConverter;
 import lombok.RequiredArgsConstructor;

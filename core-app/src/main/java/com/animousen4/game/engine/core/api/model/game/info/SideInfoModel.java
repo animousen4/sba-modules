@@ -1,4 +1,4 @@
-package com.animousen4.game.engine.core.api.model.game;
+package com.animousen4.game.engine.core.api.model.game.info;
 
 import com.animousen4.game.engine.core.api.model.game.board.ChessClock;
 import lombok.Builder;

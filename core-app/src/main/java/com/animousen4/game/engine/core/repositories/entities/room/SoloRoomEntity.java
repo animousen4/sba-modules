@@ -2,7 +2,7 @@ package com.animousen4.game.engine.core.repositories.entities.room;
 
 import com.animousen4.game.engine.core.repositories.entities.game.opponent.SoloGameOpponent;
 import com.animousen4.game.engine.core.repositories.entities.game.type.GameTypePreference;
-import com.animousen4.game.engine.core.values.PlayerColor;
+import com.animousen4.game.engine.core.api.model.game.PlayerColorModel;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
@@ -14,7 +14,7 @@ public class SoloRoomEntity {
     private String roomCode;
 
     private GameTypePreference gameTypePreference;
-    private PlayerColor preferredColor;
+    private PlayerColorModel preferredColor;
     private SoloGameOpponent gameOpponent;
 
 }

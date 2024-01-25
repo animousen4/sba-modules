@@ -1,8 +1,7 @@
 package com.animousen4.game.engine.core.api.model.game;
 
 import com.animousen4.game.engine.core.api.model.game.board.ChessBoardInternalModel;
-import com.animousen4.game.engine.core.api.model.game.board.ChessBoardStoredModel;
-import com.github.bhlangonijr.chesslib.move.Move;
+import com.animousen4.game.engine.core.api.model.game.info.GameInfoModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

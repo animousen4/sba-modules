@@ -1,7 +1,6 @@
 package com.animousen4.game.engine.core.services;
 
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
-import com.animousen4.game.engine.core.api.mapper.GameMapper;
 import com.animousen4.game.engine.core.api.mapper.internal.ChessInternalFromStorageGameMapper;
 import com.animousen4.game.engine.core.api.model.game.GameInternalModel;
 import com.animousen4.game.engine.core.api.model.game.GameStoredModel;
@@ -11,12 +10,9 @@ import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.core.repositories.GameRepository;
 import com.animousen4.game.engine.core.repositories.GameStatusRepository;
 import com.animousen4.game.engine.core.repositories.entities.game.GameEntity;
-import com.animousen4.game.engine.core.repositories.entities.game.GameStatusEntity;
 import com.animousen4.game.engine.core.repositories.redis.CurrentGameRepository;
-import com.animousen4.game.engine.core.util.Placeholder;
 import com.animousen4.game.engine.core.validate.ValidationErrorFactory;
 import com.animousen4.game.engine.core.validate.description.GameNotExists;
-import com.animousen4.game.engine.core.validate.game.startGame.StartGameValidation;
 import com.animousen4.game.engine.core.validate.game.startGame.StartGameValidator;
 import com.animousen4.game.engine.core.values.GameStatus;
 import com.animousen4.game.engine.dto.h1.ValidationError;
@@ -26,9 +22,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.animousen4.game.engine.core.values.AppConsts.GAME_ID;
-import static com.animousen4.game.engine.core.values.AppConsts.GAME_NOT_EXISTS;
 
 @Service
 @RequiredArgsConstructor

@@ -1,13 +1,15 @@
-package com.animousen4.game.engine.core.api.mapper;
+package com.animousen4.game.engine.core.api.mapper.game.info;
 
 import com.animousen4.game.engine.core.api.dto.game.SideInfoDTO;
-import com.animousen4.game.engine.core.api.model.game.SideInfoModel;
+import com.animousen4.game.engine.core.api.mapper.Mapper;
+import com.animousen4.game.engine.core.api.mapper.game.ChessBoardStoredMapper;
+import com.animousen4.game.engine.core.api.model.game.info.SideInfoModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SideInfoMapper implements ModelDtoMapper<SideInfoModel, SideInfoDTO>{
+public class SideInfoMapper extends Mapper<SideInfoModel, SideInfoDTO> {
     final ChessBoardStoredMapper chessBoardStoredMapper;
 
     @Override

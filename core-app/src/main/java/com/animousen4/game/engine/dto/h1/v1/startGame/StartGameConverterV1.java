@@ -1,7 +1,7 @@
 package com.animousen4.game.engine.dto.h1.v1.startGame;
 
 import com.animousen4.game.engine.core.api.command.StartGameCommand;
-import com.animousen4.game.engine.core.api.mapper.GameMapper;
+import com.animousen4.game.engine.core.api.mapper.game.GameMapper;
 import com.animousen4.game.engine.core.api.result.StartGameResult;
 import com.animousen4.game.engine.dto.h1.AbstractConverter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.animousen4.game.engine.core.services;
 
-import com.animousen4.game.engine.core.api.model.game.GameInfoModel;
+import com.animousen4.game.engine.core.api.model.game.info.GameInfoModel;
 import com.animousen4.game.engine.core.api.model.game.board.BoardSide;
 import com.animousen4.game.engine.core.api.model.game.board.ChessBoardStoredModel;
 import com.github.bhlangonijr.chesslib.Board;

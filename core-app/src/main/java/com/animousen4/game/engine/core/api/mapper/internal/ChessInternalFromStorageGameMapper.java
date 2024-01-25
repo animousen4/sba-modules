@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ChessInternalFromStorageGameMapper implements Mapper<GameStoredModel, GameInternalModel> {
+public class ChessInternalFromStorageGameMapper extends Mapper<GameStoredModel, GameInternalModel> {
 
     private final ChessInternalFromStorageBoardMapper chessInternalBoardMapper;
 
