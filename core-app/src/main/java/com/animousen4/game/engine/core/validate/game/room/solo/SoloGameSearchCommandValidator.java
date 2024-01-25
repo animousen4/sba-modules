@@ -11,12 +11,12 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class SoloGameSearchCommandValidator extends AbstractValidator<SoloGameSearchCommand, GameInfoDtoValidation> {
+public class SoloGameSearchCommandValidator extends AbstractValidator<SoloGameSearchCommand, SoloGameSearchValidation> {
 
-    private final List<SoloGameSearchCommandValidator> validators;
+    private final List<SoloGameSearchValidation> validators;
 
     @Override
-    protected List<GameInfoDtoValidation> validationComponentsList() {
-        return null;
+    protected List<SoloGameSearchValidation> validationComponentsList() {
+        return validators;
     }
 }

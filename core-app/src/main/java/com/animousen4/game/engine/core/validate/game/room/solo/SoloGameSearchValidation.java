@@ -17,7 +17,7 @@ public class SoloGameSearchValidation implements AbstractDefaultValidation<SoloG
     private final MandatoryMicroValidator mandatoryMicroValidator;
     @Override
     public List<ValidationError> validateList(SoloGameSearchCommand command) {
-        return PrettyValidationErrorChaining.start()
+        var errors = PrettyValidationErrorChaining.start()
                 .go(command::getSoloGameInfoModel, x -> mandatoryMicroValidator.validate(x, "gameInfo"))
                 .parallel(
                         v -> v.go(() -> command.getSoloGameInfoModel().getGameDifficulty(), x -> mandatoryMicroValidator.validate(x, "difficulty"))
@@ -29,5 +29,6 @@ public class SoloGameSearchValidation implements AbstractDefaultValidation<SoloG
                         v -> v.go(() -> command.getSoloGameInfoModel().getPlayerColorModel(), x -> mandatoryMicroValidator.validate(x, "color"))
                 )
                 .validate();
+        return errors;
     }
 }

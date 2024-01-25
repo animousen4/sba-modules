@@ -27,4 +27,4 @@ jwt:
   secret:
     public: rsaPub.pub
     private: rsaPriv.priv
-  lifetime: 20m
+  lifetime: 525600m

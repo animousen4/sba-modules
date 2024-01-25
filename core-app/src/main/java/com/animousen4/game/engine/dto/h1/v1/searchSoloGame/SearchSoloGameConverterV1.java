@@ -28,6 +28,7 @@ public class SearchSoloGameConverterV1 implements AbstractConverter<SoloGameSear
     public SoloGameSearchResponse buildResponse(SoloGameSearchResult result) {
         return SoloGameSearchResponse.builder()
                 .searchRequestId(result.getRequestId())
+                .errors(result.getValidationErrors())
                 .build();
     }
 }
